@@ -9,6 +9,7 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="share_your_park"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.mapbox.token" android:value="pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
