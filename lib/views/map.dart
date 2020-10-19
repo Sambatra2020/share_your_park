@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
+import 'package:http/http.dart' as http;
 
 class MapCarteBase extends StatefulWidget {
   @override
@@ -11,6 +12,10 @@ class MapCarteBase extends StatefulWidget {
 
 class _MapCarteBaseState extends State<MapCarteBase> {
   MapboxMapController mapController;
+  String lngDepart = '2.339432';
+  String latDepart = '48.862056';
+  String lngArriver = '2.339561';
+  String latArriver = '48.863616';
   LatLng center = LatLng(48.862056, 2.339432);
   LatLng parkingPosition = LatLng(48.863616, 2.339561);
   List<LatLng> points = [
@@ -77,6 +82,21 @@ class _MapCarteBaseState extends State<MapCarteBase> {
     return FloatingActionButton(
         child: Icon(Icons.add_location), onPressed: () {});
   }
+
+  //fonction get le routes
+  /*Future<List<LatLng>> _getRoutes() async {
+    var coords;
+    var response = await http.get(
+        'https://api.mapbox.com/directions/v5/mapbox.cycling/' +
+            lngDepart +
+            ',' +
+            latDepart +
+            ';'+lngArriver+','+latArriver+'?access_token = <pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA>',
+            (data){
+              coords = Line.;
+            });
+    return coords;
+  }*/
 
   @override
   Widget build(BuildContext context) {
