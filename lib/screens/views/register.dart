@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
+  @override
+  _RegisterState createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +17,7 @@ class Register extends StatelessWidget {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       //colors: [Color(0xFF008D), Color(0xFF8DCC)
-      colors: [Color(0xFFFF008D), Color(0xFFFF41AA),Color(0xFFFF8DCC)])
+      colors: [Color(0xFFFF008D), Color(0xFFFF41AA),])
        //color: Colors.pink
         ),
         child: Align(
@@ -21,11 +26,14 @@ class Register extends StatelessWidget {
               children: [
               
               SizedBox(height: 45),
-              Image.asset(
-                'assets/bon.png',
-                width: 200, height: 200,
-                //alignment: Alignment.bottomCenter
-               ),
+              Center(
+                child: Image.asset(
+                  'assets/bon.png',
+                  width: 200, height: 200,
+                  alignment: Alignment.center,
+                  //alignment: Alignment.bottomCenter
+                 ),
+              ),
                SizedBox(height: 25),
               //Text("Enregistre-toi!", style: TextStyle(color: Colors.white, fontSize: 22, fontFamily: 'Quicksand' ))
              // ignore: missing_required_param
