@@ -12,6 +12,8 @@ class MapCarteBase extends StatefulWidget {
 }
 
 class _MapCarteBaseState extends State<MapCarteBase> {
+  //variable
+
   MapboxMapController mapController;
   String lngDepart = '2.339432';
   String latDepart = '48.862056';
@@ -122,7 +124,6 @@ class _MapCarteBaseState extends State<MapCarteBase> {
   //initialisation map
   void _onMapCreated(MapboxMapController controller) {
     mapController = controller;
-
     _getdata();
     _onStyleLoaded();
     _addSymbols(center, 'positionDepart', controller);
