@@ -1,9 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:share_your_park/models/user.dart' as userModel;
 
 class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
+
+  //instance database reference
+  final dBref = FirebaseDatabase.instance.reference();
+
+  //utilisateur et formation dans firestore
 
   //collection reference
   final CollectionReference userCollection =
@@ -68,4 +74,8 @@ class DatabaseService {
   Stream<userModel.User> get userData {
     return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
   }
+
+  //parking dans firebase database
+
+  //in
 }
