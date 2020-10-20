@@ -134,7 +134,10 @@ class _RegisterState extends State<Register> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50)),
                     color: Colors.white,
-                    onPressed: () {},
+                    onPressed: () { Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Login())
+                          );
+                        },
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -175,11 +178,8 @@ class _RegisterState extends State<Register> {
         width: 45,
         height: 35,
         child: RawMaterialButton(
-          onPressed: () {
-            Navigator.push(context,
-             MaterialPageRoute(builder: (context) => Login())
-            );
-          },
+          onPressed: () {},
+           
           child: Icon(Icons.arrow_back, color: Colors.white, size: 28,),
           fillColor: Color(0xFFFF008D),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(60)),
