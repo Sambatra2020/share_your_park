@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "947876677096",
+    "firebase_url": "https://share-your-park-3d0f3.firebaseio.com",
+    "project_id": "share-your-park-3d0f3",
+    "storage_bucket": "share-your-park-3d0f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947876677096:android:802d0ecac892e65a23105d",
+        "android_client_info": {
+          "package_name": "com.example.share_your_park"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947876677096-nrnc38s8d3nmt0ucm1sbdtf1ngri4rpt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9KDsTogyXONMCQICxNDJP3c1yy0O01Fs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947876677096-nrnc38s8d3nmt0ucm1sbdtf1ngri4rpt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
