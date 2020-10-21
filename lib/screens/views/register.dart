@@ -11,6 +11,8 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -20,7 +22,7 @@ class _RegisterState extends State<Register> {
                 //colors: [Color(0xFF008D), Color(0xFF8DCC)
                 colors: [
               Color(0xFFFF008D),
-              Color(0xFFFF41AA),
+              Color(0xFFFF6EBE),
             ])
             //color: Colors.pink
             ),
@@ -31,14 +33,19 @@ class _RegisterState extends State<Register> {
            
               children: [
                 SizedBox(height: 55),
-                Center(
-                  child: Image.asset(
-                    'assets/bon.png',
-                    width: 200, height: 200,
-                    alignment: Alignment.center,
-                    //alignment: Alignment.bottomCenter
+                
+                   Container(
+                     margin: EdgeInsets.only(left:45),
+                    
+                    child: Image.asset(
+                      
+                      'assets/bon.png',
+                      width: 200, height: 200,
+                      
+                      alignment: Alignment.center
+                    ),
                   ),
-                ),
+                
                 SizedBox(height: 25),
                 //Text("Enregistre-toi!", style: TextStyle(color: Colors.white, fontSize: 22, fontFamily: 'Quicksand' ))
 
@@ -83,7 +90,7 @@ class _RegisterState extends State<Register> {
                       children: [
                         Expanded(
                                                   child: Image.asset(
-                            'assets/fb 1.png',
+                            'assets/icons/fb 1.png',
                             width: 16,
                             height: 16,
                           ),
@@ -112,7 +119,7 @@ class _RegisterState extends State<Register> {
                       children: [
                         Expanded(
                                                   child: Image.asset(
-                            'assets/google.png',
+                            'assets/icons/google.png',
                             width: 16,
                             height: 16,
                           ),
@@ -144,7 +151,7 @@ class _RegisterState extends State<Register> {
                       children: [
                         Expanded(
                                                   child: Image.asset(
-                            'assets/Message.png',
+                            'assets/icons/Message.png',
                             width: 22,
                             height: 22,
                           ),

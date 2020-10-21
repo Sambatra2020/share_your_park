@@ -20,8 +20,8 @@ class _LoginState extends State<Login> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
-              child: Align(
-                child: Container(
+              //child: Align(
+                //child: Container(
             child: Column(
               children: [
                 Container(
@@ -33,34 +33,38 @@ class _LoginState extends State<Login> {
                         end: Alignment.bottomCenter,
                          colors: [
                       Color(0xFFFF008D),
-                      Color(0xFFFF41AA),
+                      Color(0xFFFF6EBE),
+                      //Color(0xFFFF41AA),
                     ])
                   ),
-                  child: Align(
-                    alignment: Alignment(0, 0),
-                    //alignment: Alignment.topLeft,
+                  
                     child: Column(
                       children: [
-                       SizedBox(height: 35,),
-                            Align(alignment: Alignment(-0.7,-1),
-                                //padding: EdgeInsets.only(left: 15),
+                       //SizedBox(height: 35,),
+                            Container(
+                              margin: EdgeInsets.only( right: 220, top: 45),
+                              //alignment: Alignment(-0.7,-1),
+                          //color: Colors.amber,
                               child: Text(
                                 'Bonjour',
                                 style: TextStyle(color: Colors.white, fontSize: 30, fontFamily: 'Quicksand')
                                 ),
                             ),
                             
-                            Align(
-                              alignment: Alignment(1.1, 1),
-                              child: Image.asset(
-                                'assets/revoir.png',
-                                height: 240, width: 220
-                                ),
-                            )
+                          
+                            Container(
+                              //color: Colors.amber,
+                              margin: EdgeInsets.only(left: 200,top: 30),
+                             
+                              
+                                child: Image.asset('assets/images/revoir.png', height:240, width:220,
+                                alignment: Alignment.bottomRight,))
+                             
+                            
                       ]
                     ) ,
                     ),
-                ),
+               
                 Container(
                       height: 10.0,
                       color: Color(0xFFA3005A),
@@ -105,11 +109,17 @@ class _LoginState extends State<Login> {
                              ),
                         ),
                       ),
-                       Checkbox(
-                              value: checked, 
-                              onChanged: change
-                        ),
-                    SizedBox(height: 40,),
+                       Align(
+                         alignment: Alignment(-0.8, 1),
+                             child: Checkbox(
+                           
+                           activeColor: Color(0xFFFF008D),
+                           checkColor: Colors.white,
+                                value: checked, 
+                                onChanged: change
+                          ),
+                       ),
+                    SizedBox(height: 15,),
                       Container(
                         width: 200,
                         height: 50,
@@ -142,8 +152,7 @@ class _LoginState extends State<Login> {
             ),
             
           ),
-        ),
-      ),
+      
       
     );
   }
