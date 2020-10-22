@@ -1,11 +1,9 @@
-import 'package:mapbox_gl/mapbox_gl.dart';
-
 class Trajet {
   int tId;
-  int uId;
-  LatLng pDepart;
-  LatLng pArriver;
-  List<LatLng> coords;
+  String uId;
+  List<double> pDepart;
+  List<double> pArriver;
+  List<List<double>> coords;
   double duration;
   double distance;
 
@@ -19,35 +17,62 @@ class Trajet {
       this.duration});
   //getter
   int get idTrajet => tId;
-  int get idUser => uId;
-  LatLng get positionDepart => pDepart;
-  LatLng get positionArriver => pArriver;
-  List<LatLng> get trajetCoords => coords;
+  String get idUser => uId;
+  List<double> get positionDepart => pDepart;
+  List<double> get positionArriver => pArriver;
+  List<List<double>> get trajetCoords => coords;
   double get dureeTrajet => duration;
   double get distanceTrajet => distance;
 
   //setter
-  set idUser(int newUserId) {
+  setidTrajetId(int newTrajetId) {
+    this.tId = newTrajetId;
+  }
+
+  setidUser(String newUserId) {
     this.uId = newUserId;
   }
 
-  set positionDepart(LatLng newPositionDepart) {
+  setpositionDepart(List<double> newPositionDepart) {
     this.pDepart = newPositionDepart;
   }
 
-  set positionArriver(LatLng newPositionArriver) {
+  setpositionArriver(List<double> newPositionArriver) {
     this.pArriver = newPositionArriver;
   }
 
-  set trajetCoords(List<LatLng> newCoords) {
+  settrajetCoords(List<List<double>> newCoords) {
     this.coords = newCoords;
   }
 
-  set dureeTrajet(double newduration) {
+  setdureeTrajet(double newduration) {
     this.duration = newduration;
   }
 
-  set distanceTrajet(double newdistance) {
+  setdistanceTrajet(double newdistance) {
     this.distance = newdistance;
+  }
+
+  //convert a Trajet object to a Map object
+  Map<String, dynamic> toMap() {
+    var map = Map<String, dynamic>();
+    map['positionDepart'] = pDepart;
+    map['positionArriver'] = pArriver;
+    map['coords'] = coords;
+    map['duration'] = duration;
+    map['distance'] = distance;
+
+    return map;
+  }
+
+  //extract a Dev object from a Map object
+  Trajet.fromMapObject(Map<String, dynamic> map) {
+    this.uId = map['userId'];
+    this.tId = map['trajetId'];
+    this.pDepart = map['positionDepart'];
+    this.pArriver = map['positionArriver'];
+    this.coords = map['coords'];
+    this.duration = map['duration'];
+    this.distance = map['distance'];
   }
 }

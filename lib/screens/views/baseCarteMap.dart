@@ -17,10 +17,10 @@ class _MapCarteBaseState extends State<MapCarteBase> {
   MapboxMapController mapController;
   String lngDepart = '2.339432';
   String latDepart = '48.862056';
-  String lngArriver = '2.343015';
+  String lngArriver = '2.342597';
   String latArriver = '48.863569';
   LatLng center = LatLng(48.862056, 2.339432);
-  LatLng parkingPosition = LatLng(48.863569, 2.343015);
+  LatLng parkingPosition = LatLng(48.865409, 2.342597);
 
   final styleCarte = 'mapbox://styles/sambatra/ckgbwa2x706vs1ap3n6qcaptj';
 
@@ -28,7 +28,7 @@ class _MapCarteBaseState extends State<MapCarteBase> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: creaMapa(),
-      floatingActionButton: _boutonSymbols(),
+      //floatingActionButton: _boutonSymbols(),
     );
   }
 
@@ -53,14 +53,14 @@ class _MapCarteBaseState extends State<MapCarteBase> {
 
   //
   void _onStyleLoaded() {
-    addImageFromAsset("positionDepart", "assets/positionDepart.png");
-    addImageFromAsset("positionJaune", "assets/positionJaune.png");
-    addImageFromAsset("positionRouge", "assets/positionRouge.png");
-    addImageFromAsset("positionVert", "assets/positionVert.png");
+    addImageFromAsset("positionDepart", "assets/images/positionDepart.png");
+    addImageFromAsset("positionJaune", "assets/images/positionJaune.png");
+    addImageFromAsset("positionRouge", "assets/images/positionRouge.png");
+    addImageFromAsset("positionVert", "assets/images/positionVert.png");
   }
 
   //fonction get le routes
-  Future _getdata() async {
+  Future getCoodsAndDrawRoutes() async {
     List<LatLng> chemin = [];
     //requete http qui retourne un response
     http.Response response = await http.get(
@@ -73,6 +73,7 @@ class _MapCarteBaseState extends State<MapCarteBase> {
             "," +
             latArriver +
             "?geometries=geojson&access_token=pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA");
+
     //convert data response to json
     Map data = json.decode(response.body);
     var routes = data['routes'];
@@ -116,18 +117,18 @@ class _MapCarteBaseState extends State<MapCarteBase> {
     ));
   }
 
-  FloatingActionButton _boutonSymbols() {
+  /*FloatingActionButton _boutonSymbols() {
     return FloatingActionButton(
         child: Icon(Icons.add_location), onPressed: () {});
-  }
+  }*/
 
   //initialisation map
   void _onMapCreated(MapboxMapController controller) {
     mapController = controller;
-    _getdata();
+    getCoodsAndDrawRoutes();
     _onStyleLoaded();
-    _addSymbols(center, 'positionDepart', controller);
-    _addSymbols(parkingPosition, 'positionVert', controller);
+    _addSymbols(center, 'positionDepart', mapController);
+    _addSymbols(parkingPosition, 'positionVert', mapController);
   }
 
   //creation carte
@@ -135,6 +136,6 @@ class _MapCarteBaseState extends State<MapCarteBase> {
     return MapboxMap(
         styleString: styleCarte,
         onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(target: center, zoom: 15));
+        initialCameraPosition: CameraPosition(target: center, zoom: 14));
   }
 }
