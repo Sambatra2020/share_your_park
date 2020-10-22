@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:share_your_park/screens/views/validate.dart';
 
-class Car extends StatefulWidget {
+class Brouillon extends StatefulWidget {
   @override
-  _CarState createState() => _CarState();
+  _BrouillonState createState() => _BrouillonState();
 }
 
-class _CarState extends State<Car> {
+class _BrouillonState extends State<Brouillon> {
   
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,8 @@ class _CarState extends State<Car> {
               children: [
                 Container(
                   height: size.height/2,
-                   decoration: BoxDecoration(
+                  
+                  decoration: BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
@@ -67,8 +67,9 @@ class _CarState extends State<Car> {
                       textAlign: TextAlign.left,
                       ),
                   ),
-                  /*Container(
+                  Container(
                     height: 70,
+                    //color: Colors.lime,
                     child: Align(
                       child: Row(
                         children: [
@@ -100,7 +101,7 @@ class _CarState extends State<Car> {
                                 child: Column(
                                 children: [
                                   SizedBox(height: 10,),
-                                  Image.asset('assets/icons/taxigris.png', alignment: Alignment.center,),
+                                  Icon(FontAwesome.car, color: Colors.grey,),
                                   Text('Thermique', style: TextStyle(color: Colors.black, fontSize: 8),)
                                 ]
                               ),
@@ -110,19 +111,18 @@ class _CarState extends State<Car> {
                         ]
                       ),
                     ),
-                  ),*/
-                  Container(height: 2, color: Color(0xFFFF008D), width: 290, margin: EdgeInsets.only(bottom:10), ),
+                  ),
        //taille de voiture
                 Align(
                     alignment: Alignment(-0.7, 0),
                     //color: Colors.orange,
                     child: Text(
-                     "Taille de voiture",
+                     "Type de véhicule",
                       style: TextStyle(color: Color(0xFFFF008D), fontFamily: 'Arial', fontSize: 16, ),
                       textAlign: TextAlign.left,
                       ),
                   ),
-                  /*Container(
+                  Container(
                     height: 70,
                     //color: Colors.lime,
                     child: Align(
@@ -136,13 +136,6 @@ class _CarState extends State<Car> {
                               onPressed: () {  }, 
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                               backgroundColor: Colors.white,
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 10,),
-                                  Image.asset('assets/images/taxijaune.png', alignment: Alignment.center,),
-                                  Text('Small', style: TextStyle(color: Colors.black, fontSize: 8),)
-                                ]
-                              ),
                                 ),
                           ),
                           
@@ -153,13 +146,6 @@ class _CarState extends State<Car> {
                                 onPressed: () {  },
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                                 backgroundColor: Colors.white,
-                                 child: Column(
-                                children: [
-                                  SizedBox(height: 10,),
-                                  Image.asset('assets/icons/taxigris.png', alignment: Alignment.center,),
-                                  Text('Medium', style: TextStyle(color: Colors.black, fontSize: 8),)
-                                ]
-                              ),
                                 ),
                               ),
 
@@ -170,32 +156,24 @@ class _CarState extends State<Car> {
                               onPressed: () {  }, 
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                               backgroundColor: Colors.white,
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 10,),
-                                  Image.asset('assets/icons/taxirouge.png', alignment: Alignment.center,),
-                                  Text('Large', style: TextStyle(color: Colors.black, fontSize: 8),)
-                                ]
-                              ),
                                 ),
                           ),
 
                          ]
                       ),
                     ),
-                  ),*/
-                  Container(height: 2, color: Color(0xFFFF008D), width: 290, margin: EdgeInsets.only(bottom:10), ),
+                  ),
+
+                  
                   //bouton inscription
                           Container(
-                            margin: EdgeInsets.only(top:10),
-                        width: 240, height: 40,
+                        width: 240,
+                        height: 40,
                         child: FlatButton(
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                           color: Color(0xFFFF008D),
                           onPressed: (){
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => Validate())
-                                );
+                           
                           }, 
                           child: Text(
                             "S'inscrire",

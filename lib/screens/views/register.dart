@@ -40,7 +40,7 @@ class _RegisterState extends State<Register> {
                     child: Image.asset(
                       
                       'assets/bon.png',
-                      width: 200, height: 200,
+                      width: 230, height: 230,
                       
                       alignment: Alignment.center
                     ),

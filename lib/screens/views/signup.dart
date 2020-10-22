@@ -176,9 +176,8 @@ class _SignupState extends State<Signup> {
                         ),
                            ),
                            SizedBox(height: 10,),
-                           Container(
-                        width: 200,
-                        height: 50,
+                        Container(
+                        height: 50,width: 240,
                         child: FlatButton(
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                           color: Color(0xFFFF008D),

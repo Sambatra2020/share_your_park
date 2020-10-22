@@ -57,7 +57,7 @@ class _LoginState extends State<Login> {
                               margin: EdgeInsets.only(left: 200,top: 30),
                              
                               
-                                child: Image.asset('assets/images/revoir.png', height:240, width:220,
+                                child: Image.asset('assets/images/revoir.png', height:205, width:220,
                                 alignment: Alignment.bottomRight,))
                              
                             
@@ -121,8 +121,7 @@ class _LoginState extends State<Login> {
                        ),
                     SizedBox(height: 15,),
                       Container(
-                        width: 200,
-                        height: 50,
+                        height: 50,width: 240,
                         child: FlatButton(
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                           color: Color(0xFFFF008D),
