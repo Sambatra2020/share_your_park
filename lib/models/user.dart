@@ -1,29 +1,24 @@
-class User {
+class UserInformation {
   String userId;
   String userFirstName;
   String userLastName;
   String userEmail;
-  String userTypeVehicule;
-  String userTailleVehicule;
+  String userAdress;
+  int userCodePostal;
   String userNumeroPhone;
   DateTime userDateDeNaissance;
   DateTime userDateInscription;
+  String userTypeVehicule;
+  String userTailleVehicule;
 
-  User(
-      {this.userFirstName,
-      this.userLastName,
-      this.userEmail,
-      this.userNumeroPhone,
-      this.userDateDeNaissance,
-      this.userTypeVehicule,
-      this.userTailleVehicule,
-      this.userDateInscription});
-  User.withId(
+  UserInformation(
       {this.userId,
       this.userFirstName,
       this.userLastName,
       this.userEmail,
       this.userNumeroPhone,
+      this.userAdress,
+      this.userCodePostal,
       this.userDateDeNaissance,
       this.userTypeVehicule,
       this.userTailleVehicule,
@@ -35,53 +30,69 @@ class User {
   String get lastName => userLastName;
   String get email => userEmail;
   String get numeroPhone => userNumeroPhone;
+  String get adress => userAdress;
+  int get codePostal => userCodePostal;
   DateTime get dateDeNaissance => userDateDeNaissance;
   String get typeDeVehicule => userTypeVehicule;
   String get tailleDeVehicule => userTailleVehicule;
   DateTime get dateInscription => userDateInscription;
 
   //setter
-  set firstName(String newfirstName) {
+  setId(String newId) {
+    this.userId = newId;
+  }
+
+  setFirstName(String newfirstName) {
     if (newfirstName.length < 50) {
       this.userFirstName = newfirstName;
     }
   }
 
-  set lastName(String newlastName) {
+  setLastName(String newlastName) {
     if (newlastName.length < 50) {
       this.userLastName = newlastName;
     }
   }
 
-  set email(String newemail) {
+  setEmail(String newemail) {
     if (newemail.length < 50) {
       this.userEmail = newemail;
     }
   }
 
-  set numeroPhone(String newnumeroPhone) {
+  setNumeroPhone(String newnumeroPhone) {
     if (newnumeroPhone.length < 15) {
       this.userNumeroPhone = newnumeroPhone;
     }
   }
 
-  set dateDeNaissance(DateTime newdateDeNaissance) {
+  setAdress(String newAdress) {
+    if (newAdress.length < 50) {
+      this.userAdress = newAdress;
+    }
+  }
+
+  setCodePostal(int newCodePostal) {
+    this.userCodePostal = newCodePostal;
+  }
+
+  setDateDeNaissance(DateTime newdateDeNaissance) {
     this.userDateDeNaissance = newdateDeNaissance;
   }
 
-  set typeDeVehicule(String newTypeDeVehicule) {
+  setTypeDeVehicule(String newTypeDeVehicule) {
     if (newTypeDeVehicule.length < 11) {
       this.userTypeVehicule = newTypeDeVehicule;
     }
   }
 
-  set tailleDeVehicule(String newTailleDeVehicule) {
+  setTailleDeVehicule(String newTailleDeVehicule) {
     if (newTailleDeVehicule.length < 7) {
       this.userTailleVehicule = newTailleDeVehicule;
     }
   }
 
-  set dateInscription(DateTime newdateInscription) {
+  setDateInscription(DateTime newdateInscription) {
     this.userDateInscription = newdateInscription;
   }
 
@@ -96,6 +107,8 @@ class User {
     map['lastName'] = userLastName;
     map['email'] = userEmail;
     map['numeroPhone'] = userNumeroPhone;
+    map['adress'] = userAdress;
+    map['codePostal'] = userCodePostal;
     map['dateDeNaissance'] = userDateDeNaissance;
     map['typeDeVehicule'] = userTypeVehicule;
     map['tailleDeVehicule'] = userTailleVehicule;
@@ -105,13 +118,15 @@ class User {
   }
 
   //extract a Dev object from a Map object
-  User.fromMapObject(Map<String, dynamic> map) {
+  UserInformation.fromMapObject(Map<String, dynamic> map) {
     this.userId = map['id'];
     this.userFirstName = map['firstName'];
     this.userLastName = map['lastName'];
     this.userEmail = map['email'];
     this.userNumeroPhone = map['numeroPhone'];
     this.userDateDeNaissance = map['dateDeNaissance'];
+    this.userAdress = map['adress'];
+    this.userCodePostal = map['dateDeNaissance'];
     this.userTypeVehicule = map['typeDeVehicule'];
     this.userTailleVehicule = map['tailleDeVehicule'];
     this.userDateInscription = map['dateInscription'];

@@ -16,15 +16,19 @@ class Parking {
   int get status => pStatus;
 
   //setter
-  set nomRue(String newNomRue) {
+  setNomRue(String newNomRue) {
     this.pNomRue = newNomRue;
   }
 
-  set lat(double newLat) {
+  setLat(double newLat) {
     this.pLat = newLat;
   }
 
-  set lng(double newLng) {
+  setLng(double newLng) {
     this.pLng = newLng;
+  }
+
+  setStatus(int newStatus) {
+    this.pStatus = newStatus;
   }
 }

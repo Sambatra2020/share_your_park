@@ -39,9 +39,10 @@ class DatabaseService {
   }
 
   // list utilisateur from snapshot
-  List<userModel.User> _brewListFromSnapshot(QuerySnapshot snapshot) {
+  List<userModel.UserInformation> _brewListFromSnapshot(
+      QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
-      return userModel.User(
+      return userModel.UserInformation(
           userFirstName: doc.get('lastName') ?? '',
           userLastName: doc.get('sugars') ?? '',
           userEmail: doc.get('email') ?? '',
@@ -54,8 +55,8 @@ class DatabaseService {
   }
 
   //userData from snapshot
-  userModel.User _userDataFromSnapshot(DocumentSnapshot snapshot) {
-    return userModel.User.withId(
+  userModel.UserInformation _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return userModel.UserInformation(
         userId: uid,
         userFirstName: snapshot.get('lastName'),
         userLastName: snapshot.get('sugars'),
@@ -68,12 +69,12 @@ class DatabaseService {
   }
 
   //recuper  stream  utilisateurs
-  Stream<List<userModel.User>> get utilisateurs {
+  Stream<List<userModel.UserInformation>> get utilisateurs {
     return userCollection.snapshots().map(_brewListFromSnapshot);
   }
 
   //get user doc stream
-  Stream<userModel.User> get userData {
+  Stream<userModel.UserInformation> get userData {
     return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
   }
 
