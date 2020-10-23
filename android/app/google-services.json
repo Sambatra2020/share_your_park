@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "947876677096-b7f9qjmrgstpmt58rb1h9r0nukqn6su1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.share_your_park",
+            "certificate_hash": "339ec2b54e39ad0a6c1b85115d0566d34ea5ca21"
+          }
+        },
+        {
           "client_id": "947876677096-nrnc38s8d3nmt0ucm1sbdtf1ngri4rpt.apps.googleusercontent.com",
           "client_type": 3
         }
