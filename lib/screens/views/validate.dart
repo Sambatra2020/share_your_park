@@ -162,6 +162,28 @@ class _ValidateState extends State<Validate> {
                         Text('Se souvenir de moi'),
                          ]
                        ),
+                  Container(
+                            margin: EdgeInsets.only(top:10),
+                        width: 170, height: 40,
+                        child: FlatButton(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                          color: Color(0xFFFF008D),
+                          onPressed: (){
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => Validate())
+                                );
+                          }, 
+                          child: Text(
+                            "Valider",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontFamily: 'Quicksand'
+                            ),
+                          
+                          )
+                          ),
+                      ),
                 ]
               ),
             ),
