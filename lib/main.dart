@@ -2,8 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:share_your_park/auth.dart';
-import 'package:share_your_park/screens/views/acceuil.dart';
 import 'dart:io';
+
+import 'package:share_your_park/screens/views/signup.dart';
 
 
 void main() async {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Acceuil(),
+      // home: Acceuil(),
     );
   }
 }
@@ -41,7 +42,7 @@ class MainPage extends StatelessWidget {
           );
         }
         if ( snapshot.data == null || !snapshot.hasData ) {
-          return Acceuil();
+          return Signup();
         }
         return Scaffold(
           body: Center(
