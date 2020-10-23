@@ -15,12 +15,14 @@ class _MapCarteBaseState extends State<MapCarteBase> {
   //variable
 
   MapboxMapController mapController;
-  String lngDepart = '2.339432';
-  String latDepart = '48.862056';
-  String lngArriver = '2.342597';
-  String latArriver = '48.863569';
-  LatLng center = LatLng(48.862056, 2.339432);
-  LatLng parkingPosition = LatLng(48.865409, 2.342597);
+  static String lngDepart = '2.339432';
+  static String latDepart = '48.862056';
+  static String lngArriver = '2.340308';
+  static String latArriver = '48.866029';
+  static LatLng center =
+      LatLng(double.parse(latDepart), double.parse(lngDepart));
+  static LatLng parkingPosition =
+      LatLng(double.parse(latArriver), double.parse(lngArriver));
 
   final styleCarte = 'mapbox://styles/sambatra/ckgbwa2x706vs1ap3n6qcaptj';
 
