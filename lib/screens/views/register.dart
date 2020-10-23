@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:share_your_park/auth.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -7,6 +8,8 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +60,11 @@ class _RegisterState extends State<Register> {
                FlatButton(
                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
                color: Color(0xFF5071C3),
-               onPressed: (){},  
+               onPressed: () async {
+                  var res = await _auth.signInWithFacebook();
+                  if ( res == null )
+                    print("error");
+               },  
                child: Row(
                  mainAxisSize: MainAxisSize.min,
                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,7 +81,11 @@ class _RegisterState extends State<Register> {
                FlatButton(
                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
                color: Colors.white,
-               onPressed: (){},  
+               onPressed: () async {
+                var res = await _auth.loginWithGoogle();
+                if ( res == null )
+                  print("error");
+               },  
                child: Row(
                  mainAxisSize: MainAxisSize.min,
                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
