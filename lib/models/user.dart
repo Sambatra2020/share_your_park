@@ -1,3 +1,8 @@
+class User {
+  String userId;
+  User({this.userId});
+}
+
 class UserInformation {
   String userId;
   String userFirstName;
