@@ -1,11 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:share_your_park/auth.dart';
 import 'package:share_your_park/screens/views/register.dart';
 import 'dart:io';
-import 'package:share_your_park/screens/views/signup.dart';
 import 'package:provider/provider.dart';
+import 'package:share_your_park/screens/views/signup.dart';
 import 'models/user.dart' as userModel;
 
 
@@ -73,22 +72,23 @@ class MainPage extends StatelessWidget {
       if ( user == null ) {
         return Register();
       } else {
-        return Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children : <Widget>[
-                FlatButton(onPressed: () async {
-                    AuthService().logOut();
-                  },
-                  color: Colors.pink,
-                  child: Text("disconnect")
-                )
+        // return Scaffold(
+        //   body: Center(
+        //     child: Column(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children : <Widget>[
+        //         FlatButton(onPressed: () async {
+        //             AuthService().logOut();
+        //           },
+        //           color: Colors.pink,
+        //           child: Text("disconnect")
+        //         )
 
-              ]
-            ),
-          )
-        );
+        //       ]
+        //     ),
+        //   )
+        // );
+        return Signup();
       }
 
   }
