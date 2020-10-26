@@ -2,16 +2,31 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
+import 'models/user.dart' as userModel;
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<bool> signInWithEmail( String email, String password) async {
+  userModel.User _userFromFireBaseUser( User user ) {
+    return user != null ? userModel.User(userId: user.uid) : null;
+  }
+
+  //auth change user Stream
+  
+  Stream<userModel.User> get user {
+    return _auth.authStateChanges()
+    .map((User user) => (_userFromFireBaseUser(user)));
+    // .map(_userFromFireBaseUser);
+  }
+
+
+
+
+  Future signInWithEmail( String email, String password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       User user = result.user;
-      print(user);
-      return true;
+      return _userFromFireBaseUser(user);
     } catch (e) {
 
     }
@@ -31,8 +46,11 @@ class AuthService {
 
       if ( result.status == FacebookLoginStatus.loggedIn ) {
         final AuthCredential credential = FacebookAuthProvider.credential(token);
-        _auth.signInWithCredential(credential);
+        var result = await _auth.signInWithCredential(credential);
+        var user = result.user;
+        return _userFromFireBaseUser(user);
       }
+      
     } catch (e) {
     }
 
@@ -51,8 +69,10 @@ class AuthService {
         idToken: googleAuth.idToken,
       );
 
-    // Once signed in, return the UserCredential
-      return await FirebaseAuth.instance.signInWithCredential(credential);
+      // Once signed in, return the UserCredential
+      var result = await FirebaseAuth.instance.signInWithCredential(credential);
+      var user = result.user;
+      return _userFromFireBaseUser(user);
 
     } catch (e) {
         print(e.toString());
