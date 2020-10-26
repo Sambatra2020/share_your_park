@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
+import 'package:share_your_park/screens/views/checkbox.dart';
+
 class Validate extends StatefulWidget {
+  
+  
   @override
   _ValidateState createState() => _ValidateState();
 }
 
 class _ValidateState extends State<Validate> {
-  bool checked = true;
-    void change(bool isChecked){
-      setState(() {
-       checked = isChecked;
-      });
-    }
+  
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    
     return Scaffold(
         body: SingleChildScrollView(
           child: Align(
@@ -52,27 +52,7 @@ class _ValidateState extends State<Validate> {
                                   
                                   )
                                 ),
-                           /* Column(
-                               children: [
-                                Text(
-                                  "Vos données personnelles sont",
-                                  textAlign: TextAlign.left,
-                                   style: TextStyle(color: Colors.black, fontFamily: 'Quicksand', fontSize:14, wordSpacing: 3.5,
-                                  
-                                  )
-                                ),
-                                Text(
-                                  "uniquement utilisées pour adapter",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(color: Colors.black, fontFamily: 'Quicksand', fontSize:14, wordSpacing: 2)
-                                ),
-                                 Text(
-                                  "l'application à vos besoins",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(color: Colors.black, fontFamily: 'Quicksand', fontSize:14, wordSpacing: 3.5)
-                                ),
-                              ]
-                            )*/
+                          
                           ],
                         ),
                         SizedBox(height: 10,),
@@ -87,22 +67,7 @@ class _ValidateState extends State<Validate> {
                                   
                                   )
                                 ),
-                            /*Column(
-                               children: [
-                                Text(
-                                  "Nous ne partageons pas à nos tiers",
-                                  textAlign: TextAlign.left,
-                                   style: TextStyle(color: Colors.black, fontFamily: 'Quicksand', fontSize:14, wordSpacing: 1,
-                                  
-                                  )
-                                ),
-                                Text(
-                                  "vos données à des fins commerciales",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(color: Colors.black, fontFamily: 'Quicksand', fontSize:14, wordSpacing: 2)
-                                ),
-                              ]
-                            )*/
+                            
                           ],
                         ),
                         SizedBox(height: 10,),
@@ -117,27 +82,7 @@ class _ValidateState extends State<Validate> {
                                   
                                   )
                                 ),
-                            /*Column(
-                               children: [
-                                Text(
-                                  "Nous utilisons uniquement vos données",
-                                  textAlign: TextAlign.left,
-                                   style: TextStyle(color: Colors.black, fontFamily: 'Quicksand', fontSize:14, wordSpacing: 1,
-                                  
-                                  )
-                                ),
-                                Text(
-                                  "pour échanger avec vous syp",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(color: Colors.black, fontFamily: 'Quicksand', fontSize:14, wordSpacing: 2)
-                                ),
-                                Text(
-                                  "vos données restent privée",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(color: Colors.black, fontFamily: 'Quicksand', fontSize:14, wordSpacing: 2)
-                                ),
-                              ]
-                            )*/
+                            
                           ],
                         ),
                         SizedBox(height:30),
@@ -153,18 +98,42 @@ class _ValidateState extends State<Validate> {
                   ),
                   ),
                   Row(
+                        
                          mainAxisAlignment: MainAxisAlignment.start,
                          children: <Widget> [
-                           Checkbox(
-                              value: checked, 
-                              onChanged: change
-                        ),
-                        Text('Se souvenir de moi'),
+                           Container(
+                             margin: EdgeInsets.only(left: 30, right: 15, top: 30),
+                             child: CheckBox()),
+                           
+                        Container(
+                          margin: EdgeInsets.only(  top: 30),
+                          child: Text(
+                            "J'accepte de partager avec syp mes infos \nafin d'établir mon profil de syppeur",
+                            style: TextStyle(color: Colors.black, fontFamily: 'Quicksand', fontSize:14, wordSpacing: 2,
+                          ),),
+                        )
+                         ]
+                       ),
+                        Row(
+                        
+                         mainAxisAlignment: MainAxisAlignment.start,
+                         children: <Widget> [
+                           Container(
+                             margin: EdgeInsets.only(left: 30, right: 15, top: 20),
+                             child: CheckBox()),
+                           
+                        Container(
+                          margin: EdgeInsets.only(  top: 20),
+                          child: Text(
+                            "J'ai lu et j'accepte les conditions générales \nd'utilisation",
+                            style: TextStyle(color: Colors.black, fontFamily: 'Quicksand', fontSize:14, wordSpacing: 2,
+                          ),),
+                        )
                          ]
                        ),
                   Container(
-                            margin: EdgeInsets.only(top:10),
-                        width: 170, height: 40,
+                            margin: EdgeInsets.only(top:15),
+                        width: 140, height: 45,
                         child: FlatButton(
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                           color: Color(0xFFFF008D),

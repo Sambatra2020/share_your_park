@@ -13,6 +13,8 @@ class _CarState extends State<Car> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SingleChildScrollView(
         child: Align(
@@ -20,7 +22,7 @@ class _CarState extends State<Car> {
             child: Column(
               children: [
                 Container(
-                  height: size.height/2,
+                  height: size.height * 1/3,
                    decoration: BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.topCenter,
@@ -35,10 +37,13 @@ class _CarState extends State<Car> {
                       children: [
                         Container(
                           //color: Colors.amber,
-                          margin:  EdgeInsets.only(left:25, top: 15),
+                          //margin:  EdgeInsets.only(left:25, top: 15),
                           child: Align(
-                
-                            child: Image.asset('assets/images/car.png', height: 300, width: 280,alignment: Alignment(0, 1),)
+                            child: Image.asset('assets/images/car.png',
+                             //height: 300, width: 280,
+                             height: screenHeight * 0.5,
+                             width: screenWidth * 0.75,
+                             alignment: Alignment(0, 1),)
                           ),
                         ),
                       ]
@@ -46,13 +51,8 @@ class _CarState extends State<Car> {
                     
                   ),
               ),
-              Container(
-                      height: 10.0,
-                      color: Color(0xFFA3005A),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
+              Container( height: screenHeight * 0.02,color: Color(0xFFA3005A),),
+              SizedBox(height: screenHeight * 0.04,),
               
               Column(
                 children: [
@@ -67,7 +67,19 @@ class _CarState extends State<Car> {
                       textAlign: TextAlign.left,
                       ),
                   ),
-                  /*Container(
+                  Container(
+                     height: 70,
+                     child: Align(
+                       child: Row(
+                         children: [
+                           Container(
+
+                           ),
+                         ],
+                         )
+                     ),
+                  ),
+                 /* Container(
                     height: 70,
                     child: Align(
                       child: Row(

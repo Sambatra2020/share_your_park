@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share_your_park/screens/views/signup.dart';
+import 'package:share_your_park/screens/views/checkbox.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -8,24 +9,21 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-      bool checked = true;
-        void change(bool isChecked){
-          setState(() {
-          checked = isChecked;
-          });
-        }
+      
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    final size = MediaQuery.of(context).size;
+   final size = MediaQuery.of(context).size;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: SingleChildScrollView(
-              //child: Align(
-                //child: Container(
+              
             child: Column(
               children: [
                 Container(
                   height: size.height/2,
+                  width: size.width,
                   
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -40,46 +38,39 @@ class _LoginState extends State<Login> {
                   
                     child: Column(
                       children: [
-                       //SizedBox(height: 35,),
+                       
                             Container(
-                              margin: EdgeInsets.only( right: 220, top: 45),
-                              //alignment: Alignment(-0.7,-1),
-                          //color: Colors.amber,
+                              margin: EdgeInsets.only(
+                                right: screenWidth * 0.6,
+                                top: screenHeight * 0.05
+                                ),
                               child: Text(
                                 'Bonjour',
                                 style: TextStyle(color: Colors.white, fontSize: 30, fontFamily: 'Quicksand')
                                 ),
                             ),
-                            
-                          
-                            Container(
-                              //color: Colors.amber,
-                              margin: EdgeInsets.only(left: 200,top: 30),
-                             
-                              
-                                child: Image.asset('assets/images/revoir.png', height:205, width:220,
-                                alignment: Alignment.bottomRight,))
-                             
-                            
-                      ]
+                            Container( 
+                              margin: EdgeInsets.only(
+                                left: screenWidth * 0.51,
+                                top: screenHeight * 0.14
+                              ),
+                                child: Image.asset('assets/images/revoir.png',
+                               height: screenHeight * 0.25 ,
+                                width: screenWidth * 0.5,
+                                alignment: Alignment.bottomRight,))]
                     ) ,
                     ),
                
-                Container(
-                      height: 10.0,
-                      color: Color(0xFFA3005A),
-                      ),
-                      SizedBox(height: 35,),
-                    
+                Container( height: screenHeight * 0.02,color: Color(0xFFA3005A),),
+                SizedBox(height: screenHeight * 0.04,),
+                  //formulaire  
                 Column(
                   children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical:5, horizontal: 50),
+                    Container( 
+                      height: screenHeight * 0.08,
+                      width: screenWidth * 0.75,
                       child: TextField(
                         decoration: InputDecoration(
-                          /*icon: Icon(Entypo.message, color: Color(0xFFFF008D),),
-                          labelText: 'Email',
-                          labelStyle: TextStyle(color: Color(0xFFFF008D),)*/
                           enabledBorder: UnderlineInputBorder (borderSide: BorderSide(color:Color(0xFFFF008D) )),
                            prefixIcon: Icon(Entypo.mail, color: Color(0xFFFF008D)),
                             hintText: 'Email',
@@ -88,40 +79,34 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    //SizedBox(height: 10,),
                     Container(
-                        margin: EdgeInsets.symmetric(vertical:5, horizontal: 50),
-                        child: TextField(
+                      height: screenHeight * 0.08,
+                      width: screenWidth * 0.75,
+                      child: TextField(
                           obscureText: true,
                           decoration: InputDecoration(
-                            //prefix: Image.asset('assets/Message.png', color: Color(0xFFFF008D), width: 20,height: 20,),
-                           /* prefixIconConstraints: BoxConstraints(
-                                                              minHeight: 20,
-                                                              minWidth: 20,
-                                                            ),*/
                             enabledBorder: UnderlineInputBorder (borderSide: BorderSide(color:Color(0xFFFF008D) )),
                             prefixIcon: Icon(Entypo.lock, color: Color(0xFFFF008D)),
                             hintText: 'Mot de passe',
-                            hintStyle: TextStyle(color: Color(0xFFFF008D),
-                             
-                            ),
-                            
+                            hintStyle: TextStyle(color: Color(0xFFFF008D),) 
                              ),
                         ),
                       ),
-                       Align(
-                         alignment: Alignment(-0.8, 1),
-                             child: Checkbox(
-                           
-                           activeColor: Color(0xFFFF008D),
-                           checkColor: Colors.white,
-                                value: checked, 
-                                onChanged: change
+                       Container(
+                          margin: EdgeInsets.only(
+                            right: screenWidth * 0.65,
+                            top: screenHeight * 0.02
                           ),
+                           child: CheckBox( isChecked: true,),
                        ),
-                    SizedBox(height: 15,),
+
+                    SizedBox(height: screenHeight * 0.05),
+                    //bouton connexion
                       Container(
-                        height: 50,width: 240,
+                        
+                        height: screenHeight * 0.07,
+                        width: screenWidth * 0.7,
                         child: FlatButton(
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                           color: Color(0xFFFF008D),
@@ -136,9 +121,7 @@ class _LoginState extends State<Login> {
                               color: Colors.white,
                               fontSize: 18,
                               fontFamily: 'Quicksand'
-                            ),
-                          
-                          )
+                            ),)
                           ),
                       ),
 

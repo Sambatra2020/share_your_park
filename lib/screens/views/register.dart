@@ -13,6 +13,10 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     final size = MediaQuery.of(context).size;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -32,26 +36,22 @@ class _RegisterState extends State<Register> {
               crossAxisAlignment: CrossAxisAlignment.center,
            
               children: [
-                SizedBox(height: 55),
+                SizedBox(height: screenHeight * 0.05),
                 
                    Container(
                      margin: EdgeInsets.only(left:45),
-                    
-                    child: Image.asset(
-                      
-                      'assets/bon.png',
-                      width: 230, height: 230,
-                      
-                      alignment: Alignment.center
+                     child: Image.asset(
+                     'assets/bon.png',
+                      width: screenWidth * 0.5, height: screenHeight * 0.45,
+                     alignment: Alignment.center
                     ),
                   ),
                 
-                SizedBox(height: 25),
-                //Text("Enregistre-toi!", style: TextStyle(color: Colors.white, fontSize: 22, fontFamily: 'Quicksand' ))
-
+                SizedBox(height: screenHeight * 0.01),
+                
                 Container(
-                   height: 35,
-                  width: 190,
+                  height:  screenHeight * 0.06,
+                  width: screenWidth * 0.60,
                   child: FlatButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50)),
@@ -62,23 +62,24 @@ class _RegisterState extends State<Register> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(child: Icon(FlutterIcons.apple_mco, color: Colors.white)),
-                        SizedBox(
-                          height: 10,
+                        Icon(FlutterIcons.apple_mco, color: Colors.white),
+                        SizedBox(width: screenWidth * 0.02,
                         ),
                         Text('Connecter avec Apple',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 12,
-                                fontFamily: 'Roboto'))
+                                fontSize: 14,
+                                fontFamily: 'Roboto'),
+                                textAlign: TextAlign.start,
+                                )
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height:10),
+                SizedBox(height: screenHeight * 0.015),
                 Container(
-                  height: 35,
-                  width: 190,
+                  height:  screenHeight * 0.06,
+                  width: screenWidth * 0.6,
                   child: FlatButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50)),
@@ -88,26 +89,23 @@ class _RegisterState extends State<Register> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                                                  child: Image.asset(
-                            'assets/icons/fb 1.png',
-                            width: 16,
-                            height: 16,
+                        Image.asset(
+                        'assets/icons/fb 1.png',
+                        width: 16, height: 16,
                           ),
-                        ),
                         Text('Connecter avec Facebook',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 12,
+                                fontSize: 14,
                                 fontFamily: 'Roboto'))
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height:10),
+               SizedBox(height: screenHeight * 0.015),
                 Container(
-                   height: 35,
-                  width: 190,
+                   height:  screenHeight * 0.06,
+                  width: screenWidth * 0.6,
                   child: FlatButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50)),
@@ -117,26 +115,25 @@ class _RegisterState extends State<Register> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                                                  child: Image.asset(
+                        Image.asset(
                             'assets/icons/google.png',
                             width: 16,
                             height: 16,
                           ),
-                        ),
+                          SizedBox(width: screenWidth * 0.02,),
                         Text('Connecter avec google',
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 12,
+                                fontSize: 14,
                                 fontFamily: 'Roboto'))
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height:10),
+                SizedBox(height: screenHeight * 0.015),
                 Container(
-                   height: 35,
-                  width: 190,
+                   height:  screenHeight * 0.06,
+                  width: screenWidth * 0.6,
                   child: FlatButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50)),
@@ -149,54 +146,48 @@ class _RegisterState extends State<Register> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                                                  child: Image.asset(
+                        Image.asset(
                             'assets/icons/Message.png',
                             width: 22,
                             height: 22,
                           ),
-                        ),
+                        SizedBox(width: screenWidth * 0.02,),
                         Text('Connecter avec Email',
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 12,
+                                fontSize: 14,
                                 fontFamily: 'Roboto'))
                       ],
                     ),
                   ),
                 ),
 
-                SizedBox(height: 20),
+                SizedBox(height: screenHeight * 0.02),
                 Text(
                   'On partagera jamais rien sans',
                   style: TextStyle(
-                      color: Colors.white, fontFamily: 'Roboto', fontSize: 10),
+                      color: Colors.white, fontFamily: 'Roboto', fontSize: 12),
                 ),
                 Text(
                   'ta permission',
                   style: TextStyle(
-                      color: Colors.white, fontFamily: 'Roboto', fontSize: 10),
+                      color: Colors.white, fontFamily: 'Roboto', fontSize: 12),
                 ),
               ],
             )),
       ),
-      // ignore: missing_required_param
+      
       floatingActionButton: Container(
-        width: 45,
-        height: 35,
+        height: screenHeight * 0.05,
+        width: screenWidth * 0.15,
         child: RawMaterialButton(
           onPressed: () {},
-           
-          child: Icon(Icons.arrow_back, color: Colors.white, size: 28,),
+           child: Icon(Icons.arrow_back, color: Colors.white, size: 28,),
           fillColor: Color(0xFFFF008D),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(60)),
           elevation: 8.0,
           )
-        
-        
-        
-        
-      ), 
+        ), 
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop
     );
   }
