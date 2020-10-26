@@ -6,7 +6,6 @@ import 'dart:io';
 
 import 'package:share_your_park/screens/views/signup.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -29,38 +28,33 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatelessWidget {
-
   const MainPage({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context,snapshot) {
-        if ( snapshot.connectionState == ConnectionState.waiting ) {
-          return Container(
-            child: Text("Loading"),
-          );
-        }
-        if ( snapshot.data == null || !snapshot.hasData ) {
-          return Signup();
-        }
-        return Scaffold(
-          body: Center(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Container(
+              child: Text("Loading"),
+            );
+          }
+          if (snapshot.data == null || !snapshot.hasData) {
+            return Signup();
+          }
+          return Scaffold(
+              body: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children : <Widget>[
-                FlatButton(onPressed: () async {
-                    AuthService().logOut();
-                  },
-                  color: Colors.pink,
-                  child: Text("disconnect")
-                )
-
-              ]
-            ),
-          )
-        );
-      }
-    );
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FlatButton(
+                      onPressed: () async {
+                        AuthService().logOut();
+                      },
+                      color: Colors.pink,
+                      child: Text("disconnect"))
+                ]),
+          ));
+        });
   }
 }
