@@ -7,53 +7,45 @@ import 'models/user.dart' as userModel;
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  userModel.User _userFromFireBaseUser( User user ) {
+  userModel.User _userFromFireBaseUser(User user) {
     return user != null ? userModel.User(userId: user.uid) : null;
   }
 
   //auth change user Stream
-  
+
   Stream<userModel.User> get user {
-    return _auth.authStateChanges()
-    .map((User user) => (_userFromFireBaseUser(user)));
+    return _auth
+        .authStateChanges()
+        .map((User user) => (_userFromFireBaseUser(user)));
     // .map(_userFromFireBaseUser);
   }
 
-
-
-
-  Future signInWithEmail( String email, String password) async {
+  Future signInWithEmail(String email, String password) async {
     try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
       User user = result.user;
       return _userFromFireBaseUser(user);
-    } catch (e) {
-
-    }
-
+    } catch (e) {}
   }
 
-
   Future signInWithFacebook() async {
-
     try {
       final FacebookLogin facebookLogin = FacebookLogin();
-      final result = await facebookLogin.logIn  (['email']);
+      final result = await facebookLogin.logIn(['email']);
       final token = result.accessToken.token;
       final graphResponse = await http.get(
-                  'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${token}');
+          'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${token}');
       print(graphResponse.body);
 
-      if ( result.status == FacebookLoginStatus.loggedIn ) {
-        final AuthCredential credential = FacebookAuthProvider.credential(token);
+      if (result.status == FacebookLoginStatus.loggedIn) {
+        final AuthCredential credential =
+            FacebookAuthProvider.credential(token);
         var result = await _auth.signInWithCredential(credential);
         var user = result.user;
         return _userFromFireBaseUser(user);
       }
-      
-    } catch (e) {
-    }
-
+    } catch (e) {}
   }
 
   Future loginWithGoogle() async {
@@ -61,7 +53,8 @@ class AuthService {
       final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
 
       // Obtain the auth details from the request
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       // Create a new credential
       final GoogleAuthCredential credential = GoogleAuthProvider.credential(
@@ -73,17 +66,15 @@ class AuthService {
       var result = await FirebaseAuth.instance.signInWithCredential(credential);
       var user = result.user;
       return _userFromFireBaseUser(user);
-
     } catch (e) {
-        print(e.toString());
+      print(e.toString());
     }
-
   }
 
   Future<void> logOut() async {
-    try{
+    try {
       await _auth.signOut();
-    } catch(e){
+    } catch (e) {
       print(e.toString());
     }
   }

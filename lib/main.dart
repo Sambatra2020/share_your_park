@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 <<<<<<< HEAD
 import 'package:share_your_park/auth.dart';
+import 'package:share_your_park/screens/nfc/scan_nfc.dart';
 import 'package:share_your_park/screens/views/register.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
@@ -16,7 +17,6 @@ import 'package:share_your_park/tuto/acceuil.dart';
 //import 'package:share_your_park/tuto/tutoTwo.dart';
 >>>>>>> tuto_page
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -27,9 +27,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider.value(
-        value: AuthService().user,
-        child: MaterialApp(
-        home: MainPage(),
+      value: AuthService().user,
+      child: MaterialApp(
+        home: ScanNFC(),
         debugShowCheckedModeBanner: false,
         title: 'SYP Demo',
         theme: ThemeData(
@@ -42,7 +42,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatelessWidget {
-
   const MainPage({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -57,48 +56,47 @@ class MainPage extends StatelessWidget {
     //     if ( snapshot.data == null || !snapshot.hasData ) {
     //       return Signup();
     //     }
-        // return Scaffold(
-        //   body: Center(
-        //     child: Column(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children : <Widget>[
-        //         FlatButton(onPressed: () async {
-        //             AuthService().logOut();
-        //           },
-        //           color: Colors.pink,
-        //           child: Text("disconnect")
-        //         )
+    // return Scaffold(
+    //   body: Center(
+    //     child: Column(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       children : <Widget>[
+    //         FlatButton(onPressed: () async {
+    //             AuthService().logOut();
+    //           },
+    //           color: Colors.pink,
+    //           child: Text("disconnect")
+    //         )
 
-        //       ]
-        //     ),
-        //   )
-        // );
+    //       ]
+    //     ),
+    //   )
+    // );
     //   }
     // );
 
-      final user = Provider.of<userModel.User>(context);
-      print(user);
-      if ( user == null ) {
-        return Register();
-      } else {
-        // return Scaffold(
-        //   body: Center(
-        //     child: Column(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children : <Widget>[
-        //         FlatButton(onPressed: () async {
-        //             AuthService().logOut();
-        //           },
-        //           color: Colors.pink,
-        //           child: Text("disconnect")
-        //         )
+    final user = Provider.of<userModel.User>(context);
+    print(user);
+    if (user == null) {
+      return Register();
+    } else {
+      // return Scaffold(
+      //   body: Center(
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children : <Widget>[
+      //         FlatButton(onPressed: () async {
+      //             AuthService().logOut();
+      //           },
+      //           color: Colors.pink,
+      //           child: Text("disconnect")
+      //         )
 
-        //       ]
-        //     ),
-        //   )
-        // );
-        return Signup();
-      }
-
+      //       ]
+      //     ),
+      //   )
+      // );
+      return Signup();
+    }
   }
 }

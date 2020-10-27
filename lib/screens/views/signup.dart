@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:share_your_park/models/user.dart' as userModel;
 import 'package:share_your_park/screens/views/car.dart';
 import 'package:validators/validators.dart';
@@ -23,6 +24,7 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Align(
@@ -185,7 +187,7 @@ class _SignupState extends State<Signup> {
                           fontSize: 15,
                         ),
                       ),
-                      validator: (val) => val.isEmpty || val.length != 18
+                      validator: (val) => val.isEmpty || val.length != 17
                           ? 'n° phone obligatoire'
                           : null,
                       onChanged: (val) =>
@@ -241,7 +243,6 @@ class _SignupState extends State<Signup> {
                         color: Color(0xFFFF008D),
                         onPressed: () {
                           if (_formkey.currentState.validate()) {
-                            newUser.setId("nata01");
                             newUser.setFirstName(currentFirstName);
                             newUser.setLastName(currentLastName);
                             newUser.setNumeroPhone(currentNumeroPhone);

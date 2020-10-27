@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:share_your_park/models/user.dart' as userModel;
+import 'package:share_your_park/services/database.dart';
 
 class Validate extends StatefulWidget {
   final userModel.UserInformation newUser;
@@ -20,6 +22,8 @@ class _ValidateState extends State<Validate> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<userModel.User>(context);
+    DatabaseService databaseService = DatabaseService(uid: user.userId);
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -191,12 +195,14 @@ class _ValidateState extends State<Validate> {
                         borderRadius: BorderRadius.circular(25)),
                     color: Color(0xFFFF008D),
                     onPressed: () {
-                      print(newUser.id);
                       print(newUser.firstName);
                       print(newUser.lastName);
                       print(newUser.adress);
                       print(newUser.email);
                       print(newUser.codePostal);
+                      print(newUser.tailleDeVehicule);
+                      print(newUser.typeDeVehicule);
+                      databaseService.updateUserData(newUser);
                     },
                     child: Text(
                       "Valider",

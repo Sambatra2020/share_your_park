@@ -81,9 +81,8 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.circular(50)),
                       color: Color(0xFF5071C3),
                       onPressed: () async {
-                          var res = await _auth.signInWithFacebook();
-                          if ( res == null )
-                            print("error");
+                        var res = await _auth.signInWithFacebook();
+                        if (res == null) print("error");
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -115,9 +114,8 @@ class _RegisterState extends State<Register> {
                       color: Colors.white,
                       onPressed: () async {
                         var res = await _auth.loginWithGoogle();
-                        if ( res == null )
-                          print("error");
-                      },  
+                        if (res == null) print("error");
+                      },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
