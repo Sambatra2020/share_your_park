@@ -246,6 +246,8 @@ class _CarState extends State<Car> {
                               borderRadius: BorderRadius.circular(25)),
                           color: Color(0xFFFF008D),
                           onPressed: () {
+                            newUser.setTypeDeVehicule("Electrique");
+                            newUser.setTailleDeVehicule("Medium");
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

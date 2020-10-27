@@ -18,31 +18,26 @@ class DatabaseService {
       FirebaseFirestore.instance.collection('utilisateur');
 
   //creer un nouveau collection
-  Future updateUserData(
-      String firstName,
-      String lastName,
-      String email,
-      String numeroPhone,
-      DateTime dateDeNaissance,
-      String typeVehicule,
-      String tailleVehicule) async {
+  Future updateUserData(userModel.UserInformation userInformation) async {
     return await userCollection.doc(uid).set({
-      'firstName': firstName,
-      'lastName': lastName,
-      'email': email,
-      'numeroPhone': numeroPhone,
-      'dateDeNaissance': dateDeNaissance,
-      'typeVehicule': typeVehicule,
-      'tailleVehicule': tailleVehicule,
+      'uid': uid,
+      'firstName': userInformation.firstName,
+      'lastName': userInformation.lastName,
+      'email': userInformation.email,
+      'numeroPhone': userInformation.numeroPhone,
+      'dateDeNaissance': userInformation.dateDeNaissance,
+      'typeVehicule': userInformation.typeDeVehicule,
+      'tailleVehicule': userInformation.tailleDeVehicule,
       'dateInscription': DateTime.now()
     });
   }
 
   // list utilisateur from snapshot
-  List<userModel.UserInformation> _brewListFromSnapshot(
+  List<userModel.UserInformation> _listUtilisateurFromSnapshot(
       QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return userModel.UserInformation(
+          userId: doc.get('uid') ?? '',
           userFirstName: doc.get('lastName') ?? '',
           userLastName: doc.get('sugars') ?? '',
           userEmail: doc.get('email') ?? '',
@@ -70,7 +65,7 @@ class DatabaseService {
 
   //recuper  stream  utilisateurs
   Stream<List<userModel.UserInformation>> get utilisateurs {
-    return userCollection.snapshots().map(_brewListFromSnapshot);
+    return userCollection.snapshots().map(_listUtilisateurFromSnapshot);
   }
 
   //get user doc stream
