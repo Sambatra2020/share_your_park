@@ -68,7 +68,7 @@ class _RegisterState extends State<Register> {
                         Text('Connecter avec Apple',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 14,
+                                fontSize: (36 / screenWidth) * 100,
                                 fontFamily: 'Roboto'),
                                 textAlign: TextAlign.start,
                                 )
@@ -96,7 +96,7 @@ class _RegisterState extends State<Register> {
                         Text('Connecter avec Facebook',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 14,
+                                fontSize: (32 / screenWidth) * 100,
                                 fontFamily: 'Roboto'))
                       ],
                     ),
@@ -124,7 +124,7 @@ class _RegisterState extends State<Register> {
                         Text('Connecter avec google',
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 14,
+                                fontSize: (36 / screenWidth) * 100,
                                 fontFamily: 'Roboto'))
                       ],
                     ),
@@ -155,7 +155,7 @@ class _RegisterState extends State<Register> {
                         Text('Connecter avec Email',
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 14,
+                                fontSize: (36 / screenWidth) * 100,
                                 fontFamily: 'Roboto'))
                       ],
                     ),

@@ -20,7 +20,7 @@ class _SignupState extends State<Signup> {
              child: Column(
                children: [
                  Container(
-                   height: size.height/2,
+                   height: size.height / 2,
                    
                    decoration: BoxDecoration(
                      gradient: LinearGradient(
@@ -51,7 +51,9 @@ class _SignupState extends State<Signup> {
                          Center(
                            child: Text(
                              "Enregistre-toi !",
-                             style: TextStyle(color: Colors.white, fontSize: 30, fontFamily: 'Quicksand')
+                             style: TextStyle(color: Colors.white, 
+                             fontSize: ( 144 / screenHeight) * 100, 
+                             fontFamily: 'Quicksand')
                            )
                          )
                        ],
@@ -178,10 +180,10 @@ class _SignupState extends State<Signup> {
                                  ),
                            ),
                               ),
-                              SizedBox(width: screenWidth * 0.015,),
+                              SizedBox(height: screenHeight * 0.015,),
                            Container(
                            //height: 50,width: 240,
-                           height: screenHeight * 0.07,
+                           height: screenHeight * 0.08,
                            width: screenWidth * 0.7,
                            child: FlatButton(
                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
@@ -195,7 +197,7 @@ class _SignupState extends State<Signup> {
                                "S'inscrire",
                                style: TextStyle(
                                  color: Colors.white,
-                                 fontSize: 18,
+                                 fontSize:(90 / screenHeight) * 100,
                                  fontFamily: 'Quicksand'
                                ),
                              

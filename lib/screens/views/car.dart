@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:share_your_park/screens/views/flat.dart';
 import 'package:share_your_park/screens/views/validate.dart';
 
 class Car extends StatefulWidget {
@@ -22,7 +23,7 @@ class _CarState extends State<Car> {
             child: Column(
               children: [
                 Container(
-                  height: size.height * 1/3,
+                  height: size.height /2,
                    decoration: BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.topCenter,
@@ -52,7 +53,7 @@ class _CarState extends State<Car> {
                   ),
               ),
               Container( height: screenHeight * 0.02,color: Color(0xFFA3005A),),
-              SizedBox(height: screenHeight * 0.04,),
+              SizedBox(height: screenHeight * 0.01,),
               
               Column(
                 children: [
@@ -68,62 +69,64 @@ class _CarState extends State<Car> {
                       ),
                   ),
                   Container(
-                     height: 70,
+                   margin: EdgeInsets.only(top: screenHeight * 0.01, bottom:screenHeight * 0.02),
                      child: Align(
                        child: Row(
                          children: [
                            Container(
-
+                             decoration: BoxDecoration(boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  spreadRadius: 2,
+                                  blurRadius: 4,
+                                  offset: Offset(0, 2), // changes position of shadow
+                                ),
+                              ],),
+                             margin: EdgeInsets.only(left: screenWidth * 0.15),
+                             width: screenWidth * 0.25,
+                             height: screenHeight * 0.1,
+                             child: FlatButton(
+                               onPressed: (){},
+                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+                               color: Colors.white, 
+                               child: Column(
+                                children: [
+                                  SizedBox(height: screenHeight * 0.015,),
+                                  Image.asset('assets/images/taxijaune.png', alignment: Alignment.center,),
+                                  Text('Electrique', style: TextStyle(color: Colors.black, fontSize: screenHeight * 0.015),)
+                                ]
+                              ), ),
+                           ),
+                           Container(
+                             decoration: BoxDecoration(boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  spreadRadius: 2,
+                                  blurRadius: 4,
+                                  offset: Offset(0, 2), // changes position of shadow
+                                ),
+                              ],),
+                             margin: EdgeInsets.only(left: screenWidth * 0.02),
+                             width: screenWidth * 0.25,
+                             height: screenHeight * 0.1,
+                             child: FlatButton(
+                               onPressed: (){},
+                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+                               color: Colors.white, 
+                               child: Column(
+                                children: [
+                                  SizedBox(height: screenHeight * 0.015,),
+                                  Image.asset('assets/icons/taxigris.png', alignment: Alignment.center,),
+                                  Text('Thermique', style: TextStyle(color: Colors.black, fontSize: screenHeight * 0.015),)
+                                ]
+                              ), ),
                            ),
                          ],
                          )
                      ),
                   ),
-                 /* Container(
-                    height: 70,
-                    child: Align(
-                      child: Row(
-                        children: [
-                          
-                          Container(
-                            margin: EdgeInsets.only(left:50),
-                            height: 45,
-                            child: FloatingActionButton(
-                              onPressed: () {  }, 
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                              backgroundColor: Colors.white,
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 10,),
-                                  Image.asset('assets/images/taxijaune.png', alignment: Alignment.center,),
-                                  Text('Electrique', style: TextStyle(color: Colors.black, fontSize: 8),)
-                                ]
-                              ),
-                                ),
-                          ),
-                          
-                              Container(
-                                margin: EdgeInsets.only(left:10),
-                                height: 45,
-                                child: FloatingActionButton(
-                                onPressed: () {  },
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                                backgroundColor: Colors.white,
-                                child: Column(
-                                children: [
-                                  SizedBox(height: 10,),
-                                  Image.asset('assets/icons/taxigris.png', alignment: Alignment.center,),
-                                  Text('Thermique', style: TextStyle(color: Colors.black, fontSize: 8),)
-                                ]
-                              ),
-                                ),
-                              ),
-                          
-                        ]
-                      ),
-                    ),
-                  ),*/
-                  Container(height: 2, color: Color(0xFFFF008D), width: 290, margin: EdgeInsets.only(bottom:10), ),
+                
+                  Container(height: 2, color: Color(0xFFFF008D), width: screenWidth * 0.8, margin: EdgeInsets.only(bottom: screenHeight * 0.015),),
        //taille de voiture
                 Align(
                     alignment: Alignment(-0.7, 0),
@@ -134,73 +137,100 @@ class _CarState extends State<Car> {
                       textAlign: TextAlign.left,
                       ),
                   ),
-                  /*Container(
-                    height: 70,
-                    //color: Colors.lime,
-                    child: Align(
-                      child: Row(
-                        children: [
-                          
-                          Container(
-                            margin: EdgeInsets.only(left:50),
-                            height: 45, width: 45,
-                            child: FloatingActionButton(
-                              onPressed: () {  }, 
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                              backgroundColor: Colors.white,
-                              child: Column(
+                  Container(
+                   margin: EdgeInsets.only(top: screenHeight * 0.01, bottom:screenHeight * 0.02),
+                     child: Align(
+                       child: Row(
+                         children: [
+                           Container(
+                             decoration: BoxDecoration(boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  spreadRadius: 2,
+                                  blurRadius: 4,
+                                  offset: Offset(0, 2), // changes position of shadow
+                                ),
+                              ],),
+                             margin: EdgeInsets.only(left: screenWidth * 0.15),
+                             width: screenWidth * 0.2,
+                             height: screenHeight * 0.1,
+                             child: FlatButton(
+                               onPressed: (){},
+                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+                               color: Colors.white, 
+                               child: Column(
                                 children: [
-                                  SizedBox(height: 10,),
+                                  SizedBox(height: screenHeight * 0.015,),
                                   Image.asset('assets/images/taxijaune.png', alignment: Alignment.center,),
-                                  Text('Small', style: TextStyle(color: Colors.black, fontSize: 8),)
+                                  Text('Small', style: TextStyle(color: Colors.black, fontSize: screenHeight * 0.015),)
                                 ]
-                              ),
+                              ), ),
+                           ),
+                           Container(
+                             decoration: BoxDecoration(boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  spreadRadius: 2,
+                                  blurRadius: 4,
+                                  offset: Offset(0, 2), // changes position of shadow
                                 ),
-                          ),
-                          
-                              Container(
-                                margin: EdgeInsets.only(left:10),
-                                height: 45, width: 45,
-                                child: FloatingActionButton(
-                                onPressed: () {  },
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                                backgroundColor: Colors.white,
-                                 child: Column(
+                              ],),
+                             margin: EdgeInsets.only(left: screenWidth * 0.02),
+                             width: screenWidth * 0.2,
+                             height: screenHeight * 0.1,
+                             child: FlatButton(
+                               onPressed: (){},
+                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+                               color: Colors.white, 
+                               child: Column(
                                 children: [
-                                  SizedBox(height: 10,),
+                                  SizedBox(height: screenHeight * 0.015,),
                                   Image.asset('assets/icons/taxigris.png', alignment: Alignment.center,),
-                                  Text('Medium', style: TextStyle(color: Colors.black, fontSize: 8),)
+                                  Text('Mediun', style: TextStyle(color: Colors.black, fontSize: screenHeight * 0.015),)
                                 ]
-                              ),
+                              ), ),
+                            ),
+                            Container(
+                             decoration: BoxDecoration(boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  spreadRadius: 2,
+                                  blurRadius: 4,
+                                  offset: Offset(0, 2), // changes position of shadow
                                 ),
-                              ),
-
-                              Container(
-                            margin: EdgeInsets.only(left:10),
-                            height: 45, width: 45,
-                            child: FloatingActionButton(
-                              onPressed: () {  }, 
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                              backgroundColor: Colors.white,
-                              child: Column(
+                              ],),
+                             margin: EdgeInsets.only(left: screenWidth * 0.02),
+                             width: screenWidth * 0.2,
+                             height: screenHeight * 0.1,
+                             child: FlatButton(
+                               onPressed: (
+                                 setState(() {
+                                  pressed = !pressed;
+                                });
+                               ){},
+                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7), 
+                               //side: BorderSide(width: 2.0, color: Colors.pink)
+                               ),
+                               color: Colors.white, 
+                               child: Column(
                                 children: [
-                                  SizedBox(height: 10,),
+                                  SizedBox(height: screenHeight * 0.015,),
                                   Image.asset('assets/icons/taxirouge.png', alignment: Alignment.center,),
-                                  Text('Large', style: TextStyle(color: Colors.black, fontSize: 8),)
+                                  Text('Large', style: TextStyle(color: Colors.black, fontSize: screenHeight * 0.015),)
                                 ]
-                              ),
-                                ),
-                          ),
-
-                         ]
-                      ),
-                    ),
-                  ),*/
-                  Container(height: 2, color: Color(0xFFFF008D), width: 290, margin: EdgeInsets.only(bottom:10), ),
+                              ), ),
+                           ),
+                         ],
+                         )
+                     ),
+                  ),
+              Container(height: 2, color: Color(0xFFFF008D), width: screenWidth * 0.8, ),
+              SizedBox(height: screenHeight * 0.015,),
                   //bouton inscription
                           Container(
-                            margin: EdgeInsets.only(top:10),
-                        width: 240, height: 40,
+                           
+                        height: screenHeight * 0.08,
+                           width: screenWidth * 0.7,
                         child: FlatButton(
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                           color: Color(0xFFFF008D),
@@ -213,7 +243,7 @@ class _CarState extends State<Car> {
                             "S'inscrire",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize:(90 / screenHeight) * 100,
                               fontFamily: 'Quicksand'
                             ),
                           

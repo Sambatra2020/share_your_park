@@ -41,7 +41,7 @@ class _LoginState extends State<Login> {
                        
                             Container(
                               margin: EdgeInsets.only(
-                                right: screenWidth * 0.6,
+                                right: screenWidth * 0.55,
                                 top: screenHeight * 0.05
                                 ),
                               child: Text(
@@ -52,7 +52,7 @@ class _LoginState extends State<Login> {
                             Container( 
                               margin: EdgeInsets.only(
                                 left: screenWidth * 0.51,
-                                top: screenHeight * 0.14
+                                top: screenHeight * 0.12
                               ),
                                 child: Image.asset('assets/images/revoir.png',
                                height: screenHeight * 0.25 ,
@@ -79,7 +79,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                    //SizedBox(height: 10,),
+                    SizedBox(height: screenHeight * 0.05,),
                     Container(
                       height: screenHeight * 0.08,
                       width: screenWidth * 0.75,
@@ -104,10 +104,9 @@ class _LoginState extends State<Login> {
                     SizedBox(height: screenHeight * 0.05),
                     //bouton connexion
                       Container(
-                        
-                        height: screenHeight * 0.07,
+                        height: screenHeight * 0.08,
                         width: screenWidth * 0.7,
-                        child: FlatButton(
+                       child: FlatButton(
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                           color: Color(0xFFFF008D),
                           onPressed: (){
@@ -119,7 +118,7 @@ class _LoginState extends State<Login> {
                             'Connexion',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize:(90 / screenHeight) * 100,
                               fontFamily: 'Quicksand'
                             ),)
                           ),
