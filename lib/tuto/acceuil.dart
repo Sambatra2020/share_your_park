@@ -65,8 +65,8 @@ class _AcceuilState extends State<Acceuil> {
                       //color: Colors.amber,
                       child: Image.asset(
                         'assets/images/tuto_one.png',
-                        width: 250,
-                        height: 210,
+                        width: (width * 60) / 100,
+                        height: (height * 45) / 100,
                       )),
                 ),
                 Align(

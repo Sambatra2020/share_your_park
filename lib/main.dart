@@ -1,11 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:share_your_park/auth.dart';
 import 'package:share_your_park/screens/views/register.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
 import 'package:share_your_park/screens/views/signup.dart';
 import 'models/user.dart' as userModel;
+=======
+import 'package:share_your_park/tuto/acceuil.dart';
+//import 'package:share_your_park/tuto/second.dart';
+//import 'package:share_your_park/tuto/acceuil.dart';
+//import 'package:share_your_park/tuto/tutoOne.dart';
+//import 'package:share_your_park/tuto/tutoOne.dart';
+//import 'package:share_your_park/tuto/tutoTwo.dart';
+>>>>>>> tuto_page
 
 
 void main() async {
