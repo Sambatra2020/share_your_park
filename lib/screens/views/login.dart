@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share_your_park/screens/views/signup.dart';
+import 'package:share_your_park/screens/views/checkbox.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -17,16 +18,17 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
     final size = MediaQuery.of(context).size;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: SingleChildScrollView(
-        //child: Align(
-        //child: Container(
         child: Column(
           children: [
             Container(
               height: size.height / 2,
+              width: size.width,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
@@ -37,45 +39,42 @@ class _LoginState extends State<Login> {
                     //Color(0xFFFF41AA),
                   ])),
               child: Column(children: [
-                //SizedBox(height: 35,),
                 Container(
-                  margin: EdgeInsets.only(right: 220, top: 45),
-                  //alignment: Alignment(-0.7,-1),
-                  //color: Colors.amber,
+                  margin: EdgeInsets.only(
+                      right: screenWidth * 0.55, top: screenHeight * 0.05),
                   child: Text('Bonjour',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 30,
                           fontFamily: 'Quicksand')),
                 ),
-
                 Container(
-                    //color: Colors.amber,
-                    margin: EdgeInsets.only(left: 200, top: 30),
+                    margin: EdgeInsets.only(
+                        left: screenWidth * 0.51, top: screenHeight * 0.12),
                     child: Image.asset(
                       'assets/images/revoir.png',
-                      height: 205,
-                      width: 220,
+                      height: screenHeight * 0.25,
+                      width: screenWidth * 0.5,
                       alignment: Alignment.bottomRight,
                     ))
               ]),
             ),
+
             Container(
-              height: 10.0,
+              height: screenHeight * 0.02,
               color: Color(0xFFA3005A),
             ),
             SizedBox(
-              height: 35,
+              height: screenHeight * 0.04,
             ),
+            //formulaire
             Column(
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 5, horizontal: 50),
+                  height: screenHeight * 0.08,
+                  width: screenWidth * 0.75,
                   child: TextField(
                     decoration: InputDecoration(
-                        /*icon: Icon(Entypo.message, color: Color(0xFFFF008D),),
-                          labelText: 'Email',
-                          labelStyle: TextStyle(color: Color(0xFFFF008D),)*/
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Color(0xFFFF008D))),
                         prefixIcon: Icon(Entypo.mail, color: Color(0xFFFF008D)),
@@ -84,42 +83,36 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: screenHeight * 0.05,
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 5, horizontal: 50),
+                  height: screenHeight * 0.08,
+                  width: screenWidth * 0.75,
                   child: TextField(
                     obscureText: true,
                     decoration: InputDecoration(
-                      //prefix: Image.asset('assets/Message.png', color: Color(0xFFFF008D), width: 20,height: 20,),
-                      /* prefixIconConstraints: BoxConstraints(
-                                                              minHeight: 20,
-                                                              minWidth: 20,
-                                                            ),*/
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFFFF008D))),
-                      prefixIcon: Icon(Entypo.lock, color: Color(0xFFFF008D)),
-                      hintText: 'Mot de passe',
-                      hintStyle: TextStyle(
-                        color: Color(0xFFFF008D),
-                      ),
-                    ),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFFFF008D))),
+                        prefixIcon: Icon(Entypo.lock, color: Color(0xFFFF008D)),
+                        hintText: 'Mot de passe',
+                        hintStyle: TextStyle(
+                          color: Color(0xFFFF008D),
+                        )),
                   ),
                 ),
-                Align(
-                  alignment: Alignment(-0.8, 1),
-                  child: Checkbox(
-                      activeColor: Color(0xFFFF008D),
-                      checkColor: Colors.white,
-                      value: checked,
-                      onChanged: change),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
                 Container(
-                  height: 50,
-                  width: 240,
+                  margin: EdgeInsets.only(
+                      right: screenWidth * 0.65, top: screenHeight * 0.02),
+                  child: CheckBox(
+                    isChecked: true,
+                  ),
+                ),
+
+                SizedBox(height: screenHeight * 0.05),
+                //bouton connexion
+                Container(
+                  height: screenHeight * 0.08,
+                  width: screenWidth * 0.7,
                   child: FlatButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25)),
@@ -132,7 +125,7 @@ class _LoginState extends State<Login> {
                         'Connexion',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 18,
+                            fontSize: (90 / screenHeight) * 100,
                             fontFamily: 'Quicksand'),
                       )),
                 ),

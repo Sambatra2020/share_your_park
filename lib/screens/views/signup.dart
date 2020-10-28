@@ -25,6 +25,9 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Align(
@@ -44,28 +47,28 @@ class _SignupState extends State<Signup> {
                     child: Column(
                       children: [
                         Container(
-                          //color: Colors.amber,
-                          margin: EdgeInsets.only(left: 40, top: 5),
+                          margin: EdgeInsets.only(
+                              left: screenWidth * 0.13,
+                              top: screenHeight * 0.01),
                           child: Align(
                               child: Image.asset(
                             'assets/images/bien.png',
-                            height: 260,
-                            width: 240,
+                            height: screenHeight * 0.4,
+                            width: screenWidth * 0.7,
                             alignment: Alignment(0, 1),
                           )),
                         ),
-                        // SizedBox(height: 5,),
-                        /*Center(
+                        Center(
                             child: Text("Enregistre-toi !",
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 30,
-                                    fontFamily: 'Quicksand')))*/
+                                    fontSize: (144 / screenHeight) * 100,
+                                    fontFamily: 'Quicksand')))
                       ],
                     ),
                   )),
               Container(
-                height: 10.0,
+                height: screenHeight * 0.02,
                 color: Color(0xFFA3005A),
               ),
               Form(
@@ -97,7 +100,7 @@ class _SignupState extends State<Signup> {
                           ),
                         ),
                         SizedBox(
-                          width: 15,
+                          width: screenWidth * 0.025,
                         ),
                         Expanded(
                           //margin: EdgeInsets.symmetric(vertical:5, horizontal: 130),
@@ -147,7 +150,7 @@ class _SignupState extends State<Signup> {
                           ),
                         ),
                         SizedBox(
-                          width: 15,
+                          width: screenWidth * 0.025,
                         ),
                         Expanded(
                           //margin: EdgeInsets.symmetric(vertical:5, horizontal: 130),
@@ -174,7 +177,8 @@ class _SignupState extends State<Signup> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 40),
+                    height: screenHeight * 0.09,
+                    width: screenWidth * 0.78,
                     child: TextFormField(
                       decoration: InputDecoration(
                         enabledBorder: UnderlineInputBorder(
@@ -184,7 +188,6 @@ class _SignupState extends State<Signup> {
                         labelText: 'Numéro de téléphone',
                         labelStyle: TextStyle(
                           color: Color(0xFFFF008D),
-                          fontSize: 15,
                         ),
                       ),
                       validator: (val) => val.isEmpty || val.length != 17
@@ -195,7 +198,8 @@ class _SignupState extends State<Signup> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 40),
+                    height: screenHeight * 0.09,
+                    width: screenWidth * 0.78,
                     child: TextFormField(
                       decoration: InputDecoration(
                         enabledBorder: UnderlineInputBorder(
@@ -205,7 +209,6 @@ class _SignupState extends State<Signup> {
                         labelText: 'Email',
                         labelStyle: TextStyle(
                           color: Color(0xFFFF008D),
-                          fontSize: 15,
                         ),
                       ),
                       validator: (val) => EmailValidator.validate(val) == false
@@ -215,7 +218,8 @@ class _SignupState extends State<Signup> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 40),
+                    height: screenHeight * 0.09,
+                    width: screenWidth * 0.78,
                     child: TextField(
                       obscureText: true,
                       decoration: InputDecoration(
@@ -226,17 +230,16 @@ class _SignupState extends State<Signup> {
                         labelText: 'Mot de passe',
                         labelStyle: TextStyle(
                           color: Color(0xFFFF008D),
-                          fontSize: 15,
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: screenHeight * 0.015,
                   ),
                   Container(
-                    height: 50,
-                    width: 240,
+                    height: screenHeight * 0.08,
+                    width: screenWidth * 0.7,
                     child: FlatButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25)),
@@ -261,7 +264,7 @@ class _SignupState extends State<Signup> {
                           "S'inscrire",
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: (90 / screenHeight) * 100,
                               fontFamily: 'Quicksand'),
                         )),
                   ),
