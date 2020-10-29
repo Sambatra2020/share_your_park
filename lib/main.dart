@@ -72,23 +72,22 @@ class MainPage extends StatelessWidget {
       if ( user == null ) {
         return Register();
       } else {
-        // return Scaffold(
-        //   body: Center(
-        //     child: Column(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children : <Widget>[
-        //         FlatButton(onPressed: () async {
-        //             AuthService().logOut();
-        //           },
-        //           color: Colors.pink,
-        //           child: Text("disconnect")
-        //         )
-
-        //       ]
-        //     ),
-        //   )
-        // );
-        return Signup();
+        return Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children : <Widget>[
+                FlatButton(onPressed: () async {
+                    AuthService().logOut();
+                  },
+                  color: Colors.pink,
+                  child: Text("disconnect")
+                )
+              ]
+            ),
+          )
+        );
+        // return Signup();
       }
 
   }
