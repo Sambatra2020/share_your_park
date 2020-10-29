@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:share_your_park/const.dart';
 import 'package:share_your_park/screens/views/validate.dart';
 import 'package:share_your_park/models/user.dart' as userModel;
 
@@ -14,6 +14,13 @@ class Car extends StatefulWidget {
 class _CarState extends State<Car> {
   userModel.UserInformation newUser;
   _CarState(this.newUser);
+  String typeVehicule = '';
+  String tailleVehicule = '';
+  bool isSelectedElectrique = false;
+  bool isSelectedThermique = false;
+  bool isSelectedSmall = false;
+  bool isSelectedMedium = false;
+  bool isSelectedLarge = false;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -38,12 +45,9 @@ class _CarState extends State<Car> {
                   child: Center(
                     child: Column(children: [
                       Container(
-                        //color: Colors.amber,
-                        //margin:  EdgeInsets.only(left:25, top: 15),
                         child: Align(
                             child: Image.asset(
                           'assets/images/car.png',
-                          //height: 300, width: 280,
                           height: screenHeight * 0.5,
                           width: screenWidth * 0.75,
                           alignment: Alignment(0, 1),
@@ -61,10 +65,9 @@ class _CarState extends State<Car> {
                 ),
 
                 Column(children: [
-                  //taille de voiture
+                  //taille voiture
                   Align(
                       alignment: Alignment(-0.7, 0),
-                      //color: Colors.orange,
                       child: Text(
                         "Type de véhicule",
                         style: TextStyle(
@@ -98,9 +101,21 @@ class _CarState extends State<Car> {
                         width: screenWidth * 0.25,
                         height: screenHeight * 0.1,
                         child: FlatButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              isSelectedElectrique = true;
+                              isSelectedThermique = false;
+                              typeVehicule = 'Electrique';
+                            });
+                          },
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(7)),
+                              borderRadius: BorderRadius.circular(7),
+                              side: BorderSide(
+                                color: isSelectedElectrique
+                                    ? kbordercolor
+                                    : Colors.transparent,
+                                width: 1,
+                              )),
                           color: Colors.white,
                           child: Column(children: [
                             SizedBox(
@@ -135,9 +150,21 @@ class _CarState extends State<Car> {
                         width: screenWidth * 0.25,
                         height: screenHeight * 0.1,
                         child: FlatButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              isSelectedThermique = true;
+                              isSelectedElectrique = false;
+                              typeVehicule = 'Thermique';
+                            });
+                          },
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(7)),
+                              borderRadius: BorderRadius.circular(7),
+                              side: BorderSide(
+                                color: isSelectedThermique
+                                    ? kbordercolor
+                                    : Colors.transparent,
+                                width: 1,
+                              )),
                           color: Colors.white,
                           child: Column(children: [
                             SizedBox(
@@ -202,9 +229,22 @@ class _CarState extends State<Car> {
                         width: screenWidth * 0.2,
                         height: screenHeight * 0.1,
                         child: FlatButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              isSelectedSmall = true;
+                              isSelectedMedium = false;
+                              isSelectedLarge = false;
+                              tailleVehicule = 'Small';
+                            });
+                          },
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(7)),
+                              borderRadius: BorderRadius.circular(7),
+                              side: BorderSide(
+                                color: isSelectedSmall
+                                    ? kbordercolor
+                                    : Colors.transparent,
+                                width: 1,
+                              )),
                           color: Colors.white,
                           child: Column(children: [
                             SizedBox(
@@ -239,9 +279,22 @@ class _CarState extends State<Car> {
                         width: screenWidth * 0.2,
                         height: screenHeight * 0.1,
                         child: FlatButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              isSelectedMedium = true;
+                              isSelectedSmall = false;
+                              isSelectedLarge = false;
+                              tailleVehicule = 'Medium';
+                            });
+                          },
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(7)),
+                              borderRadius: BorderRadius.circular(7),
+                              side: BorderSide(
+                                color: isSelectedMedium
+                                    ? kbordercolor
+                                    : Colors.transparent,
+                                width: 1,
+                              )),
                           color: Colors.white,
                           child: Column(children: [
                             SizedBox(
@@ -276,11 +329,22 @@ class _CarState extends State<Car> {
                         width: screenWidth * 0.2,
                         height: screenHeight * 0.1,
                         child: FlatButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              isSelectedLarge = true;
+                              isSelectedSmall = false;
+                              isSelectedMedium = false;
+                              tailleVehicule = 'Large';
+                            });
+                          },
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(7),
-                            //side: BorderSide(width: 2.0, color: Colors.pink)
-                          ),
+                              borderRadius: BorderRadius.circular(7),
+                              side: BorderSide(
+                                color: isSelectedLarge
+                                    ? kbordercolor
+                                    : Colors.transparent,
+                                width: 1,
+                              )),
                           color: Colors.white,
                           child: Column(children: [
                             SizedBox(
@@ -319,14 +383,16 @@ class _CarState extends State<Car> {
                           borderRadius: BorderRadius.circular(25)),
                       color: Color(0xFFFF008D),
                       onPressed: () {
-                        newUser.setTypeDeVehicule("Electrique");
-                        newUser.setTailleDeVehicule("Medium");
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Validate(
-                                      newUser: newUser,
-                                    )));
+                        if (typeVehicule != '' || tailleVehicule != '') {
+                          newUser.setTypeDeVehicule(typeVehicule);
+                          newUser.setTailleDeVehicule(tailleVehicule);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Validate(
+                                        newUser: newUser,
+                                      )));
+                        }
                       },
                       child: Text(
                         "S'inscrire",

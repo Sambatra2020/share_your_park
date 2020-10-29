@@ -8,3 +8,4 @@ const kPrimaryGradientColor = LinearGradient(
 const kfontFamily = "Quicksand-Light";
 const kTextColor = Color(0xFFFFFFFF);
 const kAnimationDuration = Duration(milliseconds: 200);
+const kbordercolor = Color(0xFFFF008D);

@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:share_your_park/models/user.dart' as userModel;
 import 'package:share_your_park/services/database.dart';
@@ -15,13 +19,8 @@ class Validate extends StatefulWidget {
 class _ValidateState extends State<Validate> {
   userModel.UserInformation newUser;
   _ValidateState(this.newUser);
-  bool checked = true;
-  void change(bool isChecked) {
-    setState(() {
-      checked = isChecked;
-    });
-  }
-
+  bool checked1 = false;
+  bool checked2 = false;
   @override
   Widget build(BuildContext context) {
     //final user = Provider.of<userModel.User>(context);
@@ -29,6 +28,7 @@ class _ValidateState extends State<Validate> {
     final size = MediaQuery.of(context).size;
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    print("check1 : $checked1");
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -153,7 +153,7 @@ class _ValidateState extends State<Validate> {
                             right: screenWidth * 0.01,
                             top: screenWidth * 0.07,
                           ),
-                          child: CheckBox()),
+                          child: checkbox1()),
                       Container(
                         margin: EdgeInsets.only(top: screenWidth * 0.07),
                         child: Text(
@@ -171,12 +171,13 @@ class _ValidateState extends State<Validate> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                          margin: EdgeInsets.only(
-                            left: screenWidth * 0.1,
-                            right: screenWidth * 0.01,
-                            top: screenWidth * 0.06,
-                          ),
-                          child: CheckBox()),
+                        margin: EdgeInsets.only(
+                          left: screenWidth * 0.1,
+                          right: screenWidth * 0.01,
+                          top: screenWidth * 0.06,
+                        ),
+                        child: checkbox2(),
+                      ),
                       Container(
                         margin: EdgeInsets.only(top: screenWidth * 0.06),
                         child: Text(
@@ -199,14 +200,17 @@ class _ValidateState extends State<Validate> {
                           borderRadius: BorderRadius.circular(25)),
                       color: Color(0xFFFF008D),
                       onPressed: () {
-                        print(newUser.firstName);
-                        print(newUser.lastName);
-                        print(newUser.adress);
-                        print(newUser.email);
-                        print(newUser.codePostal);
-                        print(newUser.tailleDeVehicule);
-                        print(newUser.typeDeVehicule);
-                        // databaseService.updateUserData(newUser);
+                        if (checked1 && checked2) {
+                          print(newUser.firstName);
+                          print(newUser.lastName);
+                          print(newUser.adress);
+                          print(newUser.email);
+                          print(newUser.codePostal);
+                          print(newUser.tailleDeVehicule);
+                          print(newUser.typeDeVehicule);
+                          // databaseService.updateUserData(newUser);
+                          SystemNavigator.pop();
+                        }
                       },
                       child: Text(
                         "Valider",
@@ -222,5 +226,57 @@ class _ValidateState extends State<Validate> {
         ),
       ),
     );
+  }
+
+  Widget checkbox1() {
+    return GestureDetector(
+        onTap: () {
+          setState(() {
+            checked1 = !checked1;
+          });
+        },
+        child: AnimatedContainer(
+          height: 30,
+          width: 30,
+          decoration: BoxDecoration(
+              color: checked1 ? Colors.grey[300] : Colors.grey[200],
+              borderRadius: BorderRadius.circular(10),
+              border:
+                  checked1 ? null : Border.all(color: Colors.grey, width: 2.0)),
+          duration: Duration(milliseconds: 500),
+          curve: Curves.fastLinearToSlowEaseIn,
+          child: checked1
+              ? Icon(
+                  Entypo.check,
+                  color: Colors.black,
+                )
+              : null,
+        ));
+  }
+
+  Widget checkbox2() {
+    return GestureDetector(
+        onTap: () {
+          setState(() {
+            checked2 = !checked2;
+          });
+        },
+        child: AnimatedContainer(
+          height: 30,
+          width: 30,
+          decoration: BoxDecoration(
+              color: checked2 ? Colors.grey[300] : Colors.grey[200],
+              borderRadius: BorderRadius.circular(10),
+              border:
+                  checked2 ? null : Border.all(color: Colors.grey, width: 2.0)),
+          duration: Duration(milliseconds: 500),
+          curve: Curves.fastLinearToSlowEaseIn,
+          child: checked2
+              ? Icon(
+                  Entypo.check,
+                  color: Colors.black,
+                )
+              : null,
+        ));
   }
 }
