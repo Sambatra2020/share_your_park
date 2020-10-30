@@ -66,7 +66,7 @@ class UserInformation {
   }
 
   setNumeroPhone(String newnumeroPhone) {
-    if (newnumeroPhone.length < 15) {
+    if (newnumeroPhone.length < 18) {
       this.userNumeroPhone = newnumeroPhone;
     }
   }

@@ -1,11 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:share_your_park/screens/tuto/acceuil.dart';
-import 'package:share_your_park/screens/views/car.dart';
 import 'package:share_your_park/services/auth.dart';
-import 'package:share_your_park/screens/views/register.dart';
 import 'package:provider/provider.dart';
-import 'package:share_your_park/screens/views/signup.dart';
+import 'package:share_your_park/views/screens/register.dart';
+import 'package:share_your_park/views/screens/signup.dart';
+import 'package:share_your_park/views/tuto/acceuil.dart';
 import 'models/user.dart' as userModel;
 
 void main() async {

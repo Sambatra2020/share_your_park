@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:share_your_park/const.dart';
-import 'package:share_your_park/screens/views/validate.dart';
 import 'package:share_your_park/models/user.dart' as userModel;
+import 'package:share_your_park/views/screens/validate.dart';
 
 class Car extends StatefulWidget {
   final userModel.UserInformation newUser;
