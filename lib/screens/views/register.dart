@@ -68,12 +68,11 @@ class _RegisterState extends State<Register> {
                             width: screenWidth * 0.02,
                           ),
                           FittedBox(
-                            
-                                 child: Text(
+                            child: Text(
                               'Connecter avec Apple',
                               style: TextStyle(
                                   color: Colors.white,
-                                  //fontSize: (36 / screenWidth) * 100,
+                                  fontSize: (36 / screenWidth) * 100,
                                   fontFamily: 'Roboto'),
                               textAlign: TextAlign.start,
                             ),
@@ -104,11 +103,11 @@ class _RegisterState extends State<Register> {
                             height: screenHeight * 0.06,
                             width: screenWidth * 0.06,
                           ),
-                          FittedBox(fit:BoxFit.fitWidth,
+                          FittedBox(
                               child: Text('Connecter avec Facebook',
                                 style: TextStyle(
                                     color: Colors.white,
-                                    //fontSize: (32 / screenWidth) * 100,
+                                    fontSize: (32 / screenWidth) * 100,
                                     fontFamily: 'Roboto')),
                           )
                         ],
@@ -141,11 +140,10 @@ class _RegisterState extends State<Register> {
                             width: screenWidth * 0.02,
                           ),
                           FittedBox(
-                            fit:BoxFit.fitWidth,
-                              child: Text('Connecter avec google',
+                             child: Text('Connecter avec google',
                                 style: TextStyle(
                                     color: Colors.black,
-                                    //fontSize: (36 / screenWidth) * 100,
+                                    fontSize: (36 / screenWidth) * 100,
                                     fontFamily: 'Roboto')),
                           )
                         ],
@@ -172,17 +170,16 @@ class _RegisterState extends State<Register> {
                             'assets/icons/Message.png',
                             //width: 22,height: 22,
                             height: screenHeight * 0.1,
-                            width: screenWidth * 0.1,
+                            width: screenWidth * 0.08,
                           ),
                           SizedBox(
-                            width: screenWidth * 0.02,
+                            width: screenWidth * 0.015,
                           ),
                           FittedBox(
-                            fit:BoxFit.fitWidth,
                               child: Text('Connecter avec Email',
                                 style: TextStyle(
                                     color: Colors.black,
-                                    //fontSize: (36 / screenWidth) * 100,
+                                   fontSize: (36 / screenWidth) * 100,
                                     fontFamily: 'Roboto')),
                           )
                         ],
@@ -191,12 +188,13 @@ class _RegisterState extends State<Register> {
                   ),
                   SizedBox(height: screenHeight * 0.02),
                   FittedBox(
-                    fit:BoxFit.fitWidth,
+                    //fit:BoxFit.fitWidth,
                     child: Text(
                       'On partagera jamais rien sans \nta permission',
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Roboto',
+                        fontSize: screenWidth * 0.04,
                         ),
                         textAlign: TextAlign.center,
                       ),
