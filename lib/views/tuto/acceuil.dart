@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:share_your_park/const.dart';
-import 'package:share_your_park/screens/tuto/second.dart';
+import 'package:share_your_park/views/tuto/second.dart';
 
 class Acceuil extends StatefulWidget {
   Acceuil({Key key}) : super(key: key);

@@ -1,9 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:provider/provider.dart';
 import 'package:share_your_park/models/user.dart' as userModel;
-import 'package:share_your_park/screens/views/car.dart';
+import 'package:share_your_park/views/screens/car.dart';
 import 'package:validators/validators.dart';
 
 class Signup extends StatefulWidget {

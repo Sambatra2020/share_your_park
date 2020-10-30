@@ -26,7 +26,22 @@ class AuthService {
           email: email, password: password);
       User user = result.user;
       return _userFromFireBaseUser(user);
-    } catch (e) {}
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  //register with email and password
+  Future registerWithEmailAndPassword(String email, String password) async {
+    try {
+      dynamic result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      User user = result.user;
+
+      return _userFromFireBaseUser(user);
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   Future signInWithFacebook() async {
@@ -36,7 +51,7 @@ class AuthService {
       final token = result.accessToken.token;
       final graphResponse = await http.get(
           'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${token}');
-      print(graphResponse.body);
+      print("graphResponse.body: ${graphResponse.body}");
 
       if (result.status == FacebookLoginStatus.loggedIn) {
         final AuthCredential credential =

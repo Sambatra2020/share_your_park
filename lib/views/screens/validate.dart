@@ -1,13 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:share_your_park/models/user.dart' as userModel;
 import 'package:share_your_park/services/database.dart';
-
-import 'package:share_your_park/screens/views/checkbox.dart';
 
 class Validate extends StatefulWidget {
   final userModel.UserInformation newUser;
@@ -23,12 +19,11 @@ class _ValidateState extends State<Validate> {
   bool checked2 = false;
   @override
   Widget build(BuildContext context) {
-    //final user = Provider.of<userModel.User>(context);
-    //DatabaseService databaseService = DatabaseService(uid: user.userId);
+    final user = Provider.of<userModel.User>(context);
+    DatabaseService databaseService = DatabaseService(uid: user.userId);
     final size = MediaQuery.of(context).size;
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    print("check1 : $checked1");
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -208,8 +203,8 @@ class _ValidateState extends State<Validate> {
                           print(newUser.codePostal);
                           print(newUser.tailleDeVehicule);
                           print(newUser.typeDeVehicule);
-                          // databaseService.updateUserData(newUser);
-                          SystemNavigator.pop();
+                          databaseService.updateUserData(newUser);
+                          //SystemNavigator.pop();
                         }
                       },
                       child: Text(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share_your_park/const.dart';
-import 'package:share_your_park/screens/tuto/intro_end.dart';
-import 'package:share_your_park/screens/tuto/slide.dart';
+import 'package:share_your_park/views/tuto/intro_end.dart';
+import 'package:share_your_park/views/tuto/slide.dart';
 
 class ScreenSlide extends StatefulWidget {
   @override
