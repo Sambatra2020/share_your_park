@@ -78,8 +78,8 @@ class _IntroEndState extends State<IntroEnd> {
                       MaterialPageRoute(builder: (context) => MainPage()));
                 },
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(width * 0.06)),
-                child: Icon(Icons.arrow_forward),
+                    borderRadius: BorderRadius.circular(60)),
+                child: Icon(Icons.arrow_forward,size: 28,),
               ))),
     );
   }

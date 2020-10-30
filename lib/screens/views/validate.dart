@@ -52,8 +52,8 @@ class _ValidateState extends State<Validate> {
                         Container(
                             margin: EdgeInsets.only(
                                 //top: 20, right:85
-                                top: screenHeight * 0.02,
-                                right: screenWidth * 0.3),
+                                top: screenHeight * 0.05,
+                                right: screenWidth * 0.25),
                             //color: Colors.amber,
                             child: Image.asset('assets/images/validate.png')),
                         SizedBox(
@@ -68,15 +68,18 @@ class _ValidateState extends State<Validate> {
                                 ),
                                 child: Image.asset(
                                     'assets/icons/validverrou.png')),
-                            Text(
-                                "Vos données personnelles sont \nuniquement utilisées pour adapter \nl'application à vos besoins",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Quicksand',
-                                  fontSize: (40 / screenWidth) * 100,
-                                  wordSpacing: 1,
-                                )),
+                            FittedBox(
+                              fit:BoxFit.fitWidth,
+                              child: Text(
+                                  "Vos données personnelles sont \nuniquement utilisées pour adapter \nl'application à vos besoins",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Quicksand',
+                                    //fontSize: (40 / screenWidth) * 100,
+                                    wordSpacing: 1,
+                                  )),
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -91,15 +94,18 @@ class _ValidateState extends State<Validate> {
                                 ),
                                 child:
                                     Image.asset('assets/icons/validcheck.png')),
-                            Text(
-                                "Nous ne partageons pas à nos \ntiers vos données à des fins \ncommerciales",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Quicksand',
-                                  fontSize: (40 / screenWidth) * 100,
-                                  wordSpacing: 1,
-                                )),
+                            FittedBox(
+                              fit:BoxFit.fitWidth,
+                                child: Text(
+                                  "Nous ne partageons pas à nos \ntiers vos données à des fins \ncommerciales",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Quicksand',
+                                    //fontSize: (40 / screenWidth) * 100,
+                                    wordSpacing: 1,
+                                  )),
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -114,30 +120,36 @@ class _ValidateState extends State<Validate> {
                                 ),
                                 child:
                                     Image.asset('assets/icons/validsend.png')),
-                            Text(
-                                "Nous utilisons uniquement vos \ndonnées pour échanger avec vous\nsyp vos données restent privée",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Quicksand',
-                                  fontSize: (40 / screenWidth) * 100,
-                                  wordSpacing: 1,
-                                )),
+                            FittedBox(
+                              fit:BoxFit.fitWidth,
+                               child: Text(
+                                  "Nous utilisons uniquement vos \ndonnées pour échanger avec vous\nsyp vos données restent privée",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Quicksand',
+                                    //fontSize: (40 / screenWidth) * 100,
+                                    wordSpacing: 1,
+                                  )),
+                            ),
                           ],
                         ),
                         SizedBox(
-                          height: screenHeight * 0.02,
+                          height: screenHeight * 0.035,
                         ),
-                        RichText(
-                          text: TextSpan(
-                              text:
-                                  'Lire la politique de confidentialité et les CGV',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Quicksand',
-                                  fontSize: (36 / screenWidth) * 100,
-                                  wordSpacing: 2,
-                                  decoration: TextDecoration.underline)),
+                        FittedBox(
+                          fit:BoxFit.fitWidth,
+                          child: RichText(
+                            text: TextSpan(
+                                text:
+                                    'Lire la politique de confidentialité et les CGV',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Quicksand',
+                                    //fontSize: (36 / screenWidth) * 100,
+                                    wordSpacing: 2,
+                                    decoration: TextDecoration.underline)),
+                          ),
                         ),
                       ],
                     ),
@@ -156,13 +168,16 @@ class _ValidateState extends State<Validate> {
                           child: CheckBox()),
                       Container(
                         margin: EdgeInsets.only(top: screenWidth * 0.07),
-                        child: Text(
-                          "J'accepte de partager avec syp mes \ninfos afin d'établir mon profil de syppeur",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Quicksand',
-                            fontSize: (36 / screenWidth) * 100,
-                            wordSpacing: 2,
+                        child: FittedBox(
+                          fit:BoxFit.fitWidth,
+                            child: Text(
+                            "J'accepte de partager avec syp mes \ninfos afin d'établir mon profil de syppeur",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Quicksand',
+                              //fontSize: (36 / screenWidth) * 100,
+                              wordSpacing: 2,
+                            ),
                           ),
                         ),
                       )
@@ -179,13 +194,16 @@ class _ValidateState extends State<Validate> {
                           child: CheckBox()),
                       Container(
                         margin: EdgeInsets.only(top: screenWidth * 0.06),
-                        child: Text(
-                          "J'ai lu et j'accepte les conditions \ngénérales d'utilisation",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Quicksand',
-                            fontSize: (36 / screenWidth) * 100,
-                            wordSpacing: 2,
+                        child: FittedBox(
+                          fit:BoxFit.fitWidth,
+                            child: Text(
+                            "J'ai lu et j'accepte les conditions \ngénérales d'utilisation",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Quicksand',
+                              //fontSize: (36 / screenWidth) * 100,
+                              wordSpacing: 2,
+                            ),
                           ),
                         ),
                       )
@@ -212,7 +230,7 @@ class _ValidateState extends State<Validate> {
                         "Valider",
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: (90 / screenHeight) * 100,
+                            fontSize:  screenHeight * 0.03,
                             fontFamily: 'Quicksand'),
                       )),
                 ),

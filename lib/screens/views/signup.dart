@@ -75,7 +75,8 @@ class _SignupState extends State<Signup> {
                 key: _formkey,
                 child: Column(children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 40.0, right: 40),
+                    padding: const EdgeInsets.only(
+                      left: 40.0, right: 40),
                     child: Row(
                       children: [
                         Expanded(
@@ -264,7 +265,7 @@ class _SignupState extends State<Signup> {
                           "S'inscrire",
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: (90 / screenHeight) * 100,
+                              fontSize: screenWidth * 0.05,
                               fontFamily: 'Quicksand'),
                         )),
                   ),

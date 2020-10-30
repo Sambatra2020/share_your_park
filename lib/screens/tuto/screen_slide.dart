@@ -116,7 +116,7 @@ class _ScreenSlideState extends State<ScreenSlide> {
                                 },
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(80))),
+                                        BorderRadius.all(Radius.circular(25))),
                                 child: Icon(
                                   Icons.arrow_forward,
                                   color: Color(0xFFFFFFFF),

@@ -46,9 +46,8 @@ class _SecondState extends State<Second> {
               ),
             ),
             Container(
-              width: (width * 50) / 100,
-              height: (height * 10) / 100,
-              decoration: BoxDecoration(
+              width: width * 0.7,
+              height: height * 0.08, decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(height * 0.01)),
               child: FlatButton(
                   shape: RoundedRectangleBorder(
