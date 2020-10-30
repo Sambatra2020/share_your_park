@@ -8,14 +8,14 @@ class Slide {
 List<Slide> listSlide = [
   Slide(
       'Partage ton stationnement lors de ton départ ! 😎🚗',
-      'assets/images/Group 52.png',
+      'assets/images/anim1.gif',
       'Au moment de partir, tu avertis la communauté qu’une place de stationnement vient de se libérer'),
   Slide(
       'Tu aideras ainsi ceux qui cherchent une place 🔍 🚙',
-      'assets/images/Group 53.png',
+      'assets/images/anim2.gif',
       'Proche de sa destination, un automobiliste en recherche de stationnement se verra avertir de la disponibilité de ta place !'),
   Slide(
-      'Et le schéma s’appliquera pour toi aussi ! 🧩 😎🧩',
-      'assets/images/Group 54.png',
+      'Et le schéma s’appliquera pour toi aussi ! 😎',
+      'assets/images/anim3.gif',
       'L’automobiliste en recherche de stationnement peut alors se garer sur l’emplacement que tu as liberé !')
 ];
