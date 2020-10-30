@@ -226,10 +226,12 @@ packages:
   flutter_nfc_reader:
     dependency: "direct main"
     description:
-      name: flutter_nfc_reader
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
+      path: "."
+      ref: master
+      resolved-ref: f37b5966f1d29dbf8573eaee2b560c5bf613f48a
+      url: "git://github.com/matteocrippa/flutter-nfc-reader.git"
+    source: git
+    version: "0.1.1"
   flutter_screenutil:
     dependency: "direct main"
     description:

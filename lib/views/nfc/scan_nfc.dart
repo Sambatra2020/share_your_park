@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_nfc_reader/flutter_nfc_reader.dart';
 import 'package:share_your_park/const.dart';
 
@@ -9,7 +12,18 @@ class ScanNFC extends StatefulWidget {
 }
 
 class _ScanNFCState extends State<ScanNFC> {
-  NfcData _nfcData = NfcData();
+  MethodChannel _channel = MethodChannel('flutter_nfc_reader');
+  EventChannel stream =
+      EventChannel('it.matteocrippa.flutternfcreader.flutter_nfc_reader');
+  @override
+  initState() {
+    super.initState();
+    FlutterNfcReader.onTagDiscovered().listen((onData) {
+      print(onData.id);
+      print(onData.content);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -23,16 +37,17 @@ class _ScanNFCState extends State<ScanNFC> {
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(
-                        top: (heigth * 8) / 100, left: (width * 70) / 100),
-                    child: FloatingActionButton(
-                        backgroundColor: Color(0xFFFF008D),
-                        child: Icon(Icons.menu),
-                        onPressed: () async {
-                          await startNFC();
-                          print("scan terminer");
-                        }),
-                  ),
+                      margin: EdgeInsets.only(
+                          top: (heigth * 8) / 100, left: (width * 70) / 100),
+                      child: FloatingActionButton(
+                          backgroundColor: Color(0xFFFF008D),
+                          child: Icon(Icons.menu),
+                          onPressed: () async {
+                            var result = enableReaderMode();
+                            print(result);
+                            var r = read();
+                            print(r);
+                          })),
                   Container(
                     margin: EdgeInsets.only(
                         top: (heigth * 8) / 100, left: (width * 20) / 100),
@@ -58,17 +73,28 @@ class _ScanNFCState extends State<ScanNFC> {
             )));
   }
 
-  Future startNFC() async {
-    setState(() {
-      _nfcData.status = NFCStatus.reading;
-    });
+  Future<NfcData> enableReaderMode() async {
+    final Map data = await _channel.invokeMethod('NfcEnableReaderMode');
+    final NfcData result = NfcData.fromMap(data);
 
-    print('NFC: Scan started');
+    return result;
+  }
 
-    var response = await FlutterNfcReader.read();
-    setState(() {
-      _nfcData = response;
-    });
-    print(_nfcData);
+  Future<NfcData> read({String instruction}) async {
+    final Map data = await _callRead(instruction: instruction);
+    final NfcData result = NfcData.fromMap(data);
+    return result;
+  }
+
+  Future<Map> _callRead({instruction: String}) async {
+    return await _channel
+        .invokeMethod('NfcRead', <String, dynamic>{"instruction": instruction});
+  }
+
+  Future<NFCAvailability> checkNFCAvailability() async {
+    var availability =
+        "NFCAvailability.${await _channel.invokeMethod<String>("NfcAvailable")}";
+    return NFCAvailability.values
+        .firstWhere((item) => item.toString() == availability);
   }
 }
