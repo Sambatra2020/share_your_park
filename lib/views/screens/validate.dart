@@ -56,7 +56,6 @@ class _ValidateState extends State<Validate> {
                           height: screenHeight * 0.01,
                         ),
                         Row(
-                          
                           children: [
                             Container(
                                 margin: EdgeInsets.only(
@@ -73,7 +72,7 @@ class _ValidateState extends State<Validate> {
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontFamily: 'Quicksand',
-                                   fontSize: (40 / screenWidth) * 100,
+                                    fontSize: (40 / screenWidth) * 100,
                                     wordSpacing: 1,
                                   )),
                             ),
@@ -93,14 +92,14 @@ class _ValidateState extends State<Validate> {
                                     Image.asset('assets/icons/validcheck.png')),
                             Container(
                               child: AutoSizeText(
-                                "Nous ne partageons pas à nos \ntiers vos données à des fins \ncommerciales",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Quicksand',
-                                  fontSize: (40 / screenWidth) * 100,
-                                  wordSpacing: 1,
-                                )),
+                                  "Nous ne partageons pas à nos \ntiers vos données à des fins \ncommerciales",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Quicksand',
+                                    fontSize: (40 / screenWidth) * 100,
+                                    wordSpacing: 1,
+                                  )),
                             ),
                           ],
                         ),
@@ -118,33 +117,30 @@ class _ValidateState extends State<Validate> {
                                     Image.asset('assets/icons/validsend.png')),
                             Container(
                               child: AutoSizeText(
-                                 "Nous utilisons uniquement vos \ndonnées pour échanger avec vous\nsyp vos données restent privée",
-                                 textAlign: TextAlign.left,
-                                 style: TextStyle(
-                                   color: Colors.black,
-                                   fontFamily: 'Quicksand',
-                                   fontSize: (40 / screenWidth) * 100,
-                                   wordSpacing: 1,
-                                 )),
+                                  "Nous utilisons uniquement vos \ndonnées pour échanger avec vous\nsyp vos données restent privée",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Quicksand',
+                                    fontSize: (40 / screenWidth) * 100,
+                                    wordSpacing: 1,
+                                  )),
                             ),
                           ],
                         ),
                         SizedBox(
                           height: screenHeight * 0.01,
                         ),
-                       
-                            Container(
-                              child: AutoSizeText(
-                                 
-                                      'Lire la politique de confidentialité et les CGV',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'Quicksand',
-                                      fontSize: (36 / screenWidth) * 100,
-                                      wordSpacing: 2,
-                                      decoration: TextDecoration.underline)),
-                            ),
-                          
+                        Container(
+                          child: AutoSizeText(
+                              'Lire la politique de confidentialité et les CGV',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Quicksand',
+                                  fontSize: (36 / screenWidth) * 100,
+                                  wordSpacing: 2,
+                                  decoration: TextDecoration.underline)),
+                        ),
                       ],
                     ),
                   ),
@@ -163,14 +159,14 @@ class _ValidateState extends State<Validate> {
                       Container(
                         margin: EdgeInsets.only(top: screenWidth * 0.07),
                         child: AutoSizeText(
-                        "J'accepte de partager avec syp mes \ninfos afin d'établir mon profil de syppeur",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Quicksand',
-                          fontSize: (36 / screenWidth) * 100,
-                          wordSpacing: 2,
-                        ),
+                          "J'accepte de partager avec syp mes \ninfos afin d'établir mon profil de syppeur",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Quicksand',
+                            fontSize: (36 / screenWidth) * 100,
+                            wordSpacing: 2,
                           ),
+                        ),
                       )
                     ]),
                 Row(
@@ -187,14 +183,14 @@ class _ValidateState extends State<Validate> {
                       Container(
                         margin: EdgeInsets.only(top: screenWidth * 0.06),
                         child: AutoSizeText(
-                        "J'ai lu et j'accepte les conditions \ngénérales d'utilisation",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Quicksand',
-                          fontSize: (36 / screenWidth) * 100,
-                          wordSpacing: 2,
-                        ),
+                          "J'ai lu et j'accepte les conditions \ngénérales d'utilisation",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Quicksand',
+                            fontSize: (36 / screenWidth) * 100,
+                            wordSpacing: 2,
                           ),
+                        ),
                       )
                     ]),
                 Container(
@@ -214,19 +210,19 @@ class _ValidateState extends State<Validate> {
                           print(newUser.codePostal);
                           print(newUser.tailleDeVehicule);
                           print(newUser.typeDeVehicule);
-                          // databaseService.updateUserData(newUser);
+                          databaseService.updateUserData(newUser);
                           //SystemNavigator.pop();
                           Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Ending()));
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Ending()));
                         }
                       },
                       child: Text(
                         "Valider",
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize:  screenHeight * 0.03,
+                            fontSize: screenHeight * 0.03,
                             fontFamily: 'Quicksand'),
                       )),
                 ),
