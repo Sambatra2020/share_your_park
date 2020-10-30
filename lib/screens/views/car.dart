@@ -391,7 +391,9 @@ class _CarState extends State<Car> {
                               MaterialPageRoute(
                                   builder: (context) => Validate(
                                         newUser: newUser,
-                                      )));
+                                      )
+                                      )
+                                      );
                         }
                       },
                       child: Text(
