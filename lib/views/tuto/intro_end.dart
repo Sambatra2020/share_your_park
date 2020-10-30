@@ -42,7 +42,7 @@ class _IntroEndState extends State<IntroEnd> {
           ),
           Align(
             child: Container(
-              child: Image.asset('assets/images/Group 55.png'),
+              child: Image.asset('assets/images/anim4.gif'),
               width: (width * 75) / 100,
               height: (height * 55) / 100,
             ),

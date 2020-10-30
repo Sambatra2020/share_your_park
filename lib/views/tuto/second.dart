@@ -40,7 +40,7 @@ class _SecondState extends State<Second> {
             ),
             Align(
               child: Container(
-                child: Image.asset('assets/images/Group 51.png'),
+                child: Image.asset('assets/images/first_pic.png'),
                 width: (width * 75) / 100,
                 height: (height * 70) / 100,
               ),

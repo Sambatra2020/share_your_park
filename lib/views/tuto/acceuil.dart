@@ -28,10 +28,10 @@ class _AcceuilState extends State<Acceuil> {
         context,
         // ignore: missing_required_param
         PageRouteBuilder(
-            transitionDuration: Duration(seconds: 3),
+            transitionDuration: Duration(seconds: 1),
             transitionsBuilder: (context, animation, animationTime, child) {
-              animation = CurvedAnimation(
-                  parent: animation, curve: Curves.elasticInOut);
+              animation =
+                  CurvedAnimation(parent: animation, curve: Curves.easeInCirc);
               return ScaleTransition(
                 alignment: Alignment.center,
                 scale: animation,

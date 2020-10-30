@@ -62,7 +62,7 @@ class _ScreenSlideState extends State<ScreenSlide> {
                                   ),
                                 ),
                                 Expanded(
-                                  flex: 3,
+                                  flex: 4,
                                   child: Container(
                                     child: Image.asset(
                                       slide.image,
@@ -77,7 +77,7 @@ class _ScreenSlideState extends State<ScreenSlide> {
                                     style: TextStyle(
                                         fontFamily: kfontFamily,
                                         color: kTextColor,
-                                        fontSize: width * 0.047),
+                                        fontSize: width * 0.038),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
@@ -88,7 +88,7 @@ class _ScreenSlideState extends State<ScreenSlide> {
                     Align(
                       child: Container(
                         alignment: Alignment.bottomCenter,
-                        margin: EdgeInsets.all(30),
+                        margin: EdgeInsets.all(20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
