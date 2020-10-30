@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share_your_park/services/auth.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import 'login.dart';
 import 'signup.dart';
@@ -50,7 +51,7 @@ class _RegisterState extends State<Register> {
                   SizedBox(height: screenHeight * 0.01),
                   Container(
                     height: screenHeight * 0.06,
-                    width: screenWidth * 0.60,
+                    width: screenWidth * 0.62,
                     child: FlatButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
@@ -65,14 +66,15 @@ class _RegisterState extends State<Register> {
                         children: [
                           Icon(FlutterIcons.apple_mco, color: Colors.white),
                           SizedBox(
-                            width: screenWidth * 0.02,
+                            width: screenWidth * 0.01,
                           ),
-                          FittedBox(
-                            child: Text(
+                          Container(
+                            child: AutoSizeText(
                               'Connecter avec Apple',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: (36 / screenWidth) * 100,
+                                  fontSize: (32 / screenWidth) * 100,
+                                  //fontSize: screenWidth * 0.03,
                                   fontFamily: 'Roboto'),
                               textAlign: TextAlign.start,
                             ),
@@ -84,7 +86,7 @@ class _RegisterState extends State<Register> {
                   SizedBox(height: screenHeight * 0.015),
                   Container(
                     height: screenHeight * 0.06,
-                    width: screenWidth * 0.6,
+                    width: screenWidth * 0.63,
                     child: FlatButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
@@ -102,13 +104,14 @@ class _RegisterState extends State<Register> {
                             //width: 16, height: 16,
                             height: screenHeight * 0.06,
                             width: screenWidth * 0.06,
+                            alignment: AlignmentDirectional(-0.5, 0),
                           ),
-                          FittedBox(
-                              child: Text('Connecter avec Facebook',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: (32 / screenWidth) * 100,
-                                    fontFamily: 'Roboto')),
+                          Container(
+                            child:Text('Connecter avec Facebook',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: (35 / screenWidth) * 100,
+                                  fontFamily: 'Roboto')),
                           )
                         ],
                       ),
@@ -117,7 +120,7 @@ class _RegisterState extends State<Register> {
                   SizedBox(height: screenHeight * 0.015),
                   Container(
                     height: screenHeight * 0.06,
-                    width: screenWidth * 0.6,
+                    width: screenWidth * 0.62,
                     child: FlatButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
@@ -135,16 +138,18 @@ class _RegisterState extends State<Register> {
                             //width: 16,height: 16,
                             height: screenHeight * 0.06,
                             width: screenWidth * 0.06,
+                            
+                            
                           ),
                           SizedBox(
-                            width: screenWidth * 0.02,
+                            width: screenWidth * 0.01,
                           ),
-                          FittedBox(
-                             child: Text('Connecter avec google',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: (36 / screenWidth) * 100,
-                                    fontFamily: 'Roboto')),
+                          Container(
+                            child: AutoSizeText('Connecter avec google',
+                               style: TextStyle(
+                                   color: Colors.black,
+                                   fontSize: (32 / screenWidth) * 100,
+                                   fontFamily: 'Roboto')),
                           )
                         ],
                       ),
@@ -153,7 +158,7 @@ class _RegisterState extends State<Register> {
                   SizedBox(height: screenHeight * 0.015),
                   Container(
                     height: screenHeight * 0.06,
-                    width: screenWidth * 0.6,
+                    width: screenWidth * 0.62,
                     child: FlatButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
@@ -163,7 +168,7 @@ class _RegisterState extends State<Register> {
                             MaterialPageRoute(builder: (context) => Login()));
                       },
                       child: Row(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Image.asset(
@@ -173,23 +178,23 @@ class _RegisterState extends State<Register> {
                             width: screenWidth * 0.08,
                           ),
                           SizedBox(
-                            width: screenWidth * 0.015,
+                            width: screenWidth * 0.01,
                           ),
-                          FittedBox(
-                              child: Text('Connecter avec Email',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                   fontSize: (36 / screenWidth) * 100,
-                                    fontFamily: 'Roboto')),
+                          Container(
+                            child: AutoSizeText('Connecter avec Email',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                 
+                                 fontSize: (36 / screenWidth) * 100,
+                                  fontFamily: 'Roboto')),
                           )
                         ],
                       ),
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.02),
-                  FittedBox(
-                    //fit:BoxFit.fitWidth,
-                    child: Text(
+                  Container(
+                    child: AutoSizeText(
                       'On partagera jamais rien sans \nta permission',
                       style: TextStyle(
                         color: Colors.white,
