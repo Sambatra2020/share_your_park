@@ -398,7 +398,7 @@ class _CarState extends State<Car> {
                         "S'inscrire",
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: (90 / screenHeight) * 100,
+                            fontSize: screenWidth * 0.05,
                             fontFamily: 'Quicksand'),
                       )),
                 ),

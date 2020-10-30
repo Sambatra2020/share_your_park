@@ -40,22 +40,30 @@ class _LoginState extends State<Login> {
                   ])),
               child: Column(children: [
                 Container(
+                  height: screenHeight * 0.06,
+                  width: screenWidth * 0.35,
                   margin: EdgeInsets.only(
                       right: screenWidth * 0.55, top: screenHeight * 0.05),
-                  child: Text('Bonjour',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontFamily: 'Quicksand')),
+                  child: FittedBox(
+                    fit:BoxFit.fitWidth,
+                        child: Text('Bonjour',
+                        style: TextStyle(
+                            color: Colors.white,
+                            //fontSize: 30,
+                            fontFamily: 'Quicksand')),
+                  ),
                 ),
                 Container(
                     margin: EdgeInsets.only(
                         left: screenWidth * 0.51, top: screenHeight * 0.12),
-                    child: Image.asset(
-                      'assets/images/revoir.png',
-                      height: screenHeight * 0.25,
-                      width: screenWidth * 0.5,
-                      alignment: Alignment.bottomRight,
+                    child: FittedBox(
+                      fit:BoxFit.fitWidth,
+                           child: Image.asset(
+                        'assets/images/revoir.png',
+                        height: screenHeight * 0.25,
+                        width: screenWidth * 0.5,
+                        alignment: Alignment.bottomRight,
+                      ),
                     ))
               ]),
             ),
@@ -125,7 +133,7 @@ class _LoginState extends State<Login> {
                         'Connexion',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: (90 / screenHeight) * 100,
+                            fontSize:  screenWidth * 0.05,
                             fontFamily: 'Quicksand'),
                       )),
                 ),
