@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:share_your_park/auth.dart';
+import 'package:share_your_park/services/auth.dart';
 
 import 'login.dart';
+import 'signup.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -10,12 +11,16 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  // ignore: unused_field
   final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     final size = MediaQuery.of(context).size;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
         body: Container(
           decoration: BoxDecoration(
@@ -34,48 +39,50 @@ class _RegisterState extends State<Register> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 55),
-
+                  SizedBox(height: screenHeight * 0.05),
                   Container(
                     margin: EdgeInsets.only(left: 45),
                     child: Image.asset('assets/bon.png',
-                        width: 230, height: 230, alignment: Alignment.center),
+                        width: screenWidth * 0.5,
+                        height: screenHeight * 0.45,
+                        alignment: Alignment.center),
                   ),
-
-                  SizedBox(height: 25),
-                  //Text("Enregistre-toi!", style: TextStyle(color: Colors.white, fontSize: 22, fontFamily: 'Quicksand' ))
-
+                  SizedBox(height: screenHeight * 0.01),
                   Container(
-                    height: 35,
-                    width: 190,
+                    height: screenHeight * 0.06,
+                    width: screenWidth * 0.60,
                     child: FlatButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       color: Colors.black,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Signup()));
+                      },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                              child: Icon(FlutterIcons.apple_mco,
-                                  color: Colors.white)),
+                          Icon(FlutterIcons.apple_mco, color: Colors.white),
                           SizedBox(
-                            height: 10,
+                            width: screenWidth * 0.02,
                           ),
-                          Text('Connecter avec Apple',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Roboto'))
+                          Text(
+                            'Connecter avec Apple',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: (36 / screenWidth) * 100,
+                                fontFamily: 'Roboto'),
+                            textAlign: TextAlign.start,
+                          )
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: screenHeight * 0.015),
                   Container(
-                    height: 35,
-                    width: 190,
+                    height: screenHeight * 0.06,
+                    width: screenWidth * 0.6,
                     child: FlatButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
@@ -88,26 +95,24 @@ class _RegisterState extends State<Register> {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: Image.asset(
-                              'assets/icons/fb 1.png',
-                              width: 16,
-                              height: 16,
-                            ),
+                          Image.asset(
+                            'assets/icons/fb 1.png',
+                            width: 16,
+                            height: 16,
                           ),
                           Text('Connecter avec Facebook',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12,
+                                  fontSize: (32 / screenWidth) * 100,
                                   fontFamily: 'Roboto'))
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: screenHeight * 0.015),
                   Container(
-                    height: 35,
-                    width: 190,
+                    height: screenHeight * 0.06,
+                    width: screenWidth * 0.6,
                     child: FlatButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
@@ -120,79 +125,81 @@ class _RegisterState extends State<Register> {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: Image.asset(
-                              'assets/icons/google.png',
-                              width: 16,
-                              height: 16,
-                            ),
+                          Image.asset(
+                            'assets/icons/google.png',
+                            width: 16,
+                            height: 16,
+                          ),
+                          SizedBox(
+                            width: screenWidth * 0.02,
                           ),
                           Text('Connecter avec google',
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 12,
+                                  fontSize: (36 / screenWidth) * 100,
                                   fontFamily: 'Roboto'))
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: screenHeight * 0.015),
                   Container(
-                    height: 35,
-                    width: 190,
+                    height: screenHeight * 0.06,
+                    width: screenWidth * 0.6,
                     child: FlatButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       color: Colors.white,
                       onPressed: () {
-                        /*Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Login()));*/
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Login()));
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: Image.asset(
-                              'assets/icons/Message.png',
-                              width: 22,
-                              height: 22,
-                            ),
+                          Image.asset(
+                            'assets/icons/Message.png',
+                            width: 22,
+                            height: 22,
+                          ),
+                          SizedBox(
+                            width: screenWidth * 0.02,
                           ),
                           Text('Connecter avec Email',
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 12,
+                                  fontSize: (36 / screenWidth) * 100,
                                   fontFamily: 'Roboto'))
                         ],
                       ),
                     ),
                   ),
-
-                  SizedBox(height: 20),
+                  SizedBox(height: screenHeight * 0.02),
                   Text(
                     'On partagera jamais rien sans',
                     style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Roboto',
-                        fontSize: 10),
+                        fontSize: 12),
                   ),
                   Text(
                     'ta permission',
                     style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Roboto',
-                        fontSize: 10),
+                        fontSize: 12),
                   ),
                 ],
               )),
         ),
-        // ignore: missing_required_param
         floatingActionButton: Container(
-            width: 45,
-            height: 35,
+            height: screenHeight * 0.05,
+            width: screenWidth * 0.15,
             child: RawMaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               child: Icon(
                 Icons.arrow_back,
                 color: Colors.white,

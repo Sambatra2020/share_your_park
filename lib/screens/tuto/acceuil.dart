@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:share_your_park/tuto/second.dart';
-
-import '../const.dart';
+import 'package:share_your_park/const.dart';
+import 'package:share_your_park/screens/tuto/second.dart';
 
 class Acceuil extends StatefulWidget {
   Acceuil({Key key}) : super(key: key);
@@ -29,7 +28,7 @@ class _AcceuilState extends State<Acceuil> {
         context,
         // ignore: missing_required_param
         PageRouteBuilder(
-            transitionDuration: Duration(seconds: 2),
+            transitionDuration: Duration(seconds: 3),
             transitionsBuilder: (context, animation, animationTime, child) {
               animation = CurvedAnimation(
                   parent: animation, curve: Curves.elasticInOut);
@@ -61,7 +60,7 @@ class _AcceuilState extends State<Acceuil> {
               children: [
                 Center(
                   child: Container(
-                      margin: EdgeInsets.only(top: 130),
+                      margin: EdgeInsets.only(top: height * 0.2),
                       //color: Colors.amber,
                       child: Image.asset(
                         'assets/images/tuto_one.png',
@@ -72,7 +71,8 @@ class _AcceuilState extends State<Acceuil> {
                 Align(
                     child: Container(
                   //color: Colors.cyan,
-                  margin: EdgeInsets.only(top: 50, left: 50),
+                  margin:
+                      EdgeInsets.only(top: height * 0.08, left: width * 0.2),
                   child: Image.asset('assets/images/tuto_two.png'),
                 ))
               ],

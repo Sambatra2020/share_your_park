@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share_your_park/const.dart';
-import 'package:share_your_park/tuto/intro_end.dart';
-import 'package:share_your_park/tuto/slide.dart';
+import 'package:share_your_park/screens/tuto/intro_end.dart';
+import 'package:share_your_park/screens/tuto/slide.dart';
 
 class ScreenSlide extends StatefulWidget {
   @override
@@ -13,6 +13,8 @@ class _ScreenSlideState extends State<ScreenSlide> {
   int currentPage = 0;
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     Widget circleBar(bool isActive) {
       return AnimatedContainer(
         duration: Duration(milliseconds: 150),
@@ -55,15 +57,16 @@ class _ScreenSlideState extends State<ScreenSlide> {
                                     style: TextStyle(
                                         fontFamily: kfontFamily,
                                         color: kTextColor,
-                                        fontSize: 20),
+                                        fontSize: width * 0.06),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                                 Expanded(
-                                  flex: 5,
+                                  flex: 3,
                                   child: Container(
-                                    padding: EdgeInsets.all(5),
-                                    child: Image.asset(slide.image),
+                                    child: Image.asset(
+                                      slide.image,
+                                    ),
                                   ),
                                 ),
                                 //le sizebox ra ilain
@@ -74,7 +77,7 @@ class _ScreenSlideState extends State<ScreenSlide> {
                                     style: TextStyle(
                                         fontFamily: kfontFamily,
                                         color: kTextColor,
-                                        fontSize: 17),
+                                        fontSize: width * 0.047),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
@@ -85,12 +88,12 @@ class _ScreenSlideState extends State<ScreenSlide> {
                     Align(
                       child: Container(
                         alignment: Alignment.bottomCenter,
-                        margin: EdgeInsets.all(28),
+                        margin: EdgeInsets.all(30),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            for (int i = 0; i <= listSlide.length; i++)
+                            for (int i = 0; i < listSlide.length; i++)
                               if (i == currentPage) ...[circleBar(true)] else
                                 circleBar(false)
                           ],
@@ -104,6 +107,7 @@ class _ScreenSlideState extends State<ScreenSlide> {
                             child: Align(
                               alignment: Alignment.bottomRight,
                               child: FloatingActionButton(
+                                backgroundColor: Color(0xFFFF008D),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -113,7 +117,10 @@ class _ScreenSlideState extends State<ScreenSlide> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(80))),
-                                child: Icon(Icons.arrow_forward),
+                                child: Icon(
+                                  Icons.arrow_forward,
+                                  color: Color(0xFFFFFFFF),
+                                ),
                               ),
                             ))),
                   ],

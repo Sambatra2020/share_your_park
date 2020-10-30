@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
-import 'models/user.dart' as userModel;
+import '../models/user.dart' as userModel;
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;

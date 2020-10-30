@@ -17,6 +17,8 @@ class _CarState extends State<Car> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SingleChildScrollView(
         child: Align(
@@ -37,12 +39,13 @@ class _CarState extends State<Car> {
                     child: Column(children: [
                       Container(
                         //color: Colors.amber,
-                        margin: EdgeInsets.only(left: 25, top: 15),
+                        //margin:  EdgeInsets.only(left:25, top: 15),
                         child: Align(
                             child: Image.asset(
                           'assets/images/car.png',
-                          height: 300,
-                          width: 280,
+                          //height: 300, width: 280,
+                          height: screenHeight * 0.5,
+                          width: screenWidth * 0.75,
                           alignment: Alignment(0, 1),
                         )),
                       ),
@@ -50,16 +53,16 @@ class _CarState extends State<Car> {
                   ),
                 ),
                 Container(
-                  height: 10.0,
+                  height: screenHeight * 0.02,
                   color: Color(0xFFA3005A),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: screenHeight * 0.01,
                 ),
-                Column(
-                  children: [
-                    //taille de voiture
-                    Align(
+
+                Column(children: [
+                  //taille de voiture
+                  Align(
                       alignment: Alignment(-0.7, 0),
                       //color: Colors.orange,
                       child: Text(
@@ -70,200 +73,268 @@ class _CarState extends State<Car> {
                           fontSize: 16,
                         ),
                         textAlign: TextAlign.left,
-                      ),
-                    ),
-                    /*Container(
-                      height: 70,
-                      child: Align(
-                        child: Row(children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 50),
-                            height: 45,
-                            child: FloatingActionButton(
-                              onPressed: () {},
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                              backgroundColor: Colors.white,
-                              child: Column(children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Image.asset(
-                                  'assets/images/taxijaune.png',
-                                  alignment: Alignment.center,
-                                ),
-                                Text(
-                                  'Electrique',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 8),
-                                )
-                              ]),
+                      )),
+                ]),
+
+                Container(
+                  margin: EdgeInsets.only(
+                      top: screenHeight * 0.01, bottom: screenHeight * 0.02),
+                  child: Align(
+                      child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              spreadRadius: 2,
+                              blurRadius: 4,
+                              offset:
+                                  Offset(0, 2), // changes position of shadow
                             ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 10),
-                            height: 45,
-                            child: FloatingActionButton(
-                              onPressed: () {},
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                              backgroundColor: Colors.white,
-                              child: Column(children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Image.asset(
-                                  'assets/icons/taxigris.png',
-                                  alignment: Alignment.center,
-                                ),
-                                Text(
-                                  'Thermique',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 8),
-                                )
-                              ]),
-                            ),
-                          ),
-                        ]),
-                      ),
-                    ),*/
-                    Container(
-                      height: 2,
-                      color: Color(0xFFFF008D),
-                      width: 290,
-                      margin: EdgeInsets.only(bottom: 10),
-                    ),
-                    //taille de voiture
-                    Align(
-                      alignment: Alignment(-0.7, 0),
-                      //color: Colors.orange,
-                      child: Text(
-                        "Taille de voiture",
-                        style: TextStyle(
-                          color: Color(0xFFFF008D),
-                          fontFamily: 'Arial',
-                          fontSize: 16,
+                          ],
                         ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                    /*Container(
-                      height: 70,
-                      //color: Colors.lime,
-                      child: Align(
-                        child: Row(children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 50),
-                            height: 45,
-                            width: 45,
-                            child: FloatingActionButton(
-                              onPressed: () {},
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                              backgroundColor: Colors.white,
-                              child: Column(children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Image.asset(
-                                  'assets/images/taxijaune.png',
-                                  alignment: Alignment.center,
-                                ),
-                                Text(
-                                  'Small',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 8),
-                                )
-                              ]),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 10),
-                            height: 45,
-                            width: 45,
-                            child: FloatingActionButton(
-                              onPressed: () {},
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                              backgroundColor: Colors.white,
-                              child: Column(children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Image.asset(
-                                  'assets/icons/taxigris.png',
-                                  alignment: Alignment.center,
-                                ),
-                                Text(
-                                  'Medium',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 8),
-                                )
-                              ]),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 10),
-                            height: 45,
-                            width: 45,
-                            child: FloatingActionButton(
-                              onPressed: () {},
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                              backgroundColor: Colors.white,
-                              child: Column(children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Image.asset(
-                                  'assets/icons/taxirouge.png',
-                                  alignment: Alignment.center,
-                                ),
-                                Text(
-                                  'Large',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 8),
-                                )
-                              ]),
-                            ),
-                          ),
-                        ]),
-                      ),
-                    ),*/
-                    Container(
-                      height: 2,
-                      color: Color(0xFFFF008D),
-                      width: 290,
-                      margin: EdgeInsets.only(bottom: 10),
-                    ),
-                    //bouton inscription
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      width: 240,
-                      height: 40,
-                      child: FlatButton(
+                        margin: EdgeInsets.only(left: screenWidth * 0.15),
+                        width: screenWidth * 0.25,
+                        height: screenHeight * 0.1,
+                        child: FlatButton(
+                          onPressed: () {},
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25)),
-                          color: Color(0xFFFF008D),
-                          onPressed: () {
-                            newUser.setTypeDeVehicule("Electrique");
-                            newUser.setTailleDeVehicule("Medium");
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Validate(
-                                          newUser: newUser,
-                                        )));
-                          },
-                          child: Text(
-                            "S'inscrire",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontFamily: 'Quicksand'),
-                          )),
+                              borderRadius: BorderRadius.circular(7)),
+                          color: Colors.white,
+                          child: Column(children: [
+                            SizedBox(
+                              height: screenHeight * 0.015,
+                            ),
+                            Image.asset(
+                              'assets/images/taxijaune.png',
+                              alignment: Alignment.center,
+                            ),
+                            Text(
+                              'Electrique',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: screenHeight * 0.015),
+                            )
+                          ]),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              spreadRadius: 2,
+                              blurRadius: 4,
+                              offset:
+                                  Offset(0, 2), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        margin: EdgeInsets.only(left: screenWidth * 0.02),
+                        width: screenWidth * 0.25,
+                        height: screenHeight * 0.1,
+                        child: FlatButton(
+                          onPressed: () {},
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7)),
+                          color: Colors.white,
+                          child: Column(children: [
+                            SizedBox(
+                              height: screenHeight * 0.015,
+                            ),
+                            Image.asset(
+                              'assets/icons/taxigris.png',
+                              alignment: Alignment.center,
+                            ),
+                            Text(
+                              'Thermique',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: screenHeight * 0.015),
+                            )
+                          ]),
+                        ),
+                      ),
+                    ],
+                  )),
+                ),
+
+                Container(
+                  height: 2,
+                  color: Color(0xFFFF008D),
+                  width: screenWidth * 0.8,
+                  margin: EdgeInsets.only(bottom: screenHeight * 0.015),
+                ),
+                //taille de voiture
+                Align(
+                  alignment: Alignment(-0.7, 0),
+                  //color: Colors.orange,
+                  child: Text(
+                    "Taille de voiture",
+                    style: TextStyle(
+                      color: Color(0xFFFF008D),
+                      fontFamily: 'Arial',
+                      fontSize: 16,
                     ),
-                  ],
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                      top: screenHeight * 0.01, bottom: screenHeight * 0.02),
+                  child: Align(
+                      child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              spreadRadius: 2,
+                              blurRadius: 4,
+                              offset:
+                                  Offset(0, 2), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        margin: EdgeInsets.only(left: screenWidth * 0.15),
+                        width: screenWidth * 0.2,
+                        height: screenHeight * 0.1,
+                        child: FlatButton(
+                          onPressed: () {},
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7)),
+                          color: Colors.white,
+                          child: Column(children: [
+                            SizedBox(
+                              height: screenHeight * 0.015,
+                            ),
+                            Image.asset(
+                              'assets/images/taxijaune.png',
+                              alignment: Alignment.center,
+                            ),
+                            Text(
+                              'Small',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: screenHeight * 0.015),
+                            )
+                          ]),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              spreadRadius: 2,
+                              blurRadius: 4,
+                              offset:
+                                  Offset(0, 2), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        margin: EdgeInsets.only(left: screenWidth * 0.02),
+                        width: screenWidth * 0.2,
+                        height: screenHeight * 0.1,
+                        child: FlatButton(
+                          onPressed: () {},
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7)),
+                          color: Colors.white,
+                          child: Column(children: [
+                            SizedBox(
+                              height: screenHeight * 0.015,
+                            ),
+                            Image.asset(
+                              'assets/icons/taxigris.png',
+                              alignment: Alignment.center,
+                            ),
+                            Text(
+                              'Mediun',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: screenHeight * 0.015),
+                            )
+                          ]),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              spreadRadius: 2,
+                              blurRadius: 4,
+                              offset:
+                                  Offset(0, 2), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        margin: EdgeInsets.only(left: screenWidth * 0.02),
+                        width: screenWidth * 0.2,
+                        height: screenHeight * 0.1,
+                        child: FlatButton(
+                          onPressed: () {},
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7),
+                            //side: BorderSide(width: 2.0, color: Colors.pink)
+                          ),
+                          color: Colors.white,
+                          child: Column(children: [
+                            SizedBox(
+                              height: screenHeight * 0.015,
+                            ),
+                            Image.asset(
+                              'assets/icons/taxirouge.png',
+                              alignment: Alignment.center,
+                            ),
+                            Text(
+                              'Large',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: screenHeight * 0.015),
+                            )
+                          ]),
+                        ),
+                      ),
+                    ],
+                  )),
+                ),
+                Container(
+                  height: 2,
+                  color: Color(0xFFFF008D),
+                  width: screenWidth * 0.8,
+                ),
+                SizedBox(
+                  height: screenHeight * 0.015,
+                ),
+                //bouton inscription
+                Container(
+                  height: screenHeight * 0.08,
+                  width: screenWidth * 0.7,
+                  child: FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25)),
+                      color: Color(0xFFFF008D),
+                      onPressed: () {
+                        newUser.setTypeDeVehicule("Electrique");
+                        newUser.setTailleDeVehicule("Medium");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Validate(
+                                      newUser: newUser,
+                                    )));
+                      },
+                      child: Text(
+                        "S'inscrire",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: (90 / screenHeight) * 100,
+                            fontFamily: 'Quicksand'),
+                      )),
                 ),
               ],
             ),

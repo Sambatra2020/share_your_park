@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:share_your_park/const.dart';
-import 'package:share_your_park/tuto/screen_slide.dart';
-//import 'package:share_your_park/tuto/tutoOne.dart';
+import 'package:share_your_park/screens/tuto/screen_slide.dart';
 
 class Second extends StatefulWidget {
   @override
@@ -26,14 +25,14 @@ class _SecondState extends State<Second> {
             Center(
               child: Container(
                 //color: Colors.indigo,
-                margin:
-                    EdgeInsets.only(top: 40, left: 20, right: 20, bottom: 15),
+                margin: EdgeInsets.only(
+                    top: height * 0.055, left: width * 0.1, right: width * 0.1),
                 child: Text(
-                  "SYP c’est l’appli qui t’aide à trouver ton stationement 😎🚗",
+                  "SYP c’est l’appli qui t’aide à\ntrouver ton stationement\n😎🚗",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontFamily: kfontFamily,
-                      fontSize: 20,
+                      fontSize: width * 0.055,
                       color: kTextColor,
                       fontWeight: FontWeight.normal),
                 ),
@@ -41,8 +40,6 @@ class _SecondState extends State<Second> {
             ),
             Align(
               child: Container(
-                //color: Colors.black,
-                margin: EdgeInsets.only(top: 5, bottom: 15),
                 child: Image.asset('assets/images/Group 51.png'),
                 width: (width * 75) / 100,
                 height: (height * 70) / 100,
@@ -51,11 +48,11 @@ class _SecondState extends State<Second> {
             Container(
               width: (width * 50) / 100,
               height: (height * 10) / 100,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(50)),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(height * 0.01)),
               child: FlatButton(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50)),
+                      borderRadius: BorderRadius.circular(height * 0.05)),
                   color: Color(0xFFFF008D),
                   onPressed: () {
                     Navigator.push(context,
@@ -64,7 +61,7 @@ class _SecondState extends State<Second> {
                   child: Text("Commencer",
                       style: TextStyle(
                         color: kTextColor,
-                        fontSize: 18,
+                        fontSize: width * 0.05,
                       ))),
             ),
           ],
