@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share_your_park/services/auth.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:share_your_park/views/screens/apple.dart';
 
 import 'login.dart';
 import 'signup.dart';
@@ -58,7 +59,7 @@ class _RegisterState extends State<Register> {
                       color: Colors.black,
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Signup()));
+                            MaterialPageRoute(builder: (context) => Apple()));
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -168,7 +169,7 @@ class _RegisterState extends State<Register> {
                             MaterialPageRoute(builder: (context) => Login()));
                       },
                       child: Row(
-                        mainAxisSize: MainAxisSize.max,
+                        mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Image.asset(
@@ -185,7 +186,7 @@ class _RegisterState extends State<Register> {
                               style: TextStyle(
                                   color: Colors.black,
                                  
-                                 fontSize: (36 / screenWidth) * 100,
+                                 fontSize: (32 / screenWidth) * 100,
                                   fontFamily: 'Roboto')),
                           )
                         ],

@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
-class Ending extends StatefulWidget {
+class Apple extends StatefulWidget {
   @override
-  _EndingState createState() => _EndingState();
+  _AppleState createState() => _AppleState();
 }
 
-class _EndingState extends State<Ending> {
+class _AppleState extends State<Apple> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      
-      body: Container(
+       body: Container(
         decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -38,31 +36,13 @@ class _EndingState extends State<Ending> {
                       padding: EdgeInsets.only(
                         top: screenHeight * 0.2,
                         left: screenWidth * 0.2 ),
-                      child: Image.asset('assets/icons/ending.png',
+                      child: Image.asset('assets/icons/dispo.png',
                       width: screenWidth * 0.8,)
                     ),
                   ],
                   )
               ),
       ),
-      floatingActionButton: Container(
-            height: screenHeight * 0.07,
-            width: screenWidth * 0.15,
-            child: RawMaterialButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Icon(
-                FontAwesome.sign_out,
-                color: Colors.white,
-                size: 28,
-              ),
-              fillColor: Color(0xFFFF008D),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(60)),
-              elevation: 8.0,
-            )),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endTop
     );
   }
 }
