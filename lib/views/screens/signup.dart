@@ -74,8 +74,7 @@ class _SignupState extends State<Signup> {
                 key: _formkey,
                 child: Column(children: [
                   Padding(
-                    padding: const EdgeInsets.only(
-                      left: 40.0, right: 40),
+                    padding: const EdgeInsets.only(left: 40.0, right: 40),
                     child: Row(
                       children: [
                         Expanded(
@@ -188,6 +187,7 @@ class _SignupState extends State<Signup> {
                         labelText: 'Numéro de téléphone',
                         labelStyle: TextStyle(
                           color: Color(0xFFFF008D),
+                          fontSize: 15,
                         ),
                       ),
                       validator: (val) => val.isEmpty || val.length != 17
@@ -209,6 +209,7 @@ class _SignupState extends State<Signup> {
                         labelText: 'Email',
                         labelStyle: TextStyle(
                           color: Color(0xFFFF008D),
+                          fontSize: 15,
                         ),
                       ),
                       validator: (val) => EmailValidator.validate(val) == false
@@ -220,7 +221,7 @@ class _SignupState extends State<Signup> {
                   Container(
                     height: screenHeight * 0.09,
                     width: screenWidth * 0.78,
-                    child: TextField(
+                    child: TextFormField(
                       obscureText: true,
                       decoration: InputDecoration(
                         enabledBorder: UnderlineInputBorder(
