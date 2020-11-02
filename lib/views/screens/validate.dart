@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:share_your_park/models/user.dart' as userModel;
+import 'package:share_your_park/views/screens/end.dart';
 import 'package:share_your_park/services/database.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:share_your_park/views/screens/end.dart';
