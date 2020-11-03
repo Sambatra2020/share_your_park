@@ -87,8 +87,8 @@ class _LoginState extends State<Login> {
                               borderSide: BorderSide(color: Color(0xFFFF008D))),
                           prefixIcon:
                               Icon(Entypo.mail, color: Color(0xFFFF008D)),
-                          hintText: 'Email',
-                          hintStyle: TextStyle(color: Color(0xFFFF008D))),
+                          labelText: 'Email',
+                          labelStyle: TextStyle(color: Color(0xFFFF008D))),
                       validator: (val) => EmailValidator.validate(val) == false
                           ? 'Email obligatoire'
                           : null,
@@ -108,8 +108,8 @@ class _LoginState extends State<Login> {
                               borderSide: BorderSide(color: Color(0xFFFF008D))),
                           prefixIcon:
                               Icon(Entypo.lock, color: Color(0xFFFF008D)),
-                          hintText: 'Mot de passe',
-                          hintStyle: TextStyle(
+                          labelText: 'Mot de passe',
+                          labelStyle: TextStyle(
                             color: Color(0xFFFF008D),
                           )),
                       validator: (val) =>

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class Ending extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class _EndingState extends State<Ending> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -39,6 +41,24 @@ class _EndingState extends State<Ending> {
           ],
         )),
       ),
+      floatingActionButton: Container(
+            height: screenHeight * 0.07,
+            width: screenWidth * 0.15,
+            child: RawMaterialButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Icon(
+                FontAwesome.sign_out,
+                color: Colors.white,
+                size: 28,
+              ),
+              fillColor: Color(0xFFFF008D),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(60)),
+              elevation: 8.0,
+            )),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop
     );
   }
 }
