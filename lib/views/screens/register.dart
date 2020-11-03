@@ -5,7 +5,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:share_your_park/views/screens/apple.dart';
 
 import 'login.dart';
-import 'signup.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -108,11 +107,11 @@ class _RegisterState extends State<Register> {
                             alignment: AlignmentDirectional(-0.5, 0),
                           ),
                           Container(
-                            child:Text('Connecter avec Facebook',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: (35 / screenWidth) * 100,
-                                  fontFamily: 'Roboto')),
+                            child: Text('Connecter avec Facebook',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: (35 / screenWidth) * 100,
+                                    fontFamily: 'Roboto')),
                           )
                         ],
                       ),
@@ -139,18 +138,16 @@ class _RegisterState extends State<Register> {
                             //width: 16,height: 16,
                             height: screenHeight * 0.06,
                             width: screenWidth * 0.06,
-                            
-                            
                           ),
                           SizedBox(
                             width: screenWidth * 0.01,
                           ),
                           Container(
                             child: AutoSizeText('Connecter avec google',
-                               style: TextStyle(
-                                   color: Colors.black,
-                                   fontSize: (32 / screenWidth) * 100,
-                                   fontFamily: 'Roboto')),
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: (32 / screenWidth) * 100,
+                                    fontFamily: 'Roboto')),
                           )
                         ],
                       ),
@@ -201,11 +198,10 @@ class _RegisterState extends State<Register> {
                         color: Colors.white,
                         fontFamily: 'Roboto',
                         fontSize: screenWidth * 0.04,
-                        ),
-                        textAlign: TextAlign.center,
                       ),
+                      textAlign: TextAlign.center,
+                    ),
                   )
-                  
                 ],
               )),
         ),
