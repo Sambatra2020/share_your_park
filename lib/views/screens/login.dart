@@ -79,8 +79,8 @@ class _LoginState extends State<Login> {
               child: Column(
                 children: [
                   Container(
-                    height: screenHeight * 0.08,
-                    width: screenWidth * 0.75,
+                    height: screenHeight * 0.1,
+                    width: screenWidth * 0.8,
                     child: TextFormField(
                       decoration: InputDecoration(
                           enabledBorder: UnderlineInputBorder(
@@ -96,18 +96,17 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   SizedBox(
-                    height: screenHeight * 0.05,
+                    height: screenHeight * 0.02,
                   ),
                   Container(
-                    height: screenHeight * 0.08,
-                    width: screenWidth * 0.75,
+                    height: screenHeight * 0.1,
+                    width: screenWidth * 0.8,
                     child: TextFormField(
                       obscureText: true,
                       decoration: InputDecoration(
                           enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFFFF008D))),
-                          prefixIcon:
-                              Icon(Entypo.lock, color: Color(0xFFFF008D)),
+                           borderSide: BorderSide(color: Color(0xFFFF008D))),
+                          prefixIcon:Icon(Entypo.lock, color: Color(0xFFFF008D)),
                           labelText: 'Mot de passe',
                           labelStyle: TextStyle(
                             color: Color(0xFFFF008D),
@@ -138,6 +137,7 @@ class _LoginState extends State<Login> {
                           if (_formkey.currentState.validate()) {
                             var result = _auth.registerWithEmailAndPassword(
                                 currentEmail, currentPassword);
+                               
                             if (result != null) {
                               Navigator.push(
                                   context,

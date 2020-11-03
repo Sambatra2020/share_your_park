@@ -11,8 +11,9 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  bool test = true;
   final _formkey = GlobalKey<FormState>();
-  String currentFirstName;
+  String currentFirstName = '';
   String currentLastName;
   String currentEmail;
   String currentAdress;
@@ -81,13 +82,15 @@ class _SignupState extends State<Signup> {
                         Expanded(
                           //margin: EdgeInsets.symmetric(vertical:5, horizontal: 130),
                           child: TextFormField(
-                            decoration: InputDecoration(
-                              enabledBorder: UnderlineInputBorder(
+                            decoration:  const InputDecoration(
+                              helperText: currentFirstName == ''  ? 'Champ obligatoire': null,
+                              enabledBorder: const UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Color(0xFFFF008D))),
-                              prefixIcon: Icon(FontAwesome.user,
+                              prefixIcon: const Icon(FontAwesome.user,
                                   color: Color(0xFFFF008D)),
                               labelText: 'Nom',
+                              isDense: true,
                               labelStyle: TextStyle(
                                 color: Color(0xFFFF008D),
                                 fontSize: 15,
@@ -105,11 +108,12 @@ class _SignupState extends State<Signup> {
                         Expanded(
                           //margin: EdgeInsets.symmetric(vertical:5, horizontal: 130),
                           child: TextFormField(
-                            decoration: InputDecoration(
-                              enabledBorder: UnderlineInputBorder(
+                            decoration: const InputDecoration(
+                              enabledBorder: const UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Color(0xFFFF008D))),
                               labelText: 'Prénom',
+                              isDense: true,
                               labelStyle: TextStyle(
                                 color: Color(0xFFFF008D),
                                 fontSize: 15,
@@ -125,20 +129,20 @@ class _SignupState extends State<Signup> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 40.0, right: 40),
+                    padding: const EdgeInsets.only(left: 40.0, right: 40, ),
                     child: Row(
                       children: [
                         Expanded(
                           //margin: EdgeInsets.symmetric(vertical:5, horizontal: 130),
                           child: TextFormField(
-                            decoration: InputDecoration(
-                              enabledBorder: UnderlineInputBorder(
+                            decoration: const InputDecoration(
+                              enabledBorder: const UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Color(0xFFFF008D))),
-                              prefixIcon: Icon(FontAwesome.home,
+                              prefixIcon: const Icon(FontAwesome.home,
                                   color: Color(0xFFFF008D)),
                               labelText: 'Adresse',
-                              labelStyle: TextStyle(
+                              labelStyle: const TextStyle(
                                 color: Color(0xFFFF008D),
                                 fontSize: 15,
                               ),
@@ -155,12 +159,12 @@ class _SignupState extends State<Signup> {
                         Expanded(
                           //margin: EdgeInsets.symmetric(vertical:5, horizontal: 130),
                           child: TextFormField(
-                            decoration: InputDecoration(
-                              enabledBorder: UnderlineInputBorder(
+                            decoration: const InputDecoration(
+                              enabledBorder: const UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Color(0xFFFF008D))),
                               labelText: 'Code postal',
-                              labelStyle: TextStyle(
+                              labelStyle: const TextStyle(
                                 color: Color(0xFFFF008D),
                                 fontSize: 15,
                               ),
@@ -181,13 +185,13 @@ class _SignupState extends State<Signup> {
                     height: screenHeight * 0.09,
                     width: screenWidth * 0.78,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
+                      decoration: const InputDecoration(
+                        enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Color(0xFFFF008D))),
                         prefixIcon:
-                            Icon(FontAwesome.phone, color: Color(0xFFFF008D)),
+                           const Icon(FontAwesome.phone, color: Color(0xFFFF008D)),
                         labelText: 'Numéro de téléphone',
-                        labelStyle: TextStyle(
+                        labelStyle: const TextStyle(
                           color: Color(0xFFFF008D),
                         ),
                       ),
@@ -198,18 +202,18 @@ class _SignupState extends State<Signup> {
                           setState(() => currentNumeroPhone = val),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.02),
+                  SizedBox(height: screenHeight * 0.015),
                   Container(
                     height: screenHeight * 0.09,
                     width: screenWidth * 0.78,
                     child: TextFormField(
-                      decoration: InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
+                      decoration: const InputDecoration(
+                        enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Color(0xFFFF008D))),
-                        prefixIcon: Icon(FontAwesome.envelope,
+                        prefixIcon: const Icon(FontAwesome.envelope,
                             color: Color(0xFFFF008D)),
                         labelText: 'Email',
-                        labelStyle: TextStyle(
+                        labelStyle:  TextStyle(
                           color: Color(0xFFFF008D),
                         ),
                       ),
@@ -219,19 +223,19 @@ class _SignupState extends State<Signup> {
                       onChanged: (val) => setState(() => currentEmail = val),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.02),
+                  SizedBox(height: screenHeight * 0.01),
                   Container(
                     height: screenHeight * 0.09,
                     width: screenWidth * 0.78,
                     child: TextField(
                       obscureText: true,
-                      decoration: InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
+                      decoration: const InputDecoration(
+                        enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Color(0xFFFF008D))),
                         prefixIcon:
-                            Icon(FontAwesome.lock, color: Color(0xFFFF008D)),
+                          const  Icon(FontAwesome.lock, color: Color(0xFFFF008D)),
                         labelText: 'Mot de passe',
-                        labelStyle: TextStyle(
+                        labelStyle: const TextStyle(
                           color: Color(0xFFFF008D),
                         ),
                       ),
