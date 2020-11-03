@@ -185,13 +185,16 @@ class _SignupState extends State<Signup> {
                         prefixIcon:
                             Icon(FontAwesome.phone, color: Color(0xFFFF008D)),
                         labelText: 'Numéro de téléphone',
+                        hintText: 'x xx xx xx xx',
                         labelStyle: TextStyle(
                           color: Color(0xFFFF008D),
                           fontSize: 15,
                         ),
                       ),
-                      validator: (val) => val.isEmpty || val.length != 17
-                          ? 'n° phone obligatoire'
+                      validator: (val) => isNumeric(val) != true ||
+                              val.length > 17 ||
+                              val.length < 10
+                          ? 'Numéro de téléphone obligatoire'
                           : null,
                       onChanged: (val) =>
                           setState(() => currentNumeroPhone = val),
