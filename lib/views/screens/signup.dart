@@ -176,6 +176,7 @@ class _SignupState extends State<Signup> {
                       ],
                     ),
                   ),
+                  SizedBox(height: screenHeight * 0.02),
                   Container(
                     height: screenHeight * 0.09,
                     width: screenWidth * 0.78,
@@ -197,6 +198,7 @@ class _SignupState extends State<Signup> {
                           setState(() => currentNumeroPhone = val),
                     ),
                   ),
+                  SizedBox(height: screenHeight * 0.02),
                   Container(
                     height: screenHeight * 0.09,
                     width: screenWidth * 0.78,
@@ -217,6 +219,7 @@ class _SignupState extends State<Signup> {
                       onChanged: (val) => setState(() => currentEmail = val),
                     ),
                   ),
+                  SizedBox(height: screenHeight * 0.02),
                   Container(
                     height: screenHeight * 0.09,
                     width: screenWidth * 0.78,
