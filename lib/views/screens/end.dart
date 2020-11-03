@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:share_your_park/services/auth.dart';
 
 class Ending extends StatefulWidget {
   @override
@@ -7,6 +9,7 @@ class Ending extends StatefulWidget {
 }
 
 class _EndingState extends State<Ending> {
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -49,8 +52,9 @@ class _EndingState extends State<Ending> {
             height: screenHeight * 0.07,
             width: screenWidth * 0.15,
             child: RawMaterialButton(
-              onPressed: () {
-                Navigator.pop(context);
+              onPressed: () async {
+                await _auth.logOut();
+                SystemNavigator.pop();
               },
               child: Icon(
                 FontAwesome.sign_out,
