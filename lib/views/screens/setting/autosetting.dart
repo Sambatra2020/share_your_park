@@ -135,14 +135,37 @@ class _AutoSettingState extends State<AutoSetting> {
                           ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: screenHeight * 0.015, right: screenWidth * 0.4),
+                        margin: EdgeInsets.only(top: screenHeight * 0.015, right: screenWidth * 0.23),
                         child: Text(
-                          'Localisation : app active',
+                          'partager ma position en temps réel',
                           style: TextStyle(
                             fontSize: (90 / screenHeight) * 100, 
                             )
                           ),
                       ),
+                    SizedBox(height: screenHeight * 0.03,),
+                    Container(
+                      height: 2,
+                      color: Color(0xFFFF008D),
+                      width: screenWidth * 0.8,
+                    ),
+                      SizedBox(height: screenHeight * 0.015,),
+                  Container(
+                  height: screenHeight * 0.08,
+                  width: screenWidth * 0.7,
+                  child: FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25)),
+                      color: Color(0xFFFF008D),
+                      onPressed: () { },
+                      child: Text(
+                        "Retour",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: screenWidth * 0.05,
+                            fontFamily: 'Quicksand'),
+                      )),
+                ),
                     ],
                     )
                 )
