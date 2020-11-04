@@ -12,8 +12,9 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  bool test = true;
   final _formkey = GlobalKey<FormState>();
-  String currentFirstName;
+  String currentFirstName = '';
   String currentLastName;
   String currentEmail;
   String currentAdress;
@@ -86,7 +87,7 @@ class _SignupState extends State<Signup> {
                               prefixIcon: Icon(FontAwesome.user,
                                   color: Color(0xFFFF008D)),
                               labelText: 'Nom',
-                              labelStyle: TextStyle(
+                              labelStyle: const TextStyle(
                                 color: Color(0xFFFF008D),
                                 fontSize: 15,
                               ),
@@ -106,7 +107,8 @@ class _SignupState extends State<Signup> {
                             decoration: const InputDecoration(
                               enabledBorder: kinputdeco,
                               labelText: 'Prénom',
-                              labelStyle: TextStyle(
+                              isDense: true,
+                              labelStyle: const TextStyle(
                                 color: Color(0xFFFF008D),
                                 fontSize: 15,
                               ),
@@ -121,7 +123,10 @@ class _SignupState extends State<Signup> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 40.0, right: 40),
+                    padding: const EdgeInsets.only(
+                      left: 40.0,
+                      right: 40,
+                    ),
                     child: Row(
                       children: [
                         Expanded(
@@ -132,7 +137,7 @@ class _SignupState extends State<Signup> {
                               prefixIcon: Icon(FontAwesome.home,
                                   color: Color(0xFFFF008D)),
                               labelText: 'Adresse',
-                              labelStyle: TextStyle(
+                              labelStyle: const TextStyle(
                                 color: Color(0xFFFF008D),
                                 fontSize: 15,
                               ),
@@ -152,7 +157,8 @@ class _SignupState extends State<Signup> {
                             decoration: const InputDecoration(
                               enabledBorder: kinputdeco,
                               labelText: 'Code postal',
-                              labelStyle: TextStyle(
+                              hintText: 'xxxx',
+                              labelStyle: const TextStyle(
                                 color: Color(0xFFFF008D),
                                 fontSize: 15,
                               ),
@@ -168,6 +174,7 @@ class _SignupState extends State<Signup> {
                       ],
                     ),
                   ),
+                  SizedBox(height: screenHeight * 0.02),
                   Container(
                     height: screenHeight * 0.09,
                     width: screenWidth * 0.78,
@@ -177,21 +184,21 @@ class _SignupState extends State<Signup> {
                         prefixIcon:
                             Icon(FontAwesome.phone, color: Color(0xFFFF008D)),
                         labelText: 'Numéro de téléphone',
-                        hintText: 'x xx xx xx xx',
-                        labelStyle: TextStyle(
+                        hintText: 'xxxxxxxxx',
+                        labelStyle: const TextStyle(
                           color: Color(0xFFFF008D),
                           fontSize: 15,
                         ),
                       ),
-                      validator: (val) => isNumeric(val) != true ||
-                              val.length > 17 ||
-                              val.length < 10
-                          ? 'Numéro de téléphone obligatoire'
-                          : null,
+                      validator: (val) =>
+                          isNumeric(val) != true || val.length != 9
+                              ? 'Numéro de téléphone obligatoire'
+                              : null,
                       onChanged: (val) =>
                           setState(() => currentNumeroPhone = val),
                     ),
                   ),
+                  SizedBox(height: screenHeight * 0.015),
                   Container(
                     height: screenHeight * 0.09,
                     width: screenWidth * 0.78,
@@ -201,7 +208,7 @@ class _SignupState extends State<Signup> {
                         prefixIcon: Icon(FontAwesome.envelope,
                             color: Color(0xFFFF008D)),
                         labelText: 'Email',
-                        labelStyle: TextStyle(
+                        labelStyle: const TextStyle(
                           color: Color(0xFFFF008D),
                           fontSize: 15,
                         ),
@@ -212,6 +219,7 @@ class _SignupState extends State<Signup> {
                       onChanged: (val) => setState(() => currentEmail = val),
                     ),
                   ),
+                  SizedBox(height: screenHeight * 0.01),
                   Container(
                     height: screenHeight * 0.09,
                     width: screenWidth * 0.78,
@@ -222,7 +230,7 @@ class _SignupState extends State<Signup> {
                         prefixIcon:
                             Icon(FontAwesome.lock, color: Color(0xFFFF008D)),
                         labelText: 'Mot de passe',
-                        labelStyle: TextStyle(
+                        labelStyle: const TextStyle(
                           color: Color(0xFFFF008D),
                         ),
                       ),

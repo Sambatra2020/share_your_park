@@ -11,27 +11,32 @@ class _NotifiState extends State<Notifi> {
     final size = MediaQuery.of(context).size;
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    return Center(
-      child: Card(
-        margin: EdgeInsets.only(left: screenWidth * 0.05, right: screenWidth * 0.05),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(25))),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Container(
-              child: Image.asset('assets/icons/notifigps.png'),
-            ),
-            const ListTile(
-              //leading: Icon(Icons.album),
-              title: Text('Syp'),
-              subtitle: Text('L’appli’ qui t’aide à trouver ton stationnement'),
-            ),
-            
-                          ],
-                        ),
-                      ),
-                    );
-                  }
-                }
-                
-      
+ return Card(
+  child: Column(
+    mainAxisSize: MainAxisSize.min,
+    children: <Widget>[
+
+      ListTile(
+        leading: Image.asset('assets/icons/icone.png'),
+        title: Text(
+          'SYP',
+          style: TextStyle(color: Color(0xFF990356)),
+        ),
+      ),
+      ListTile(
+        title: Text(
+          'Stationnement disponible !',
+          style: TextStyle(fontFamily: 'Arial',),
+          )
+      )
+    ]
+  )
+ );
+  }
+}
+      /*
+          Stationnement disponible !
+
+          Une place de stationnement vient de se libérer près
+          de ta destination. Fonce pour l’avoir ! 🚀
+      */
