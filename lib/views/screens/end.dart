@@ -9,7 +9,7 @@ class Ending extends StatefulWidget {
 }
 
 class _EndingState extends State<Ending> {
-  final AuthService _auth = AuthService();
+   final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -50,7 +50,7 @@ class _EndingState extends State<Ending> {
             child: RawMaterialButton(
               onPressed: () async {
                 await _auth.logOut();
-                SystemNavigator.pop();
+               SystemNavigator.pop();
               },
               child: Icon(
                 FontAwesome.sign_out,

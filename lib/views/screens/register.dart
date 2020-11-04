@@ -57,8 +57,7 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.circular(50)),
                       color: Colors.black,
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Apple()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Apple()));
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,

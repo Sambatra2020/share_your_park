@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:share_your_park/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:share_your_park/views/screens/register.dart';
+import 'package:share_your_park/views/screens/setting/car_setting.dart';
 import 'package:share_your_park/views/screens/signup.dart';
 import 'package:share_your_park/views/tuto/acceuil.dart';
 import 'models/user.dart' as userModel;
-import 'package:share_your_park/views/screens/notification.dart';
+//import 'package:share_your_park/views/screens/notification.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider.value(
       value: AuthService().user,
       child: MaterialApp(
-        home: Acceuil(),
+        home: CarSetting(),
         debugShowCheckedModeBanner: false,
         title: 'SYP Demo',
         theme: ThemeData(
