@@ -9,3 +9,5 @@ const kfontFamily = "Quicksand-Light";
 const kTextColor = Color(0xFFFFFFFF);
 const kAnimationDuration = Duration(milliseconds: 200);
 const kbordercolor = Color(0xFFFF008D);
+const UnderlineInputBorder kinputdeco = const UnderlineInputBorder(
+                                        borderSide: BorderSide(color: Color(0xFFFF008D)));

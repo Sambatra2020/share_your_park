@@ -4,6 +4,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share_your_park/models/user.dart' as userModel;
 import 'package:share_your_park/views/screens/car.dart';
 import 'package:validators/validators.dart';
+import 'package:share_your_park/const.dart';
 
 class Signup extends StatefulWidget {
   @override
@@ -75,19 +76,15 @@ class _SignupState extends State<Signup> {
                 key: _formkey,
                 child: Column(children: [
                   Padding(
-                    padding: const EdgeInsets.only(
-                      left: 40.0, right: 40),
+                    padding: const EdgeInsets.only(left: 40.0, right: 40),
                     child: Row(
                       children: [
                         Expanded(
                           //margin: EdgeInsets.symmetric(vertical:5, horizontal: 130),
                           child: TextFormField(
-                            decoration:  const InputDecoration(
-                              
-                              enabledBorder: const UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xFFFF008D))),
-                              prefixIcon: const Icon(FontAwesome.user,
+                            decoration: const InputDecoration(
+                              enabledBorder: kinputdeco,
+                              prefixIcon: Icon(FontAwesome.user,
                                   color: Color(0xFFFF008D)),
                               labelText: 'Nom',
                              
@@ -109,9 +106,7 @@ class _SignupState extends State<Signup> {
                           //margin: EdgeInsets.symmetric(vertical:5, horizontal: 130),
                           child: TextFormField(
                             decoration: const InputDecoration(
-                              enabledBorder: const UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xFFFF008D))),
+                              enabledBorder: kinputdeco,
                               labelText: 'Prénom',
                               isDense: true,
                               labelStyle: TextStyle(
@@ -136,10 +131,8 @@ class _SignupState extends State<Signup> {
                           //margin: EdgeInsets.symmetric(vertical:5, horizontal: 130),
                           child: TextFormField(
                             decoration: const InputDecoration(
-                              enabledBorder: const UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xFFFF008D))),
-                              prefixIcon: const Icon(FontAwesome.home,
+                              enabledBorder: kinputdeco,
+                              prefixIcon: Icon(FontAwesome.home,
                                   color: Color(0xFFFF008D)),
                               labelText: 'Adresse',
                               labelStyle: const TextStyle(
@@ -160,9 +153,7 @@ class _SignupState extends State<Signup> {
                           //margin: EdgeInsets.symmetric(vertical:5, horizontal: 130),
                           child: TextFormField(
                             decoration: const InputDecoration(
-                              enabledBorder: const UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xFFFF008D))),
+                              enabledBorder: kinputdeco,
                               labelText: 'Code postal',
                               labelStyle: const TextStyle(
                                 color: Color(0xFFFF008D),
@@ -186,17 +177,20 @@ class _SignupState extends State<Signup> {
                     width: screenWidth * 0.78,
                     child: TextFormField(
                       decoration: const InputDecoration(
-                        enabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFFFF008D))),
+                        enabledBorder: kinputdeco,
                         prefixIcon:
                            const Icon(FontAwesome.phone, color: Color(0xFFFF008D)),
                         labelText: 'Numéro de téléphone',
-                        labelStyle: const TextStyle(
+                        hintText: 'x xx xx xx xx',
+                        labelStyle: TextStyle(
                           color: Color(0xFFFF008D),
+                          fontSize: 15,
                         ),
                       ),
-                      validator: (val) => val.isEmpty || val.length != 17
-                          ? 'n° phone obligatoire'
+                      validator: (val) => isNumeric(val) != true ||
+                              val.length > 17 ||
+                              val.length < 10
+                          ? 'Numéro de téléphone obligatoire'
                           : null,
                       onChanged: (val) =>
                           setState(() => currentNumeroPhone = val),
@@ -208,13 +202,13 @@ class _SignupState extends State<Signup> {
                     width: screenWidth * 0.78,
                     child: TextFormField(
                       decoration: const InputDecoration(
-                        enabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFFFF008D))),
-                        prefixIcon: const Icon(FontAwesome.envelope,
+                        enabledBorder: kinputdeco,
+                        prefixIcon: Icon(FontAwesome.envelope,
                             color: Color(0xFFFF008D)),
                         labelText: 'Email',
                         labelStyle:  TextStyle(
                           color: Color(0xFFFF008D),
+                          fontSize: 15,
                         ),
                       ),
                       validator: (val) => EmailValidator.validate(val) == false
@@ -227,11 +221,10 @@ class _SignupState extends State<Signup> {
                   Container(
                     height: screenHeight * 0.09,
                     width: screenWidth * 0.78,
-                    child: TextField(
+                    child: TextFormField(
                       obscureText: true,
                       decoration: const InputDecoration(
-                        enabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFFFF008D))),
+                        enabledBorder: kinputdeco,
                         prefixIcon:
                           const  Icon(FontAwesome.lock, color: Color(0xFFFF008D)),
                         labelText: 'Mot de passe',
