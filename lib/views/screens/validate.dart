@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,7 @@ import 'package:share_your_park/views/screens/end.dart';
 import 'package:share_your_park/services/database.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:share_your_park/views/screens/end.dart';
+import 'package:share_your_park/views/screens/politique_confid.dart';
 
 class Validate extends StatefulWidget {
   final userModel.UserInformation newUser;
@@ -133,14 +135,25 @@ class _ValidateState extends State<Validate> {
                           height: screenHeight * 0.01,
                         ),
                         Container(
-                          child: AutoSizeText(
-                              'Lire la politique de confidentialité et les CGV',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Quicksand',
-                                  fontSize: (36 / screenWidth) * 100,
-                                  wordSpacing: 2,
-                                  decoration: TextDecoration.underline)),
+                          child: RichText(
+                              text: TextSpan(
+                                  text:
+                                      'Lire la politique de confidentialité et les CGV',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Quicksand',
+                                    fontSize: (36 / screenWidth) * 100,
+                                    wordSpacing: 2,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PolitiqueConfid()));
+                                    })),
                         ),
                       ],
                     ),
