@@ -1,37 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:share_your_park/views/screens/setting/confidentialit%C3%A9.dart';
 
-class AutoSetting extends StatefulWidget {
+class Confidentialte extends StatefulWidget {
   @override
-  _AutoSettingState createState() => _AutoSettingState();
+  _ConfidentialteState createState() => _ConfidentialteState();
 }
 
-class _AutoSettingState extends State<AutoSetting> {
+class _ConfidentialteState extends State<Confidentialte> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Align(
-          child: Container(
-            child: Column(
-              children: [
-                Container(
-                  height: size.height / 2,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                        Color(0xFFFF008D),
-                        Color(0xFFFF6EBE),
-                      ])),
-                  child: Align(
-                    child: Column(children: [
-                      Row(
+      body: Container(
+        child: Container(
+          decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  radius: 2,
+                  colors: [Color(0xFFFF008D), Color(0xFFAD206E)],
+                ),
+              ),
+              child: Align(
+                child: Column(
+                  children: [
+                    Row(
                         children: [
                           Container(
                             margin: EdgeInsets.only(top: screenHeight * 0.05, left: screenWidth * 0.1),
@@ -42,7 +35,7 @@ class _AutoSettingState extends State<AutoSetting> {
                             )
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: screenHeight * 0.03, left: screenWidth * 0.015),
+                            margin: EdgeInsets.only(top: screenHeight * 0.1, left: screenWidth * 0.015),
                             child: Column(
                               children: [
                                 Text(
@@ -62,41 +55,10 @@ class _AutoSettingState extends State<AutoSetting> {
                               ],
                             ),
                           ),
-                            
-                            
-                        ],
+                         ],
                       ),
-                      Center(
-                        child: Container(
-                          //top: screenHeight * 0.01,
-                          margin: EdgeInsets.only( left: screenWidth * 0.1,),
-                          //color: Colors.blue,
-                          height: screenHeight * 0.3,
-                          width: screenWidth * 0.5,
-                          child: Align(
-                            child: Image.asset(
-                            'assets/images/carseepy.png',
-                            height: screenHeight * 0.3,
-                            width: screenWidth * 0.8,
-                            
-                          )),
-                        ),
-                      ),
-                      //SizedBox(height: screenHeight * 0.01),
-                      Center(
-                            child: Text("Paramètre véhicule",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: (144 / screenHeight) * 100,
-                                    fontFamily: 'Quicksand')))
-                    ]),
-                  ),
-                ),
-                Container(
-                  height: screenHeight * 0.02,
-                  color: Color(0xFFA3005A),
-                ),
-                Container(
+                      Container(
+                        margin: EdgeInsets.only(top: screenHeight * 0.07),
                   child: Column(
                     children: [
                       Container(
@@ -143,41 +105,13 @@ class _AutoSettingState extends State<AutoSetting> {
                             fontSize: (90 / screenHeight) * 100, 
                             )
                           ),
-                      ),
-                    SizedBox(height: screenHeight * 0.03,),
-                    Container(
-                      height: 2,
-                      color: Color(0xFFFF008D),
-                      width: screenWidth * 0.8,
-                    ),
-                      SizedBox(height: screenHeight * 0.015,),
-                  Container(
-                  height: screenHeight * 0.08,
-                  width: screenWidth * 0.7,
-                  child: FlatButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25)),
-                      color: Color(0xFFFF008D),
-                      onPressed: () { 
-                        Navigator.push(context, 
-                          MaterialPageRoute(builder: (context) => Confidentialte())
-                        );
-                      },
-                      child: Text(
-                        "Retour",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: screenWidth * 0.05,
-                            fontFamily: 'Quicksand'),
-                      )),
-                ),
-                    ],
+                      ),],
                     )
                 )
-              ]
-            )
-          )
-        )
+                  ]
+                )
+              )
+        ),
       ),
       floatingActionButton: Container(
         child: FloatingActionButton(
