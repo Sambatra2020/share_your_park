@@ -3,6 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share_your_park/services/auth.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:share_your_park/views/screens/apple.dart';
+import 'package:share_your_park/views/screens/facebook.dart';
 
 import 'login.dart';
 
@@ -57,8 +58,7 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.circular(50)),
                       color: Colors.black,
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Apple()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Apple()));
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -91,9 +91,11 @@ class _RegisterState extends State<Register> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       color: Color(0xFF5071C3),
-                      onPressed: () async {
-                        var res = await _auth.signInWithFacebook();
-                        if (res == null) print("error");
+                      onPressed: ()  {
+                        /*var res = await _auth.signInWithFacebook();
+                        if (res == null) print("error");*/
+                        Navigator.push(context, 
+                        MaterialPageRoute(builder: (context) => Facebook()));
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
