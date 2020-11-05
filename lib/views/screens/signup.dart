@@ -190,10 +190,10 @@ class _SignupState extends State<Signup> {
                           fontSize: 15,
                         ),
                       ),
-                      validator: (val) =>
-                          isNumeric(val) != true || val.length != 9
-                              ? 'Numéro de téléphone obligatoire'
-                              : null,
+                      validator: (val) => isNumeric(val) != true ||
+                              val.length != 9
+                          ? 'Numéro de téléphone obligatoire'
+                          : null,
                       onChanged: (val) =>
                           setState(() => currentNumeroPhone = val),
                     ),
