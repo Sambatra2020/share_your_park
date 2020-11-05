@@ -184,8 +184,7 @@ class _SignupState extends State<Signup> {
                         ),
                       ),
                       validator: (val) => isNumeric(val) != true ||
-                              val.length > 17 ||
-                              val.length < 10
+                              val.length != 9
                           ? 'Numéro de téléphone obligatoire'
                           : null,
                       onChanged: (val) =>
