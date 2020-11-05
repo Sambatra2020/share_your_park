@@ -12,23 +12,18 @@ class ScanNFC extends StatefulWidget {
 }
 
 class _ScanNFCState extends State<ScanNFC> {
-  MethodChannel _channel = MethodChannel('flutter_nfc_reader');
-  EventChannel stream =
-      EventChannel('it.matteocrippa.flutternfcreader.flutter_nfc_reader');
-  @override
-  initState() {
-    super.initState();
-    FlutterNfcReader.onTagDiscovered().listen((onData) {
-      print(onData.id);
-      print(onData.content);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final heigth = MediaQuery.of(context).size.height;
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: Color(0xFFFF008D),
+            child: Icon(Icons.menu),
+            onPressed: () async {
+              await stopNfc();
+              print("ok");
+            }),
         body: Container(
             decoration: BoxDecoration(
               gradient: kPrimaryGradientColor,
@@ -43,10 +38,9 @@ class _ScanNFCState extends State<ScanNFC> {
                           backgroundColor: Color(0xFFFF008D),
                           child: Icon(Icons.menu),
                           onPressed: () async {
-                            var result = enableReaderMode();
-                            print(result);
-                            var r = read();
-                            print(r);
+                            await check();
+                            await readNfc();
+                            print("ok");
                           })),
                   Container(
                     margin: EdgeInsets.only(
@@ -73,28 +67,21 @@ class _ScanNFCState extends State<ScanNFC> {
             )));
   }
 
-  Future<NfcData> enableReaderMode() async {
-    final Map data = await _channel.invokeMethod('NfcEnableReaderMode');
-    final NfcData result = NfcData.fromMap(data);
-
-    return result;
+  Future check() async {
+    var result = await FlutterNfcReader.checkNFCAvailability();
+    print("result check : $result");
   }
 
-  Future<NfcData> read({String instruction}) async {
-    final Map data = await _callRead(instruction: instruction);
-    final NfcData result = NfcData.fromMap(data);
-    return result;
+  Future stopNfc() async {
+    await FlutterNfcReader.stop().then((response) {
+      print("stop:${response.status.toString()}");
+    });
   }
 
-  Future<Map> _callRead({instruction: String}) async {
-    return await _channel
-        .invokeMethod('NfcRead', <String, dynamic>{"instruction": instruction});
-  }
-
-  Future<NFCAvailability> checkNFCAvailability() async {
-    var availability =
-        "NFCAvailability.${await _channel.invokeMethod<String>("NfcAvailable")}";
-    return NFCAvailability.values
-        .firstWhere((item) => item.toString() == availability);
+  Future readNfc() async {
+    print("start scan nfc: please wait ...");
+    await FlutterNfcReader.read().then((response) {
+      print("read nfc: ${response.content}");
+    });
   }
 }
