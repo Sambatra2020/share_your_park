@@ -27,11 +27,11 @@ class _ConfidentialteState extends State<Confidentialte> {
                     Row(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(top: screenHeight * 0.05, left: screenWidth * 0.1),
+                            margin: EdgeInsets.only(top: screenHeight * 0.1, left: screenWidth * 0.1),
                             child: Icon(
                               FontAwesome.cog, 
                               color: Colors.white70,
-                              size: 32 
+                              size: 46
                             )
                           ),
                           Container(
@@ -62,7 +62,7 @@ class _ConfidentialteState extends State<Confidentialte> {
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: screenHeight * 0.05, right: screenWidth * 0.35),
+                        margin: EdgeInsets.only(top: screenHeight * 0.05, right: screenWidth * 0.33),
                         child: Text(
                           'Paramètre de votre appareil',
                           style: TextStyle(
@@ -89,7 +89,7 @@ class _ConfidentialteState extends State<Confidentialte> {
                           ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: screenHeight * 0.03, right: screenWidth * 0.42),
+                        margin: EdgeInsets.only(top: screenHeight * 0.03, right: screenWidth * 0.41),
                         child: Text(
                           'partage de ma position',
                           style: TextStyle(
@@ -98,7 +98,7 @@ class _ConfidentialteState extends State<Confidentialte> {
                           ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: screenHeight * 0.015, right: screenWidth * 0.23),
+                        margin: EdgeInsets.only(top: screenHeight * 0.015, right: screenWidth * 0.21),
                         child: Text(
                           'partager ma position en temps réel',
                           style: TextStyle(

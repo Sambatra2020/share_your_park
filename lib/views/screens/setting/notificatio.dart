@@ -27,11 +27,11 @@ class _ParanotifState extends State<Paranotif> {
                     Row(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(top: screenHeight * 0.05, left: screenWidth * 0.1),
+                            margin: EdgeInsets.only(top: screenHeight * 0.1, left: screenWidth * 0.1),
                             child: Icon(
                               FontAwesome.cog, 
                               color: Colors.white70,
-                              size: 32 
+                              size: 46 
                             )
                           ),
                           Container(
@@ -46,10 +46,10 @@ class _ParanotifState extends State<Paranotif> {
                                     )
                                   ),
                                   Text(
-                                  'confidentialité',
+                                  'notification',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: (100 / screenWidth) * 100,
+                                    fontSize: (120 / screenWidth) * 100,
                                     )
                                   ),
                               ],
@@ -71,7 +71,7 @@ class _ParanotifState extends State<Paranotif> {
                           ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: screenHeight * 0.015, right: screenWidth * 0.35),
+                        margin: EdgeInsets.only(top: screenHeight * 0.015, right: screenWidth * 0.33),
                         child: Text(
                           'Notification push ou sms',
                           style: TextStyle(
@@ -80,32 +80,15 @@ class _ParanotifState extends State<Paranotif> {
                           ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: screenHeight * 0.02, left: screenWidth * 0.08),
+                        margin: EdgeInsets.only(top: screenHeight * 0.02, left: screenWidth * 0.03),
                         child: Text(
-                          'Comprend des notifications sur le statut d\'un \nstationnement et des mises à jour concernant votre \nlocalisation vis à vis de ce dernier',
+                          'Comprend des notifications sur le statut d\'un \nstationnement et des mises à jour concernant \nvotre localisation vis à vis de ce dernier',
                           style: TextStyle(
                             fontSize: (90 / screenHeight) * 100, 
                             )
                           ),
                       ),
-                      Container(
-                        margin: EdgeInsets.only(top: screenHeight * 0.03, right: screenWidth * 0.4),
-                        child: Text(
-                          'partage de ma position',
-                          style: TextStyle(
-                            fontSize: (90 / screenHeight) * 100, 
-                            )
-                          ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: screenHeight * 0.015, right: screenWidth * 0.18),
-                        child: Text(
-                          'partager ma position en temps réel',
-                          style: TextStyle(
-                            fontSize: (90 / screenHeight) * 100, 
-                            )
-                          ),
-                      ),],
+                      ],
                     )
                 )
                   ]

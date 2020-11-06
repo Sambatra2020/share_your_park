@@ -4,7 +4,10 @@ import 'package:share_your_park/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:share_your_park/views/screens/register.dart';
 import 'package:share_your_park/views/screens/setting/car_setting.dart';
+import 'package:share_your_park/views/screens/setting/confidentialit%C3%A9.dart';
+import 'package:share_your_park/views/screens/setting/infos.dart';
 import 'package:share_your_park/views/screens/setting/notificatio.dart';
+import 'package:share_your_park/views/screens/setting/parain.dart';
 import 'package:share_your_park/views/screens/signup.dart';
 import 'package:share_your_park/views/tuto/acceuil.dart';
 import 'models/user.dart' as userModel;
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider.value(
       value: AuthService().user,
       child: MaterialApp(
-        home: Paranotif(),
+        home: Information(),
         debugShowCheckedModeBanner: false,
         title: 'SYP Demo',
         theme: ThemeData(
