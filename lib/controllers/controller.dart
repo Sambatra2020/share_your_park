@@ -11,9 +11,18 @@ final styleCarte = 'mapbox://styles/sambatra/ckgbwa2x706vs1ap3n6qcaptj';
 MapboxMapController mapController;
 
 class Controller {
+  //draw routes
+  void _drawRoutes(List<LatLng> chemin) {
+    mapController.addLine(LineOptions(
+      geometry: chemin,
+      lineColor: '#FF008D',
+      lineWidth: 5.0,
+    ));
+  }
   //requette pour avoir les chemins
-  Future<http.Response> getListLatLng(String latDepart, String lngDepart,
-      String lngArriver, String latArriver) async {
+
+  Future getListLatLngAndDrawRoute(String latDepart, String lngDepart,
+      String latArriver, String lngArriver) async {
     http.Response response = await http.get(
         "https://api.mapbox.com/directions/v5/mapbox/driving/" +
             lngDepart +
@@ -24,68 +33,72 @@ class Controller {
             "," +
             latArriver +
             "?geometries=geojson&access_token=pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA");
-    return response;
-  }
 
-  //conversion de la reponse en liste liste de double
-  List<List<double>> convertReponseToListLatLng(String latDepart,
-      String lngDepart, String latArriver, String lngArriver) {
-    Future<http.Response> response =
-        getListLatLng(latDepart, lngDepart, lngArriver, latArriver);
-    List<List<double>> chemin = [];
+    //conversion de la reponse en liste liste de double
+    List<List<double>> _coords = [];
     double latInitiale = double.parse(latDepart);
     double lngInitiale = double.parse(lngDepart);
     List<double> initiale = [latInitiale, lngInitiale];
-    chemin.add(initiale);
-    response.then((value) {
-      Map data = json.decode(value.body);
-      var routes = data['routes'];
-      var geometry = routes[0]['geometry'];
-      var coordinates = geometry['coordinates'];
-      for (int i = 0; i < coordinates.length; i++) {
-        var coords = coordinates[i];
-        double lng = coords[0];
-        double lat = coords[1];
-        List<double> coo = [lat, lng];
-        chemin.add(coo);
-      }
-    });
-    return chemin;
-  }
+    double latFinale = double.parse(latArriver);
+    double lngFinale = double.parse(lngArriver);
+    List<double> finale = [latFinale, lngFinale];
+    _coords.add(initiale);
+    print("chemin.length: ${_coords.length}");
 
-  //fonction qui transforme une liste de liste double en list latlng
-  List<LatLng> listListDoubleToListLatlng(String latDepart, String lngDepart,
-      String latArriver, String lngArriver) {
-    List<List<double>> coords = convertReponseToListLatLng(
-        latDepart, lngDepart, latArriver, lngArriver);
-    List<LatLng> chemin = [];
-    for (int i = 0; i < coords.length; i++) {
-      LatLng latLng = LatLng(coords[i][0], coords[i][1]);
-      chemin.add(latLng);
+    //export et ajout du coordonne dans la liste
+    Map data;
+    var routes, geometry, coordinates, coords;
+    double lng, lat;
+    List<double> coo;
+    data = json.decode(response.body);
+    routes = data['routes'];
+    geometry = routes[0]['geometry'];
+    coordinates = geometry['coordinates'];
+    for (int i = 0; i < coordinates.length; i++) {
+      coords = coordinates[i];
+      lng = coords[0];
+      lat = coords[1];
+      coo = [lat, lng];
+      _coords.add(coo);
     }
-    for (int i = 0; i < chemin.length; i++) {
+    _coords.add(finale);
+
+    //fonction qui transforme une liste de liste double en list latlng
+    List<LatLng> chemin = [];
+    for (int i = 0; i < _coords.length; i++) {
+      LatLng latLng = LatLng(_coords[i][0], _coords[i][1]);
+      chemin.add(latLng);
       print(chemin[i]);
     }
-    return chemin;
+
+    _drawRoutes(chemin);
   }
 
   //construction trajet d'un utilisateur
-  Trajet constructionTrajetUtilisateur(
-      Future<http.Response> response,
+  Future<Trajet> constructionTrajetUtilisateur(
       List<List<double>> coords,
       String idUtilisateur,
       int idTrajet,
       List<double> positionDepart,
-      List<double> positionArriver) {
+      List<double> positionArriver) async {
+    http.Response response = await http.get(
+        "https://api.mapbox.com/directions/v5/mapbox/driving/" +
+            positionDepart[1].toString() +
+            "," +
+            positionDepart[0].toString() +
+            ";" +
+            positionArriver[1].toString() +
+            "," +
+            positionArriver[0].toString() +
+            "?geometries=geojson&access_token=pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA");
     Trajet trajet = Trajet();
     double duration;
     double distance;
-    response.then((value) {
-      Map data = json.decode(value.body);
-      var routes = data['routes'];
-      duration = routes[0]['duration'];
-      distance = routes[0]['distance'];
-    });
+
+    Map data = json.decode(response.body);
+    var routes = data['routes'];
+    duration = routes[0]['duration'];
+    distance = routes[0]['distance'];
 
     trajet.setidTrajetId(idTrajet);
     trajet.setidUser(idUtilisateur);
@@ -96,48 +109,6 @@ class Controller {
     trajet.settrajetCoords(coords);
 
     return trajet;
-  }
-
-  //requete vers opendatasoft pour avoir les parking
-  Future<http.Response> getListParkingData(
-      String latitude, String longitude) async {
-    http.Response response = await http.get(
-        "https://data.opendatasoft.com/api/records/1.0/search/?dataset=stationnement-sur-voie-publique-emplacements%40datailedefrance&rows=20&facet=regpri&facet=regpar&facet=typsta&facet=arrond&facet=zoneres&facet=tar&facet=locsta&facet=parite&facet=signhor&facet=signvert&facet=confsign&facet=typemob&facet=datereleve&facet=mtlast_edit_date_field&geofilter.distance=" +
-            longitude +
-            "%2C" +
-            latitude +
-            "%2C5000&format=geojson");
-    return response;
-  }
-
-  //convert data response listparking to liste objet parking
-  List<Parking> convertDataToListObjetParking(Future<http.Response> response) {
-    List<Parking> listObjetParking = [];
-    response.then((value) {
-      Map data = json.decode(value.body);
-      var instance = data['features'];
-      for (int i = 0; i < instance.length; i++) {
-        Parking parking = Parking();
-        parking.setId(i + 1);
-        parking.setNomVoie(instance[i]['properties']['nomvoie']);
-        parking.setSurface(instance[i]['properties']['surface_calculee']);
-        parking.setTarif(instance[i]['properties']['tar']);
-        parking.setLng(instance[i]['properties']['geo_point_2d'][0]);
-        parking.setLat(instance[i]['properties']['geo_point_2d'][1]);
-        listObjetParking.add(parking);
-      }
-    });
-    print(listObjetParking);
-    return listObjetParking;
-  }
-
-  //draw routes
-  void _drawRoutes(List<LatLng> chemin) {
-    mapController.addLine(LineOptions(
-      geometry: chemin,
-      lineColor: '#FF008D',
-      lineWidth: 5.0,
-    ));
   }
 
   /// Convert an assets image to string name and Adds an asset image to the currently displayed style
@@ -180,20 +151,66 @@ class Controller {
         LatLng(double.parse(latArriver), double.parse(lngArriver));
 
     //fonction qui control la creation de la carte
-    void _onMapCreated(MapboxMapController controller) {
+
+    void _onMapCreated(MapboxMapController controller) async {
       //construction et ajout de la chemin entre les deux
       mapController = controller;
-      _drawRoutes(listListDoubleToListLatlng(
-          latDepart, lngDepart, latArriver, lngArriver));
-      //ajout deux symbole de depart et d'arriver
       _onStyleLoaded();
-      _addSymbols(center, 'positionDepart', mapController);
-      _addSymbols(parkingPosition, 'positionVert', mapController);
+      await _addSymbols(center, 'positionDepart', mapController);
+      await _addSymbols(parkingPosition, 'positionVert', mapController);
+      await getListLatLngAndDrawRoute(
+          latDepart, lngDepart, latArriver, lngArriver);
+
+      //ajout deux symbole de depart et d'arriver
     }
 
     return MapboxMap(
         styleString: styleCarte,
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(target: center, zoom: 14));
+  }
+
+  //requete vers opendatasoft pour avoir les parking
+  Future getListParkingData(String latitude, String longitude) async {
+    http.Response response = await http.get(
+        "https://data.opendatasoft.com/api/records/1.0/search/?dataset=stationnement-sur-voie-publique-emplacements%40datailedefrance&rows=20&facet=regpri&facet=regpar&facet=typsta&facet=arrond&facet=zoneres&facet=tar&facet=locsta&facet=parite&facet=signhor&facet=signvert&facet=confsign&facet=typemob&facet=datereleve&facet=mtlast_edit_date_field&geofilter.distance=" +
+            longitude +
+            "%2C" +
+            latitude +
+            "%2C5000&format=geojson");
+    print(response.body);
+    Map data = json.decode(response.body);
+    var instance = data['features'];
+    print(instance.length);
+    print("les parking disponible");
+    for (int i = 0; i < instance.length; i++) {
+      print("parking numero ${i + 1}");
+      print(instance[i]['properties']['nomvoie']);
+      print(instance[i]['properties']['surface_calculee']);
+      print(instance[i]['properties']['tar']);
+      print(instance[i]['properties']['geo_point_2d'][0]);
+      print(instance[i]['properties']['geo_point_2d'][1]);
+    }
+  }
+
+  //convert data response listparking to liste objet parking
+  List<Parking> convertDataToListObjetParking(Future<http.Response> response) {
+    List<Parking> listObjetParking = [];
+    response.then((value) {
+      Map data = json.decode(value.body);
+      var instance = data['features'];
+      for (int i = 0; i < instance.length; i++) {
+        Parking parking = Parking();
+        parking.setId(i + 1);
+        parking.setNomVoie(instance[i]['properties']['nomvoie']);
+        parking.setSurface(instance[i]['properties']['surface_calculee']);
+        parking.setTarif(instance[i]['properties']['tar']);
+        parking.setLng(instance[i]['properties']['geo_point_2d'][0]);
+        parking.setLat(instance[i]['properties']['geo_point_2d'][1]);
+        listObjetParking.add(parking);
+      }
+    });
+    print(listObjetParking);
+    return listObjetParking;
   }
 }
