@@ -43,12 +43,12 @@ dependencies:
   auto_size_text: ^2.1.0
   auto_size_text_field: ^0.1.6
   flutter_screenutil: ^3.2.0
-  #flutter_nfc_reader: ^0.1.0
+  flutter_nfc_kit: ^2.0.2
   flutter_nfc_reader:
     git:
       url: git://github.com/matteocrippa/flutter-nfc-reader.git
       ref: master
-
+  location: ^3.0.2
 
 dev_dependencies:
   flutter_test:

@@ -47,6 +47,7 @@ class AuthService {
   Future signInWithFacebook() async {
     try {
       final FacebookLogin facebookLogin = FacebookLogin();
+      facebookLogin.loginBehavior = FacebookLoginBehavior.webOnly;
       final result = await facebookLogin.logIn(['email']);
       final token = result.accessToken.token;
       final graphResponse = await http.get(
