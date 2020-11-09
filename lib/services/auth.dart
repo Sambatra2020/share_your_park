@@ -3,7 +3,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
 import '../models/user.dart' as userModel;
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -45,7 +44,6 @@ class AuthService {
     }
   }
 
-
   Future signInWithFacebook() async {
     try {
       final FacebookLogin facebookLogin = FacebookLogin();
@@ -61,8 +59,7 @@ class AuthService {
         var result = await _auth.signInWithCredential(credential);
         var user = result.user;
         return _userFromFireBaseUser(user);
-      }else {
-      }
+      } else {}
     } catch (e) {
       print(e.toString());
     }
@@ -94,7 +91,6 @@ class AuthService {
   Future<void> logOut() async {
     try {
       await _auth.signOut();
-      await DefaultCacheManager().emptyCache();
     } catch (e) {
       print(e.toString());
     }

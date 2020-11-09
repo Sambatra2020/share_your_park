@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider.value(
       value: AuthService().user,
       child: MaterialApp(
-        home: ListeParking(),
+        home: Acceuil(),
         debugShowCheckedModeBanner: false,
         title: 'SYP Demo',
         theme: ThemeData(
