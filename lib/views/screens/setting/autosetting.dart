@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:share_your_park/views/screens/setting/confidentialit%C3%A9.dart';
 
 class AutoSetting extends StatefulWidget {
   @override
@@ -41,7 +42,7 @@ class _AutoSettingState extends State<AutoSetting> {
                             )
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: screenHeight * 0.04, left: screenWidth * 0.015),
+                            margin: EdgeInsets.only(top: screenHeight * 0.03, left: screenWidth * 0.015),
                             child: Column(
                               children: [
                                 Text(
@@ -68,7 +69,7 @@ class _AutoSettingState extends State<AutoSetting> {
                       Center(
                         child: Container(
                           //top: screenHeight * 0.01,
-                          margin: EdgeInsets.only( left: screenWidth * 0.1),
+                          margin: EdgeInsets.only( left: screenWidth * 0.1,),
                           //color: Colors.blue,
                           height: screenHeight * 0.3,
                           width: screenWidth * 0.5,
@@ -119,7 +120,7 @@ class _AutoSettingState extends State<AutoSetting> {
                       Container(
                         margin: EdgeInsets.only(top: screenHeight * 0.02, left: screenWidth * 0.05),
                         child: Text(
-                          'Syp utilise les services de localisation de votre \nappareil pour vous proposer un service plus fiable et \npertinent. ( en savoir plus )',
+                          'Syp utilise les services de localisation de votre \nappareil pour vous proposer un service plus fiable \net pertinent. ( en savoir plus )',
                           style: TextStyle(
                             fontSize: (90 / screenHeight) * 100, 
                             )
@@ -157,7 +158,11 @@ class _AutoSettingState extends State<AutoSetting> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25)),
                       color: Color(0xFFFF008D),
-                      onPressed: () { },
+                      onPressed: () { 
+                        Navigator.push(context, 
+                          MaterialPageRoute(builder: (context) => Confidentialte())
+                        );
+                      },
                       child: Text(
                         "Retour",
                         style: TextStyle(
