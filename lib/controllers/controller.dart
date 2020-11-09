@@ -9,6 +9,10 @@ import 'package:share_your_park/models/trajet.dart';
 
 final styleCarte = 'mapbox://styles/sambatra/ckgbwa2x706vs1ap3n6qcaptj';
 MapboxMapController mapController;
+List<LatLng> chemin = [];
+
+List<Parking> listObjetParking = [];
+List<List<double>> _coords = [];
 
 class Controller {
   //draw routes
@@ -35,7 +39,7 @@ class Controller {
             "?geometries=geojson&access_token=pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA");
 
     //conversion de la reponse en liste liste de double
-    List<List<double>> _coords = [];
+
     double latInitiale = double.parse(latDepart);
     double lngInitiale = double.parse(lngDepart);
     List<double> initiale = [latInitiale, lngInitiale];
@@ -64,11 +68,10 @@ class Controller {
     _coords.add(finale);
 
     //fonction qui transforme une liste de liste double en list latlng
-    List<LatLng> chemin = [];
+
     for (int i = 0; i < _coords.length; i++) {
       LatLng latLng = LatLng(_coords[i][0], _coords[i][1]);
       chemin.add(latLng);
-      print(chemin[i]);
     }
 
     _drawRoutes(chemin);
@@ -91,6 +94,8 @@ class Controller {
             "," +
             positionArriver[0].toString() +
             "?geometries=geojson&access_token=pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA");
+
+    //construction objet parking a partir de ka requette
     Trajet trajet = Trajet();
     double duration;
     double distance;
@@ -138,10 +143,6 @@ class Controller {
     );
   }
 
-  //liste fonction executer lors de la creation de la carte
-
-  //style de la carte
-
   //creation carte mapbox
   MapboxMap creationCarteMapBox(String latDepart, String lngDepart,
       String latArriver, String lngArriver) {
@@ -172,15 +173,30 @@ class Controller {
 
   //requete vers opendatasoft pour avoir les parking
   Future getListParkingData(String latitude, String longitude) async {
+    //requete pour avoir la liste des parking sur opendata
     http.Response response = await http.get(
         "https://data.opendatasoft.com/api/records/1.0/search/?dataset=stationnement-sur-voie-publique-emplacements%40datailedefrance&rows=20&facet=regpri&facet=regpar&facet=typsta&facet=arrond&facet=zoneres&facet=tar&facet=locsta&facet=parite&facet=signhor&facet=signvert&facet=confsign&facet=typemob&facet=datereleve&facet=mtlast_edit_date_field&geofilter.distance=" +
             longitude +
             "%2C" +
             latitude +
             "%2C5000&format=geojson");
-    print(response.body);
+
+    //convert data response listparking to liste objet parking
     Map data = json.decode(response.body);
     var instance = data['features'];
+
+    for (int i = 0; i < instance.length; i++) {
+      Parking parking = Parking();
+      parking.setId(i + 1);
+      parking.setNomVoie(instance[i]['properties']['nomvoie']);
+      parking.setSurface(instance[i]['properties']['surface_calculee']);
+      parking.setTarif(instance[i]['properties']['tar']);
+      parking.setLng(instance[i]['properties']['geo_point_2d'][0]);
+      parking.setLat(instance[i]['properties']['geo_point_2d'][1]);
+      listObjetParking.add(parking);
+    }
+
+    //visualisation liste parking sur le terminale
     print(instance.length);
     print("les parking disponible");
     for (int i = 0; i < instance.length; i++) {
@@ -191,26 +207,5 @@ class Controller {
       print(instance[i]['properties']['geo_point_2d'][0]);
       print(instance[i]['properties']['geo_point_2d'][1]);
     }
-  }
-
-  //convert data response listparking to liste objet parking
-  List<Parking> convertDataToListObjetParking(Future<http.Response> response) {
-    List<Parking> listObjetParking = [];
-    response.then((value) {
-      Map data = json.decode(value.body);
-      var instance = data['features'];
-      for (int i = 0; i < instance.length; i++) {
-        Parking parking = Parking();
-        parking.setId(i + 1);
-        parking.setNomVoie(instance[i]['properties']['nomvoie']);
-        parking.setSurface(instance[i]['properties']['surface_calculee']);
-        parking.setTarif(instance[i]['properties']['tar']);
-        parking.setLng(instance[i]['properties']['geo_point_2d'][0]);
-        parking.setLat(instance[i]['properties']['geo_point_2d'][1]);
-        listObjetParking.add(parking);
-      }
-    });
-    print(listObjetParking);
-    return listObjetParking;
   }
 }
