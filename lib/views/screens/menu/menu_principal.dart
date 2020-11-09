@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+//import 'package:flutter_screenutil/screenutil.dart';
 import 'package:share_your_park/const.dart';
 import 'package:share_your_park/views/screens/menu/menu_item.dart';
 
@@ -16,7 +17,8 @@ class MenuPrincipal extends StatelessWidget {
           gradient: kPrimaryGradientColor,
         ),
         child: Padding(
-          padding: const EdgeInsets.only(left: 10, top: 30),
+          padding:
+              EdgeInsets.only(left: width * 2 / 100, top: height * 5 / 100),
           child: Stack(
             children: [
               Align(
@@ -41,75 +43,75 @@ class MenuPrincipal extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 25, top: 10),
-                      child: Stack(
-                        children: [
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                foregroundColor: Colors.black,
-                                child: Icon(
-                                  Icons.perm_identity,
-                                  color: Colors.grey,
-                                ),
-                                radius: height * 7 / 100,
+                      padding: EdgeInsets.only(
+                          left: width * 9 / 100, top: height * 2 / 100),
+                      child: Stack(children: [
+                        CircleAvatar(
+                          foregroundColor: Colors.black,
+                          child: Icon(
+                            Icons.perm_identity,
+                            color: Colors.grey,
+                          ),
+                          radius: height * 7 / 100,
+                        ),
+                        Align(
+                            alignment: Alignment(-1, 1),
+                            child: Container(
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.blue,
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 15),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "12 270 XP",
-                                          style:
-                                              TextStyle(color: Colors.white70),
-                                        ),
-                                        SizedBox(width: 20),
-                                        Icon(
-                                          FontAwesome.star_half_empty,
-                                          color: Colors.white,
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "324 minutes",
-                                          style:
-                                              TextStyle(color: Colors.white70),
-                                        ),
-                                        SizedBox(width: 10),
-                                        Icon(
-                                          FontAwesome.clock_o,
-                                          color: Colors.white,
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "94 partages",
-                                          style:
-                                              TextStyle(color: Colors.white70),
-                                        ),
-                                        SizedBox(width: 15),
-                                        Icon(
-                                          FontAwesome.sign_out,
-                                          color: Colors.white,
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
+                            )),
+                        Padding(
+                          padding: EdgeInsets.only(left: width * 30 / 100),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "12 270 XP",
+                                    style: TextStyle(color: Colors.white70),
+                                  ),
+                                  SizedBox(width: 20),
+                                  Icon(
+                                    FontAwesome.star_half_empty,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "324 minutes",
+                                    style: TextStyle(color: Colors.white70),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Icon(
+                                    FontAwesome.clock_o,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "94 partages",
+                                    style: TextStyle(color: Colors.white70),
+                                  ),
+                                  SizedBox(width: 15),
+                                  Icon(
+                                    FontAwesome.sign_out,
+                                    color: Colors.white,
+                                  )
+                                ],
                               )
                             ],
                           ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                          ),
-                        ],
-                      ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                        ),
+                      ]),
                     ),
                     Padding(
                         padding: EdgeInsets.only(
@@ -148,7 +150,8 @@ class MenuPrincipal extends StatelessWidget {
               Container(
                 height: 350,
                 width: 240,
-                margin: EdgeInsets.only(left: 222, top: 140),
+                margin: EdgeInsets.only(
+                    left: width * 71 / 100, top: height * 28 / 100),
                 child: Align(
                   child: Image.asset("assets/images/phone.png"),
                 ),

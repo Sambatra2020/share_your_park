@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:share_your_park/views/screens/menu/menu_principal.dart';
 import 'package:share_your_park/views/screens/register.dart';
 import 'package:share_your_park/views/screens/signup.dart';
-import 'package:share_your_park/views/tuto/acceuil.dart';
+//import 'package:share_your_park/views/tuto/acceuil.dart';
 import 'models/user.dart' as userModel;
-import 'package:share_your_park/views/screens/notification.dart';
+//import 'package:share_your_park/views/screens/notification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
