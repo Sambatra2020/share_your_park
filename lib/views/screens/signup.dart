@@ -87,8 +87,7 @@ class _SignupState extends State<Signup> {
                               prefixIcon: Icon(FontAwesome.user,
                                   color: Color(0xFFFF008D)),
                               labelText: 'Nom',
-                             
-                              labelStyle: TextStyle(
+                              labelStyle: const TextStyle(
                                 color: Color(0xFFFF008D),
                                 fontSize: 15,
                               ),
@@ -109,7 +108,7 @@ class _SignupState extends State<Signup> {
                               enabledBorder: kinputdeco,
                               labelText: 'Prénom',
                               isDense: true,
-                              labelStyle: TextStyle(
+                              labelStyle: const TextStyle(
                                 color: Color(0xFFFF008D),
                                 fontSize: 15,
                               ),
@@ -124,7 +123,10 @@ class _SignupState extends State<Signup> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 40.0, right: 40, ),
+                    padding: const EdgeInsets.only(
+                      left: 40.0,
+                      right: 40,
+                    ),
                     child: Row(
                       children: [
                         Expanded(
@@ -155,6 +157,7 @@ class _SignupState extends State<Signup> {
                             decoration: const InputDecoration(
                               enabledBorder: kinputdeco,
                               labelText: 'Code postal',
+                              hintText: 'xxxx',
                               labelStyle: const TextStyle(
                                 color: Color(0xFFFF008D),
                                 fontSize: 15,
@@ -179,17 +182,16 @@ class _SignupState extends State<Signup> {
                       decoration: const InputDecoration(
                         enabledBorder: kinputdeco,
                         prefixIcon:
-                           const Icon(FontAwesome.phone, color: Color(0xFFFF008D)),
+                            Icon(FontAwesome.phone, color: Color(0xFFFF008D)),
                         labelText: 'Numéro de téléphone',
-                        hintText: 'x xx xx xx xx',
-                        labelStyle: TextStyle(
+                        hintText: 'xxxxxxxxx',
+                        labelStyle: const TextStyle(
                           color: Color(0xFFFF008D),
                           fontSize: 15,
                         ),
                       ),
                       validator: (val) => isNumeric(val) != true ||
-                              val.length > 17 ||
-                              val.length < 10
+                              val.length != 9
                           ? 'Numéro de téléphone obligatoire'
                           : null,
                       onChanged: (val) =>
@@ -206,7 +208,7 @@ class _SignupState extends State<Signup> {
                         prefixIcon: Icon(FontAwesome.envelope,
                             color: Color(0xFFFF008D)),
                         labelText: 'Email',
-                        labelStyle:  TextStyle(
+                        labelStyle: const TextStyle(
                           color: Color(0xFFFF008D),
                           fontSize: 15,
                         ),
@@ -226,7 +228,7 @@ class _SignupState extends State<Signup> {
                       decoration: const InputDecoration(
                         enabledBorder: kinputdeco,
                         prefixIcon:
-                          const  Icon(FontAwesome.lock, color: Color(0xFFFF008D)),
+                            Icon(FontAwesome.lock, color: Color(0xFFFF008D)),
                         labelText: 'Mot de passe',
                         labelStyle: const TextStyle(
                           color: Color(0xFFFF008D),

@@ -11,7 +11,7 @@ import 'package:share_your_park/views/screens/setting/parain.dart';
 import 'package:share_your_park/views/screens/signup.dart';
 import 'package:share_your_park/views/tuto/acceuil.dart';
 import 'models/user.dart' as userModel;
-//import 'package:share_your_park/views/screens/notification.dart';
+import 'package:share_your_park/views/screens/notification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,11 +25,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider.value(
       value: AuthService().user,
       child: MaterialApp(
-        home: Information(),
-        debugShowCheckedModeBanner: false,
-        title: 'SYP Demo',
         theme: ThemeData(
-          visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
       ),
     );
