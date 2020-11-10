@@ -6,6 +6,7 @@ import 'package:share_your_park/views/nfc/scan_nfc.dart';
 import 'package:share_your_park/views/nfc/testNfc.dart';
 import 'package:share_your_park/views/screens/baseCarteMap.dart';
 import 'package:share_your_park/views/screens/mapbox/listeParking.dart';
+import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
 import 'package:share_your_park/views/screens/register.dart';
 import 'package:share_your_park/views/screens/signup.dart';
 import 'package:share_your_park/views/tuto/acceuil.dart';

@@ -7,11 +7,15 @@ import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/models/trajet.dart';
 
-final styleCarte = 'mapbox://styles/sambatra/ckgbwa2x706vs1ap3n6qcaptj';
-MapboxMapController mapController;
 List<LatLng> chemin = [];
 
 class Controller {
+  MapboxMapController mapController;
+  Controller({this.mapController});
+  String styleCarte = 'mapbox://styles/sambatra/ckgbwa2x706vs1ap3n6qcaptj';
+  String accessToken =
+      'pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA';
+  List<LatLng> chemin = [];
   List<Parking> listObjetParking = [];
   List<List<double>> _coords = [];
   List<Parking> get listeParking => listObjetParking;
@@ -36,7 +40,9 @@ class Controller {
             lngArriver +
             "," +
             latArriver +
-            "?geometries=geojson&access_token=pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA");
+            "?geometries=geojson&access_token=" +
+            accessToken +
+            "");
 
     //conversion de la reponse en liste liste de double
 
@@ -204,6 +210,7 @@ class Controller {
       Parking parking = Parking();
       parking.setId(i + 1);
       parking.setNomVoie(instance[i]['properties']['nomvoie']);
+      parking.setNumVoie(instance[i]['properties']['numvoie']);
       parking.setSurface(instance[i]['properties']['surface_calculee']);
       parking.setTarif(instance[i]['properties']['tar']);
       parking.setLng(instance[i]['properties']['geo_point_2d'][0]);
