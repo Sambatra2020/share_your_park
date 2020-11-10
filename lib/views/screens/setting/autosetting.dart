@@ -181,6 +181,12 @@ class _AutoSettingState extends State<AutoSetting> {
       ),
       floatingActionButton: Container(
         child: FloatingActionButton(
+          shape: RoundedRectangleBorder(
+                borderRadius: BorderRadiusDirectional.only(
+                    topStart: Radius.circular(50),
+                    topEnd: Radius.circular(50),
+                    bottomStart: Radius.circular(50),
+                    bottomEnd: Radius.zero)),
           backgroundColor: Color(0xFFFF008D),
           onPressed: (){},
           child: Icon(Entypo.menu),
