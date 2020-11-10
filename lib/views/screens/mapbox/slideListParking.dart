@@ -23,11 +23,13 @@ class _SlideListParkingState extends State<SlideListParking> {
   String latParking = '48.866029';
   String lngParking = '2.340308';
   int current = 0;
+  MapboxMap mapboxMap;
 
   @override
   Widget build(BuildContext context) {
-    MapboxMapController mapController;
-    Controller controller = new Controller(mapController: mapController);
+    Controller controller = Controller();
+    mapboxMap = controller.creationCarteMapBox(
+        latDepart, lngDepart, latParking, lngParking);
     print("parking");
     print(latParking);
     print(lngParking);
@@ -52,8 +54,7 @@ class _SlideListParkingState extends State<SlideListParking> {
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: Stack(children: [
           Container(
-            child: controller.creationCarteMapBox(
-                latDepart, lngDepart, latParking, lngParking),
+            child: mapboxMap,
           ),
           Align(
             alignment: Alignment(-0.9, -0.85),

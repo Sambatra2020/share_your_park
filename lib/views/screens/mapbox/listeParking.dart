@@ -14,7 +14,7 @@ class _ListeParkingState extends State<ListeParking> {
   @override
   Widget build(BuildContext context) {
     MapboxMapController mapController;
-    Controller controller = Controller(mapController: mapController);
+    Controller controller = Controller();
     return Scaffold(
         floatingActionButton: Container(
           margin: EdgeInsets.only(top: 15),

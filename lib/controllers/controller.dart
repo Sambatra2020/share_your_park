@@ -2,16 +2,14 @@ import 'dart:typed_data';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:http/http.dart' as http;
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/models/trajet.dart';
 
-List<LatLng> chemin = [];
-
 class Controller {
   MapboxMapController mapController;
-  Controller({this.mapController});
   String styleCarte = 'mapbox://styles/sambatra/ckgbwa2x706vs1ap3n6qcaptj';
   String accessToken =
       'pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA';
@@ -129,8 +127,7 @@ class Controller {
     return mapController.addImage(name, list);
   }
 
-  //conversion image to String
-  void _onStyleLoaded() {
+  void _onStyleLoaded() async {
     addImageFromAsset("positionDepart", "assets/images/positionDepart.png");
     addImageFromAsset("positionJaune", "assets/images/positionJaune.png");
     addImageFromAsset("positionRouge", "assets/images/positionRouge.png");
@@ -156,19 +153,22 @@ class Controller {
     LatLng center = LatLng(double.parse(latDepart), double.parse(lngDepart));
     LatLng parkingPosition =
         LatLng(double.parse(latArriver), double.parse(lngArriver));
+    print("=================================================");
+    print(latArriver);
+    print(lngArriver);
 
     //fonction qui control la creation de la carte
 
     void _onMapCreated(MapboxMapController controller) async {
-      //construction et ajout de la chemin entre les deux
+      print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
       mapController = controller;
       _onStyleLoaded();
+      //ajout deux symbole de depart et d'arriver
       await _addSymbols(center, 'positionDepart', mapController);
       await _addSymbols(parkingPosition, 'positionVert', mapController);
+      //construction et ajout de la chemin entre les deux
       await getListLatLngAndDrawRoute(
           latDepart, lngDepart, latArriver, lngArriver);
-
-      //ajout deux symbole de depart et d'arriver
     }
 
     return MapboxMap(
@@ -176,6 +176,34 @@ class Controller {
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(target: center, zoom: 14));
   }
+
+  /*FlutterMap carteMap(String latDepart, String lngDepart,
+      String latArriver, String lngArriver){
+        //coordonner en Objet latitute et longitude de la position de depart et position parking
+    LatLng icenter = new LatLng(double.parse(latDepart), double.parse(lngDepart));
+    LatLng iparkingPosition =
+        LatLng(double.parse(latArriver), double.parse(lngArriver));
+   return FlutterMap(
+    options:  MapOptions(
+      center: ,
+      zoom: 13.0,
+    ),
+    layers: [
+       TileLayerOptions(
+        urlTemplate: "https://api.mapbox.com/styles/v1/sambatra/ckgbwa2x706vs1ap3n6qcaptj.html?fresh=true&title=view&access_token=pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA",
+      ),
+       MarkerLayerOptions(
+        markers: [
+           Marker(
+            width: 80.0,
+            height: 80.0,
+            point: iparkingPosition,
+          ),
+        ],
+      ),
+    ],
+  );
+  }*/
 
   MapboxMap mapBoxVide(double latitudeParking, double longitudeParking) {
     LatLng positionParking = LatLng(latitudeParking, longitudeParking);
