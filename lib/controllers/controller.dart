@@ -7,11 +7,13 @@ import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/models/trajet.dart';
 
-final styleCarte = 'mapbox://styles/sambatra/ckgbwa2x706vs1ap3n6qcaptj';
-MapboxMapController mapController;
-List<LatLng> chemin = [];
-
 class Controller {
+  MapboxMapController mapController;
+  String styleCarte = 'mapbox://styles/sambatra/ckgbwa2x706vs1ap3n6qcaptj';
+  String accessToken =
+      'pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA';
+  List<LatLng> chemin = [];
+  LatLng ancienPosition;
   List<Parking> listObjetParking = [];
   List<List<double>> _coords = [];
   List<Parking> get listeParking => listObjetParking;
@@ -25,8 +27,16 @@ class Controller {
   }
   //requette pour avoir les chemins
 
-  Future getListLatLngAndDrawRoute(String latDepart, String lngDepart,
-      String latArriver, String lngArriver) async {
+  //conversion response en liste de coordonner
+  void conversionResponseEnlistDouble(String latDepart, String lngDepart,
+      String latArriver, String lngArriver) {}
+
+  Future getListLatLngAndDrawRoute(
+    String latDepart,
+    String lngDepart,
+    String latArriver,
+    String lngArriver,
+  ) async {
     http.Response response = await http.get(
         "https://api.mapbox.com/directions/v5/mapbox/driving/" +
             lngDepart +
@@ -36,7 +46,9 @@ class Controller {
             lngArriver +
             "," +
             latArriver +
-            "?geometries=geojson&access_token=pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA");
+            "?geometries=geojson&access_token=" +
+            accessToken +
+            "");
 
     //conversion de la reponse en liste liste de double
 
@@ -123,8 +135,7 @@ class Controller {
     return mapController.addImage(name, list);
   }
 
-  //conversion image to String
-  void _onStyleLoaded() {
+  void _onStyleLoaded() async {
     addImageFromAsset("positionDepart", "assets/images/positionDepart.png");
     addImageFromAsset("positionJaune", "assets/images/positionJaune.png");
     addImageFromAsset("positionRouge", "assets/images/positionRouge.png");
@@ -141,6 +152,7 @@ class Controller {
         geometry: position,
       ),
     );
+    ancienPosition = position;
   }
 
   //creation carte mapbox
@@ -150,26 +162,57 @@ class Controller {
     LatLng center = LatLng(double.parse(latDepart), double.parse(lngDepart));
     LatLng parkingPosition =
         LatLng(double.parse(latArriver), double.parse(lngArriver));
+    print("=================================================");
+    print(latArriver);
+    print(lngArriver);
 
     //fonction qui control la creation de la carte
 
     void _onMapCreated(MapboxMapController controller) async {
-      //construction et ajout de la chemin entre les deux
+      print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
       mapController = controller;
       _onStyleLoaded();
+      //ajout deux symbole de depart et d'arriver
       await _addSymbols(center, 'positionDepart', mapController);
       await _addSymbols(parkingPosition, 'positionVert', mapController);
+      //construction et ajout de la chemin entre les deux
       await getListLatLngAndDrawRoute(
           latDepart, lngDepart, latArriver, lngArriver);
-
-      //ajout deux symbole de depart et d'arriver
     }
 
     return MapboxMap(
         styleString: styleCarte,
         onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(target: center, zoom: 14));
+        initialCameraPosition: CameraPosition(target: center, zoom: 18));
   }
+
+  /*FlutterMap carteMap(String latDepart, String lngDepart,
+      String latArriver, String lngArriver){
+        //coordonner en Objet latitute et longitude de la position de depart et position parking
+    LatLng icenter = new LatLng(double.parse(latDepart), double.parse(lngDepart));
+    LatLng iparkingPosition =
+        LatLng(double.parse(latArriver), double.parse(lngArriver));
+   return FlutterMap(
+    options:  MapOptions(
+      center: ,
+      zoom: 13.0,
+    ),
+    layers: [
+       TileLayerOptions(
+        urlTemplate: "https://api.mapbox.com/styles/v1/sambatra/ckgbwa2x706vs1ap3n6qcaptj.html?fresh=true&title=view&access_token=pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA",
+      ),
+       MarkerLayerOptions(
+        markers: [
+           Marker(
+            width: 80.0,
+            height: 80.0,
+            point: iparkingPosition,
+          ),
+        ],
+      ),
+    ],
+  );
+  }*/
 
   MapboxMap mapBoxVide(double latitudeParking, double longitudeParking) {
     LatLng positionParking = LatLng(latitudeParking, longitudeParking);
@@ -204,6 +247,7 @@ class Controller {
       Parking parking = Parking();
       parking.setId(i + 1);
       parking.setNomVoie(instance[i]['properties']['nomvoie']);
+      parking.setNumVoie(instance[i]['properties']['numvoie']);
       parking.setSurface(instance[i]['properties']['surface_calculee']);
       parking.setTarif(instance[i]['properties']['tar']);
       parking.setLng(instance[i]['properties']['geo_point_2d'][0]);

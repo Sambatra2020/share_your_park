@@ -6,9 +6,11 @@ class Parking {
   String pTarif;
   double pSurface;
   int pStatus = 0;
+  int pNumvoie;
 
   Parking(
       {this.pNomvoie,
+      this.pNumvoie,
       this.pLat,
       this.pLng,
       this.pStatus,
@@ -17,6 +19,7 @@ class Parking {
   Parking.withId(
       {this.pId,
       this.pNomvoie,
+      this.pNumvoie,
       this.pLat,
       this.pLng,
       this.pStatus,
@@ -26,6 +29,7 @@ class Parking {
   //getter
   int get id => pId;
   String get nomRue => pNomvoie;
+  int get numRue => pNumvoie;
   double get lat => pLat;
   double get lng => pLng;
   int get status => pStatus;
@@ -39,6 +43,10 @@ class Parking {
 
   setNomVoie(String newNomvoie) {
     this.pNomvoie = newNomvoie;
+  }
+
+  setNumVoie(int newNumvoie) {
+    this.pNumvoie = newNumvoie;
   }
 
   setLat(double newLat) {
