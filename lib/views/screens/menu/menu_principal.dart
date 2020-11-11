@@ -1,8 +1,13 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 //import 'package:flutter_screenutil/screenutil.dart';
 import 'package:share_your_park/const.dart';
-import 'package:share_your_park/views/screens/menu/menu_item.dart';
+import 'package:share_your_park/views/screens/FAQ.dart';
+import 'package:share_your_park/views/screens/setting/autosetting.dart';
+//import 'package:share_your_park/views/screens/menu/menu_item.dart';
+import 'package:share_your_park/views/screens/setting/infos.dart';
+import 'package:share_your_park/views/screens/setting/parain.dart';
 
 class MenuPrincipal extends StatelessWidget {
   @override
@@ -44,24 +49,36 @@ class MenuPrincipal extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: width * 9 / 100, top: height * 2 / 100),
+                          left: width * 11 / 100, top: height * 2 / 100),
                       child: Stack(children: [
                         CircleAvatar(
-                          foregroundColor: Colors.black,
                           child: Icon(
                             Icons.perm_identity,
                             color: Colors.grey,
                           ),
                           radius: height * 7 / 100,
                         ),
-                        Align(
-                            alignment: Alignment(-1, 1),
-                            child: Container(
-                              child: Icon(
-                                Icons.add,
-                                color: Colors.blue,
+                        Positioned(
+                          top: height * 0.06 / 100,
+                          left: width * 0.05 / 100,
+                          child: Container(
+                            height: height * 4 / 100,
+                            width: width * 6 / 100,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                width: width * 0.01 / 100,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
                               ),
-                            )),
+                              color: Colors.blueGrey,
+                            ),
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
                         Padding(
                           padding: EdgeInsets.only(left: width * 30 / 100),
                           child: Column(
@@ -114,44 +131,154 @@ class MenuPrincipal extends StatelessWidget {
                       ]),
                     ),
                     Padding(
-                        padding: EdgeInsets.only(
-                            top: height * 4 / 100, left: width * 0.1 * 100)),
-                    MenuItem(
-                      icon: FontAwesome.user,
-                      title: "Mes Informations",
-                    ),
-                    MenuItem(
-                      icon: FontAwesome.file_text,
-                      title: "Mes Stats",
-                    ),
-                    MenuItem(
-                      icon: FontAwesome.send,
-                      title: "Parrainage",
-                    ),
-                    MenuItem(
-                      icon: FontAwesome.sun_o,
-                      title: "Parametre",
-                    ),
-                    MenuItem(
-                      icon: FontAwesome.map_marker,
-                      title: "Mes trajets",
-                    ),
-                    MenuItem(
-                      icon: FontAwesome.commenting,
-                      title: "F A Q",
-                    ),
-                    MenuItem(
-                      icon: FontAwesome.info_circle,
-                      title: "Offres",
+                      padding: const EdgeInsets.only(left: 15, top: 20),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Icon(FontAwesome.user, color: Colors.white),
+                              SizedBox(width: 20),
+                              RichText(
+                                  text: TextSpan(
+                                      text: "Mes informations",
+                                      style: TextStyle(
+                                          fontFamily: kfontFamily,
+                                          color: kTextColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.normal),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Information()));
+                                        })),
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                            children: [
+                              Icon(FontAwesome.file_text, color: Colors.white),
+                              SizedBox(width: 20),
+                              Text("Mes stats",
+                                  style: TextStyle(
+                                      fontFamily: kfontFamily,
+                                      color: kTextColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.normal)),
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                            children: [
+                              Icon(FontAwesome.paper_plane_o,
+                                  color: Colors.white),
+                              SizedBox(width: 20),
+                              RichText(
+                                  text: TextSpan(
+                                      text: "Parrainage",
+                                      style: TextStyle(
+                                          fontFamily: kfontFamily,
+                                          color: kTextColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.normal),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Parrainage()));
+                                        }))
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                            children: [
+                              Icon(FontAwesome.sun_o, color: Colors.white),
+                              SizedBox(width: 20),
+                              RichText(
+                                  text: TextSpan(
+                                      text: "Paramètre",
+                                      style: TextStyle(
+                                          fontFamily: kfontFamily,
+                                          color: kTextColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.normal),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AutoSetting()));
+                                        }))
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                            children: [
+                              Icon(FontAwesome.map_marker, color: Colors.white),
+                              SizedBox(width: 20),
+                              Text("Mes trajets",
+                                  style: TextStyle(
+                                      fontFamily: kfontFamily,
+                                      color: kTextColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.normal)),
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                            children: [
+                              Icon(FontAwesome.commenting, color: Colors.white),
+                              SizedBox(width: 20),
+                              RichText(
+                                  text: TextSpan(
+                                      text: "F A Q",
+                                      style: TextStyle(
+                                          fontFamily: kfontFamily,
+                                          color: kTextColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.normal),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      PolitiConfid()));
+                                        }))
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                            children: [
+                              Icon(FontAwesome.info_circle,
+                                  color: Colors.white),
+                              SizedBox(width: 20),
+                              Text(
+                                "offres",
+                                style: TextStyle(
+                                    fontFamily: kfontFamily,
+                                    color: kTextColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.normal),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
               Container(
-                height: 350,
-                width: 240,
+                height: height * 65 / 100,
+                width: width * 60 / 100,
                 margin: EdgeInsets.only(
-                    left: width * 71 / 100, top: height * 28 / 100),
+                    left: width * 73 / 100, top: height * 25 / 100),
                 child: Align(
                   child: Image.asset("assets/images/phone.png"),
                 ),

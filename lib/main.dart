@@ -24,9 +24,7 @@ class MyApp extends StatelessWidget {
         home: MenuPrincipal(),
         debugShowCheckedModeBanner: false,
         title: 'SYP Demo',
-        theme: ThemeData(
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
+        theme: ThemeData(),
       ),
     );
   }

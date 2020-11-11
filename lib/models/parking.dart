@@ -1,23 +1,44 @@
 class Parking {
   int pId;
-  String pNomRue;
+  String pNomvoie;
   double pLat;
   double pLng;
+  String pTarif;
+  double pSurface;
   int pStatus = 0;
 
-  Parking({this.pNomRue, this.pLat, this.pLng, this.pStatus});
-  Parking.withId({this.pId, this.pNomRue, this.pLat, this.pLng, this.pStatus});
+  Parking(
+      {this.pNomvoie,
+      this.pLat,
+      this.pLng,
+      this.pStatus,
+      this.pSurface,
+      this.pTarif});
+  Parking.withId(
+      {this.pId,
+      this.pNomvoie,
+      this.pLat,
+      this.pLng,
+      this.pStatus,
+      this.pSurface,
+      this.pTarif});
 
   //getter
   int get id => pId;
-  String get nomRue => pNomRue;
+  String get nomRue => pNomvoie;
   double get lat => pLat;
   double get lng => pLng;
   int get status => pStatus;
+  String get tarif => pTarif;
+  double get surface => pSurface;
 
   //setter
-  setNomRue(String newNomRue) {
-    this.pNomRue = newNomRue;
+  setId(int newId) {
+    this.pId = newId;
+  }
+
+  setNomVoie(String newNomvoie) {
+    this.pNomvoie = newNomvoie;
   }
 
   setLat(double newLat) {
@@ -30,5 +51,13 @@ class Parking {
 
   setStatus(int newStatus) {
     this.pStatus = newStatus;
+  }
+
+  setSurface(double newSurface) {
+    this.pSurface = newSurface;
+  }
+
+  setTarif(String newTarif) {
+    this.pTarif = newTarif;
   }
 }

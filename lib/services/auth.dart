@@ -47,6 +47,7 @@ class AuthService {
   Future signInWithFacebook() async {
     try {
       final FacebookLogin facebookLogin = FacebookLogin();
+      facebookLogin.loginBehavior = FacebookLoginBehavior.webOnly;
       final result = await facebookLogin.logIn(['email']);
       final token = result.accessToken.token;
       final graphResponse = await http.get(
@@ -59,8 +60,10 @@ class AuthService {
         var result = await _auth.signInWithCredential(credential);
         var user = result.user;
         return _userFromFireBaseUser(user);
-      }
-    } catch (e) {}
+      } else {}
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   Future loginWithGoogle() async {
