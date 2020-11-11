@@ -2,7 +2,6 @@ import 'dart:typed_data';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:http/http.dart' as http;
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:share_your_park/models/parking.dart';
@@ -14,6 +13,7 @@ class Controller {
   String accessToken =
       'pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA';
   List<LatLng> chemin = [];
+  LatLng ancienPosition;
   List<Parking> listObjetParking = [];
   List<List<double>> _coords = [];
   List<Parking> get listeParking => listObjetParking;
@@ -27,8 +27,16 @@ class Controller {
   }
   //requette pour avoir les chemins
 
-  Future getListLatLngAndDrawRoute(String latDepart, String lngDepart,
-      String latArriver, String lngArriver) async {
+  //conversion response en liste de coordonner
+  void conversionResponseEnlistDouble(String latDepart, String lngDepart,
+      String latArriver, String lngArriver) {}
+
+  Future getListLatLngAndDrawRoute(
+    String latDepart,
+    String lngDepart,
+    String latArriver,
+    String lngArriver,
+  ) async {
     http.Response response = await http.get(
         "https://api.mapbox.com/directions/v5/mapbox/driving/" +
             lngDepart +
@@ -144,6 +152,7 @@ class Controller {
         geometry: position,
       ),
     );
+    ancienPosition = position;
   }
 
   //creation carte mapbox
@@ -174,7 +183,7 @@ class Controller {
     return MapboxMap(
         styleString: styleCarte,
         onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(target: center, zoom: 14));
+        initialCameraPosition: CameraPosition(target: center, zoom: 18));
   }
 
   /*FlutterMap carteMap(String latDepart, String lngDepart,

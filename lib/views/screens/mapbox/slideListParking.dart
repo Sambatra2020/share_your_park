@@ -20,16 +20,24 @@ class _SlideListParkingState extends State<SlideListParking> {
 
   String latDepart = '48.862056';
   String lngDepart = '2.339432';
-  String latParking = '48.866029';
-  String lngParking = '2.340308';
+  String latParking;
+  String lngParking;
   int current = 0;
   MapboxMap mapboxMap;
 
   @override
   Widget build(BuildContext context) {
+    if (latParking == null) {
+      latParking = this.listObjetParking[2].lng.toString();
+      lngParking = this.listObjetParking[2].lat.toString();
+    }
+
     Controller controller = Controller();
-    mapboxMap = controller.creationCarteMapBox(
-        latDepart, lngDepart, latParking, lngParking);
+    if (mapboxMap == null) {
+      mapboxMap = controller.creationCarteMapBox(
+          latDepart, lngDepart, latParking, lngParking);
+    }
+
     print("parking");
     print(latParking);
     print(lngParking);
@@ -91,8 +99,10 @@ class _SlideListParkingState extends State<SlideListParking> {
               onPageChanged: (index) {
                 setState(() {
                   current = index;
-                  latParking = listObjetParking[current].lat.toString();
-                  lngParking = listObjetParking[current].lng.toString();
+                  latParking = listObjetParking[current].lng.toString();
+                  lngParking = listObjetParking[current].lat.toString();
+                  mapboxMap = controller.creationCarteMapBox(
+                      latDepart, lngDepart, latParking, lngParking);
                   print(current);
                 });
               },

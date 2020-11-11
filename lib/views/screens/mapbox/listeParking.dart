@@ -3,18 +3,40 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:share_your_park/controllers/controller.dart';
+import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
 
 class ListeParking extends StatefulWidget {
+  final List<Parking> listObjetParking;
+  ListeParking({this.listObjetParking});
   @override
-  _ListeParkingState createState() => _ListeParkingState();
+  _ListeParkingState createState() => _ListeParkingState(listObjetParking);
 }
 
 class _ListeParkingState extends State<ListeParking> {
+  List<Parking> listObjetParking;
+  _ListeParkingState(this.listObjetParking);
+  
+   Controller controller = Controller();
+
+  String latDepart = '48.862056';
+  String lngDepart = '2.339432';
+  String latParking;
+  String lngParking;
+  MapboxMap mapboxMap;
   @override
   Widget build(BuildContext context) {
-    MapboxMapController mapController;
-    Controller controller = Controller();
+    if (latParking == null) {
+      print(listObjetParking.length);
+      latParking = this.listObjetParking[1].lng.toString();
+      lngParking = this.listObjetParking[1].lat.toString();
+    }
+
+   
+    if (mapboxMap == null) {
+      mapboxMap = controller.creationCarteMapBox(
+          latDepart, lngDepart, latParking, lngParking);
+    }
     return Scaffold(
         floatingActionButton: Container(
           margin: EdgeInsets.only(top: 15),
@@ -35,8 +57,7 @@ class _ListeParkingState extends State<ListeParking> {
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: Stack(children: [
           Container(
-            child: controller.creationCarteMapBox(
-                '48.862056', '2.339432', '48.866029', '2.340308'),
+            child: mapboxMap,
           ),
           Align(
             alignment: Alignment(-0.9, -0.85),
@@ -74,19 +95,12 @@ class _ListeParkingState extends State<ListeParking> {
               //padding: EdgeInsets.all(10),
               color: Color(0xFFFF008D),
               child: Icon(Icons.search, color: Color(0xFFFFFFFF)),
-              onPressed: () async {
-                await controller.getListParkingData('2.339432', '48.862056');
-                print(controller.listeParking.length);
-                for (int i = 0; i < controller.listeParking.length; i++) {
-                  print(controller.listObjetParking[i].nomRue);
-                  print(controller.listObjetParking[i].numRue);
-                }
+              onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => SlideListParking(
-                              listObjetParking: controller.listeParking,
-                            )));
+                            listObjetParking: this.listObjetParking)));
               },
             ),
           ),
