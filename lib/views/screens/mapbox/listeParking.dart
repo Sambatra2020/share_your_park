@@ -72,8 +72,11 @@ class _ListeParkingState extends State<ListeParking> {
         body: Stack(children: [
           Container(
             child: FlutterMap(
-              options:
-                  MapOptions(center: LatLng(48.862056, 2.339432), zoom: 18),
+              options: MapOptions(
+                center: LatLng(48.862056, 2.339432),
+                minZoom: 18,
+                maxZoom: 64,
+              ),
               layers: [
                 tileLayerOptions,
                 MarkerLayerOptions(markers: [

@@ -35,13 +35,6 @@ class _SlideListParkingState extends State<SlideListParking> {
       latParking = this.listObjetParking[current].lng.toString();
       lngParking = this.listObjetParking[current].lat.toString();
     }
-    Future<List<LatLng>> result =
-        controller.getListLatLng(latDepart, lngDepart, latParking, lngParking);
-    result.then((value) {
-      setState(() {
-        points = value;
-      });
-    });
 
     return Scaffold(
         floatingActionButton: Container(
@@ -69,14 +62,14 @@ class _SlideListParkingState extends State<SlideListParking> {
         body: Stack(children: [
           Container(
             child: FlutterMap(
-              options:
-                  MapOptions(center: LatLng(48.862056, 2.339432), zoom: 18),
+              options: MapOptions(
+                  center: LatLng(48.862056, 2.339432), zoom: 18, maxZoom: 48),
               layers: [
                 tileLayerOptions,
                 MarkerLayerOptions(markers: [
                   Marker(
-                      width: 40.0,
-                      height: 40.0,
+                      width: 35.0,
+                      height: 35.0,
                       point: LatLng(
                           double.parse(latDepart), double.parse(lngDepart)),
                       builder: (context) => Container(
@@ -134,11 +127,18 @@ class _SlideListParkingState extends State<SlideListParking> {
             child: CarouselSlider(
               height: 150,
               initialPage: 0,
-              onPageChanged: (index) {
+              onPageChanged: (index) async {
                 setState(() {
                   current = index;
                   latParking = listObjetParking[current].lng.toString();
                   lngParking = listObjetParking[current].lat.toString();
+                });
+                Future<List<LatLng>> result = controller.getListLatLng(
+                    latDepart, lngDepart, latParking, lngParking);
+                result.then((value) {
+                  setState(() {
+                    points = value;
+                  });
                 });
               },
               items: listObjetParking.map((parking) {
@@ -161,11 +161,45 @@ class _SlideListParkingState extends State<SlideListParking> {
                                       ' rue ' +
                                       parking.nomRue
                                   : 'sans nom voie',
-                              style: TextStyle(color: Color(0xFFFFFFFF)),
+                              style: TextStyle(
+                                  color: Color(0xFFFFFFFF), fontSize: 12),
                               textAlign: TextAlign.justify,
                             ),
                           ]),
-                          Row(),
+                          Row(
+                            children: [
+                              Container(
+                                  margin: EdgeInsets.only(left: 10, right: 10),
+                                  child: Image.asset(
+                                      "assets/icons/Time_Circle.png")),
+                              Container(
+                                child: Text(
+                                  'duree',
+                                  style: TextStyle(
+                                      color: Color(0xFFFFFFFF), fontSize: 12),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 10),
+                                child: Text(
+                                  'prix: ' + parking.tarif,
+                                  style: TextStyle(
+                                      color: Color(0xFFFFFFFF), fontSize: 12),
+                                ),
+                              ),
+                              Container(
+                                  margin: EdgeInsets.only(left: 10, right: 10),
+                                  child:
+                                      Image.asset("assets/icons/Filter.png")),
+                              Container(
+                                child: Text(
+                                  'taille M',
+                                  style: TextStyle(
+                                      color: Color(0xFFFFFFFF), fontSize: 12),
+                                ),
+                              )
+                            ],
+                          ),
                           MaterialButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),

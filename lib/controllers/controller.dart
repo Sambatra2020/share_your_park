@@ -60,7 +60,6 @@ class Controller {
     //
     ///
     _coordsLocal.add(initiale);
-    print("chemin.length: ${_coords.length}");
 
     //export et ajout du coordonne dans la liste
     ///
@@ -200,8 +199,6 @@ class Controller {
     }
 
     //visualisation liste parking sur le terminale
-    print(instance.length);
-    print("les parking disponible");
     for (int i = 0; i < instance.length; i++) {
       print("parking numero ${i + 1}");
       print(instance[i]['properties']['nomvoie']);
