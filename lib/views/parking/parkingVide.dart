@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
+import 'package:share_your_park/const.dart';
 
 class ParkingVide extends StatefulWidget {
   @override
@@ -15,14 +16,7 @@ class _ParkingVideState extends State<ParkingVide> {
       body: FlutterMap(
         options: MapOptions(center: LatLng(48.862056, 2.339432), zoom: 14),
         layers: [
-          TileLayerOptions(
-              urlTemplate:
-                  'https://api.mapbox.com/styles/v1/sambatra/ckgbwa2x706vs1ap3n6qcaptj/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA',
-              additionalOptions: {
-                'accessToken':
-                    'pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA',
-                'id': 'mapbox.mapbox-streets-v7'
-              }),
+          tileLayerOptions,
           MarkerLayerOptions(markers: [
             Marker(
                 width: 45.0,
@@ -38,7 +32,10 @@ class _ParkingVideState extends State<ParkingVide> {
                     child: Image.asset("assets/images/positionDepart.png"))),
           ]),
           PolylineLayerOptions(
-            polylines: points,
+            polylines: [
+              Polyline(
+                  points: points, color: Color(0xFFFF008D), strokeWidth: 2.0)
+            ],
           )
         ],
       ),

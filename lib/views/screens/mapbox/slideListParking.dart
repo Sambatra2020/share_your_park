@@ -1,8 +1,10 @@
-/*import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong/latlong.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:share_your_park/const.dart';
 import 'package:share_your_park/controllers/controller.dart';
 import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/views/screens/menu/menu_principal.dart';
@@ -24,30 +26,22 @@ class _SlideListParkingState extends State<SlideListParking> {
   String latParking;
   String lngParking;
   int current = 0;
-  MapboxMap mapboxMap;
-  MapboxMapController controllerMap;
   Controller controller = Controller();
+  List<LatLng> points = [];
 
   @override
   Widget build(BuildContext context) {
     if (latParking == null) {
-      latParking = this.listObjetParking[current + 1].lng.toString();
-      lngParking = this.listObjetParking[current + 1].lat.toString();
+      latParking = this.listObjetParking[current].lng.toString();
+      lngParking = this.listObjetParking[current].lat.toString();
     }
-
-    if (mapboxMap == null) {
-      print("Mapbox Null");
-      mapboxMap = controller.creationCarteMapBox(
-          latDepart, lngDepart, latParking, lngParking, controllerMap);
-    } else {
-      print("Mapbox Non Null");
-      mapboxMap = controller.creationCarteMapBox(
-          latDepart, lngDepart, latParking, lngParking, controllerMap);
-    }
-
-    print("parking");
-    print(latParking);
-    print(lngParking);
+    Future<List<LatLng>> result =
+        controller.getListLatLng(latDepart, lngDepart, latParking, lngParking);
+    result.then((value) {
+      setState(() {
+        points = value;
+      });
+    });
 
     return Scaffold(
         floatingActionButton: Container(
@@ -74,7 +68,39 @@ class _SlideListParkingState extends State<SlideListParking> {
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: Stack(children: [
           Container(
-            child: mapboxMap,
+            child: FlutterMap(
+              options:
+                  MapOptions(center: LatLng(48.862056, 2.339432), zoom: 18),
+              layers: [
+                tileLayerOptions,
+                MarkerLayerOptions(markers: [
+                  Marker(
+                      width: 40.0,
+                      height: 40.0,
+                      point: LatLng(
+                          double.parse(latDepart), double.parse(lngDepart)),
+                      builder: (context) => Container(
+                          child:
+                              Image.asset("assets/images/positionDepart.png"))),
+                  Marker(
+                      width: 40.0,
+                      height: 40.0,
+                      point: LatLng(
+                          double.parse(latParking), double.parse(lngParking)),
+                      builder: (context) => Container(
+                          child:
+                              Image.asset("assets/images/positionVert.png"))),
+                ]),
+                PolylineLayerOptions(
+                  polylines: [
+                    Polyline(
+                        points: points,
+                        color: Color(0xFFFF008D),
+                        strokeWidth: 6.0)
+                  ],
+                )
+              ],
+            ),
           ),
           Align(
             alignment: Alignment(-0.9, -0.85),
@@ -113,7 +139,6 @@ class _SlideListParkingState extends State<SlideListParking> {
                   current = index;
                   latParking = listObjetParking[current].lng.toString();
                   lngParking = listObjetParking[current].lat.toString();
-                  print(current);
                 });
               },
               items: listObjetParking.map((parking) {
@@ -161,4 +186,4 @@ class _SlideListParkingState extends State<SlideListParking> {
           ),
         ]));
   }
-}*/
+}

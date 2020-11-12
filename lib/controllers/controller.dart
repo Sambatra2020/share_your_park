@@ -1,17 +1,16 @@
-/*import 'dart:typed_data';
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:mapbox_gl/mapbox_gl.dart';
+import 'package:latlong/latlong.dart';
+//import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/models/trajet.dart';
 
 class Controller {
   //
   ///declaration des variables
-  MapboxMapController mapController;
-  MapboxMapController mapControllerVide;
+  //MapboxMapController mapController;
+  // MapboxMapController mapControllerVide;
   //
   ///
 
@@ -22,7 +21,6 @@ class Controller {
       'pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA';
   //
   ///
-  List<SymbolOptions> options = [];
   List<LatLng> chemin = [];
   LatLng ancienPosition;
   List<Parking> listObjetParking = [];
@@ -34,13 +32,6 @@ class Controller {
   ///les Fonctions
 
   //draw routes
-  void _drawRoutes(List<LatLng> chemin) {
-    mapController.addLine(LineOptions(
-      geometry: chemin,
-      lineColor: '#FF008D',
-      lineWidth: 5.0,
-    ));
-  }
 
   //requette pour avoir les chemins
   //
@@ -109,7 +100,7 @@ class Controller {
   ///fonctions qui envoie dde la requette pour avoir les coordonnes de la routes et traces le chemin
   //////
 
-  Future getListLatLngAndDrawRoute(
+  Future<List<LatLng>> getListLatLng(
     String latDepart,
     String lngDepart,
     String latArriver,
@@ -140,9 +131,7 @@ class Controller {
     //fonction qui transforme une liste de liste double en list latlng
     chemin = convertListToLatLng(_coords);
 
-    //construction chemin
-    ///
-    _drawRoutes(chemin);
+    return chemin;
   }
 
   //construction trajet d'un utilisateur
@@ -184,118 +173,11 @@ class Controller {
     return trajet;
   }
 
-  /// Convert an assets image to string name and Adds an asset image to the currently displayed style
-  Future<void> addImageFromAsset(String name, String assetName) async {
-    final ByteData bytes = await rootBundle.load(assetName);
-    final Uint8List list = bytes.buffer.asUint8List();
-    return mapController.addImage(name, list);
-  }
-
-  void _onStyleLoaded() async {
-    addImageFromAsset("positionDepart", "assets/images/positionDepart.png");
-    addImageFromAsset("positionJaune", "assets/images/positionJaune.png");
-    addImageFromAsset("positionRouge", "assets/images/positionRouge.png");
-    addImageFromAsset("positionVert", "assets/images/positionVert.png");
-  }
-
-  // Add a symbol (marker)
-  Future _addSymbols(
-      LatLng position, String image, MapboxMapController mapControllerI) async {
-    await mapControllerI.addSymbol(
-      SymbolOptions(
-        iconImage: image,
-        iconSize: 1.0,
-        geometry: position,
-      ),
-    );
-    ancienPosition = position;
-  }
-
-  //fonction qui cree les symbols options
-
-  SymbolOptions createSymbolOptions(LatLng position, String image) {
-    return SymbolOptions(
-      iconImage: image,
-      iconSize: 1.0,
-      geometry: position,
-    );
-  }
-
-  //ajouts symbols dans la map controller
-  void addSymbolsInMap(
-      List<SymbolOptions> options, MapboxMapController mapControllerI,
-      [List<Map> data]) async {
-    final List<SymbolOptions> effectiveOptions =
-        options.map((o) => SymbolOptions.defaultOptions.copyWith(o)).toList();
-
-    await mapControllerI.addSymbols(effectiveOptions, data);
-  }
-
-  //creation carte mapbox
-  MapboxMap creationCarteMapBox(String latDepart, String lngDepart,
-      String latArriver, String lngArriver, MapboxMapController controller) {
-    //coordonner en Objet latitute et longitude de la position de depart et position parking
-    LatLng center = LatLng(double.parse(latDepart), double.parse(lngDepart));
-    LatLng parkingPosition =
-        LatLng(double.parse(latArriver), double.parse(lngArriver));
-
-    //creation symbols options
-    SymbolOptions depart = createSymbolOptions(center, 'positionDepart');
-    SymbolOptions arriver =
-        createSymbolOptions(parkingPosition, 'positionVert');
-
-    //ajouts symbols dans la liste de symbols options
-    options.add(depart);
-    options.add(arriver);
-
-    print("=================================================");
-    print(latArriver);
-    print(lngArriver);
-
-    //fonction qui control la creation de la carte
-
-    void _onMapCreated(controller) async {
-      print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-      mapController = controller;
-      _onStyleLoaded();
-      //ajout deux symbole de depart et d'arriver
-      await _addSymbols(center, 'positionDepart', mapController);
-      await _addSymbols(parkingPosition, 'positionVert', mapController);
-      //construction et ajout de la chemin entre les deux
-      await getListLatLngAndDrawRoute(
-          latDepart, lngDepart, latArriver, lngArriver);
-    }
-
-    void _onStyleLoadedCallback() async {}
-
-    return MapboxMap(
-        onStyleLoadedCallback: _onStyleLoadedCallback,
-        myLocationEnabled: true,
-        styleString: styleCarte,
-        onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(target: center, zoom: 18));
-  }
-
-  MapboxMap mapBoxVide(double latitudeParking, double longitudeParking) {
-    LatLng positionParking = LatLng(latitudeParking, longitudeParking);
-    void _onMapCreated(MapboxMapController controllerVide) async {
-      //construction et ajout de la chemin entre les deux
-      mapControllerVide = controllerVide;
-      //ajout deux symbole de depart et d'arriver
-    }
-
-    return MapboxMap(
-        styleString: styleCarte,
-        onMapCreated: _onMapCreated,
-        initialCameraPosition:
-            CameraPosition(target: positionParking, zoom: 14));
-  }
-
   //requete vers opendatasoft pour avoir les parking
   Future getListParkingData(String latitude, String longitude) async {
     //requete pour avoir la liste des parking sur opendata
     http.Response response = await http.get(
-        "https://data.opendatasoft.com/api/records/1.0/search/?dataset=stationnement-sur-voie-publique-emplacements%40datailedefrance&rows=10&facet=regpri&facet=regpar&facet=typsta&facet=arrond&facet=zoneres&facet=tar&facet=locsta&facet=parite&facet=signhor&facet=signvert&facet=confsign&facet=typemob&facet=datereleve&facet=mtlast_edit_date_field&geofilter.distance=" +
+        "https://data.opendatasoft.com/api/records/1.0/search/?dataset=stationnement-sur-voie-publique-emplacements%40datailedefrance&rows=20&facet=regpri&facet=regpar&facet=typsta&facet=arrond&facet=zoneres&facet=tar&facet=locsta&facet=parite&facet=signhor&facet=signvert&facet=confsign&facet=typemob&facet=datereleve&facet=mtlast_edit_date_field&geofilter.distance=" +
             longitude +
             "%2C" +
             latitude +
@@ -330,4 +212,3 @@ class Controller {
     }
   }
 }
-*/
