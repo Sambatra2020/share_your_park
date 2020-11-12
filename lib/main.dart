@@ -1,11 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:share_your_park/controllers/controller.dart';
 import 'package:share_your_park/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:share_your_park/views/nfc/scan_nfc.dart';
 import 'package:share_your_park/views/nfc/testNfc.dart';
 import 'package:share_your_park/views/screens/baseCarteMap.dart';
 import 'package:share_your_park/views/screens/mapbox/listeParking.dart';
+import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
 import 'package:share_your_park/views/screens/register.dart';
 import 'package:share_your_park/views/screens/setting/autosetting.dart';
 import 'package:share_your_park/views/screens/setting/car_setting.dart';
@@ -15,9 +17,9 @@ import 'package:share_your_park/views/screens/setting/notificatio.dart';
 import 'package:share_your_park/views/screens/setting/parain.dart';
 import 'package:share_your_park/views/screens/setting/param%C3%A8tre.dart';
 import 'package:share_your_park/views/screens/signup.dart';
-import 'package:share_your_park/views/tuto/acceuil.dart';
+//import 'package:share_your_park/views/tuto/acceuil.dart';
 import 'models/user.dart' as userModel;
-import 'package:share_your_park/views/screens/notification.dart';
+//import 'package:share_your_park/views/screens/notification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
