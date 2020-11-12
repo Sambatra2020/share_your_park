@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+/*import 'dart:typed_data';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
@@ -8,15 +8,31 @@ import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/models/trajet.dart';
 
 class Controller {
+  //
+  ///declaration des variables
   MapboxMapController mapController;
+  MapboxMapController mapControllerVide;
+  //
+  ///
+
+  //
+  ///
   String styleCarte = 'mapbox://styles/sambatra/ckgbwa2x706vs1ap3n6qcaptj';
   String accessToken =
       'pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA';
+  //
+  ///
+  List<SymbolOptions> options = [];
   List<LatLng> chemin = [];
   LatLng ancienPosition;
   List<Parking> listObjetParking = [];
   List<List<double>> _coords = [];
   List<Parking> get listeParking => listObjetParking;
+  ////
+  //////
+  ///////
+  ///les Fonctions
+
   //draw routes
   void _drawRoutes(List<LatLng> chemin) {
     mapController.addLine(LineOptions(
@@ -25,11 +41,73 @@ class Controller {
       lineWidth: 5.0,
     ));
   }
+
   //requette pour avoir les chemins
+  //
+  ///
+  List<List<double>> convertResponse(http.Response response, String latDepart,
+      String lngDepart, String latArriver, String lngArriver) {
+    //
+    ///declaration des variables locaux
+    ///
+    Map data;
+    var routes, geometry, coordinates, coords;
+    double lng, lat;
+    List<double> coo;
+    List<List<double>> _coordsLocal = [];
+
+    ///
+    //
+    double latInitiale = double.parse(latDepart);
+    double lngInitiale = double.parse(lngDepart);
+    List<double> initiale = [latInitiale, lngInitiale];
+    //
+    ///
+    double latFinale = double.parse(latArriver);
+    double lngFinale = double.parse(lngArriver);
+    List<double> finale = [latFinale, lngFinale];
+    //
+    ///
+    _coordsLocal.add(initiale);
+    print("chemin.length: ${_coords.length}");
+
+    //export et ajout du coordonne dans la liste
+    ///
+
+    data = json.decode(response.body);
+    routes = data['routes'];
+    geometry = routes[0]['geometry'];
+    coordinates = geometry['coordinates'];
+    //
+    ///
+    for (int i = 0; i < coordinates.length; i++) {
+      coords = coordinates[i];
+      lng = coords[0];
+      lat = coords[1];
+      coo = [lat, lng];
+      _coordsLocal.add(coo);
+    }
+    //
+    _coordsLocal.add(finale);
+
+    return _coordsLocal;
+  }
 
   //conversion response en liste de coordonner
-  void conversionResponseEnlistDouble(String latDepart, String lngDepart,
-      String latArriver, String lngArriver) {}
+  ///
+  List<LatLng> convertListToLatLng(List<List<double>> _coordsLocal) {
+    List<LatLng> cheminLocal = [];
+    for (int i = 0; i < _coordsLocal.length; i++) {
+      LatLng latLng = LatLng(_coordsLocal[i][0], _coordsLocal[i][1]);
+      cheminLocal.add(latLng);
+    }
+    return cheminLocal;
+  }
+
+  //
+  ///
+  ///fonctions qui envoie dde la requette pour avoir les coordonnes de la routes et traces le chemin
+  //////
 
   Future getListLatLngAndDrawRoute(
     String latDepart,
@@ -37,6 +115,9 @@ class Controller {
     String latArriver,
     String lngArriver,
   ) async {
+    //
+    ///
+    /////requette pour avoir les coordonees de la route
     http.Response response = await http.get(
         "https://api.mapbox.com/directions/v5/mapbox/driving/" +
             lngDepart +
@@ -50,42 +131,17 @@ class Controller {
             accessToken +
             "");
 
+    //
     //conversion de la reponse en liste liste de double
-
-    double latInitiale = double.parse(latDepart);
-    double lngInitiale = double.parse(lngDepart);
-    List<double> initiale = [latInitiale, lngInitiale];
-    double latFinale = double.parse(latArriver);
-    double lngFinale = double.parse(lngArriver);
-    List<double> finale = [latFinale, lngFinale];
-    _coords.add(initiale);
-    print("chemin.length: ${_coords.length}");
-
-    //export et ajout du coordonne dans la liste
-    Map data;
-    var routes, geometry, coordinates, coords;
-    double lng, lat;
-    List<double> coo;
-    data = json.decode(response.body);
-    routes = data['routes'];
-    geometry = routes[0]['geometry'];
-    coordinates = geometry['coordinates'];
-    for (int i = 0; i < coordinates.length; i++) {
-      coords = coordinates[i];
-      lng = coords[0];
-      lat = coords[1];
-      coo = [lat, lng];
-      _coords.add(coo);
-    }
-    _coords.add(finale);
-
+    _coords =
+        convertResponse(response, latDepart, lngDepart, latArriver, lngArriver);
+    //
+    ///
     //fonction qui transforme une liste de liste double en list latlng
+    chemin = convertListToLatLng(_coords);
 
-    for (int i = 0; i < _coords.length; i++) {
-      LatLng latLng = LatLng(_coords[i][0], _coords[i][1]);
-      chemin.add(latLng);
-    }
-
+    //construction chemin
+    ///
     _drawRoutes(chemin);
   }
 
@@ -155,20 +211,50 @@ class Controller {
     ancienPosition = position;
   }
 
+  //fonction qui cree les symbols options
+
+  SymbolOptions createSymbolOptions(LatLng position, String image) {
+    return SymbolOptions(
+      iconImage: image,
+      iconSize: 1.0,
+      geometry: position,
+    );
+  }
+
+  //ajouts symbols dans la map controller
+  void addSymbolsInMap(
+      List<SymbolOptions> options, MapboxMapController mapControllerI,
+      [List<Map> data]) async {
+    final List<SymbolOptions> effectiveOptions =
+        options.map((o) => SymbolOptions.defaultOptions.copyWith(o)).toList();
+
+    await mapControllerI.addSymbols(effectiveOptions, data);
+  }
+
   //creation carte mapbox
   MapboxMap creationCarteMapBox(String latDepart, String lngDepart,
-      String latArriver, String lngArriver) {
+      String latArriver, String lngArriver, MapboxMapController controller) {
     //coordonner en Objet latitute et longitude de la position de depart et position parking
     LatLng center = LatLng(double.parse(latDepart), double.parse(lngDepart));
     LatLng parkingPosition =
         LatLng(double.parse(latArriver), double.parse(lngArriver));
+
+    //creation symbols options
+    SymbolOptions depart = createSymbolOptions(center, 'positionDepart');
+    SymbolOptions arriver =
+        createSymbolOptions(parkingPosition, 'positionVert');
+
+    //ajouts symbols dans la liste de symbols options
+    options.add(depart);
+    options.add(arriver);
+
     print("=================================================");
     print(latArriver);
     print(lngArriver);
 
     //fonction qui control la creation de la carte
 
-    void _onMapCreated(MapboxMapController controller) async {
+    void _onMapCreated(controller) async {
       print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
       mapController = controller;
       _onStyleLoaded();
@@ -180,45 +266,21 @@ class Controller {
           latDepart, lngDepart, latArriver, lngArriver);
     }
 
+    void _onStyleLoadedCallback() async {}
+
     return MapboxMap(
+        onStyleLoadedCallback: _onStyleLoadedCallback,
+        myLocationEnabled: true,
         styleString: styleCarte,
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(target: center, zoom: 18));
   }
 
-  /*FlutterMap carteMap(String latDepart, String lngDepart,
-      String latArriver, String lngArriver){
-        //coordonner en Objet latitute et longitude de la position de depart et position parking
-    LatLng icenter = new LatLng(double.parse(latDepart), double.parse(lngDepart));
-    LatLng iparkingPosition =
-        LatLng(double.parse(latArriver), double.parse(lngArriver));
-   return FlutterMap(
-    options:  MapOptions(
-      center: ,
-      zoom: 13.0,
-    ),
-    layers: [
-       TileLayerOptions(
-        urlTemplate: "https://api.mapbox.com/styles/v1/sambatra/ckgbwa2x706vs1ap3n6qcaptj.html?fresh=true&title=view&access_token=pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA",
-      ),
-       MarkerLayerOptions(
-        markers: [
-           Marker(
-            width: 80.0,
-            height: 80.0,
-            point: iparkingPosition,
-          ),
-        ],
-      ),
-    ],
-  );
-  }*/
-
   MapboxMap mapBoxVide(double latitudeParking, double longitudeParking) {
     LatLng positionParking = LatLng(latitudeParking, longitudeParking);
-    void _onMapCreated(MapboxMapController controller) async {
+    void _onMapCreated(MapboxMapController controllerVide) async {
       //construction et ajout de la chemin entre les deux
-      mapController = controller;
+      mapControllerVide = controllerVide;
       //ajout deux symbole de depart et d'arriver
     }
 
@@ -268,3 +330,4 @@ class Controller {
     }
   }
 }
+*/

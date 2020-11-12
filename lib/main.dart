@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:share_your_park/controllers/controller.dart';
 import 'package:share_your_park/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:share_your_park/views/nfc/scan_nfc.dart';
 import 'package:share_your_park/views/nfc/testNfc.dart';
+import 'package:share_your_park/views/parking/parkingVide.dart';
 import 'package:share_your_park/views/screens/baseCarteMap.dart';
 import 'package:share_your_park/views/screens/mapbox/listeParking.dart';
 import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider.value(
       value: AuthService().user,
       child: MaterialApp(
-        home: ScanNFC(),
+        home: ParkingVide(),
         debugShowCheckedModeBanner: false,
         title: 'SYP Demo',
         theme: ThemeData(),

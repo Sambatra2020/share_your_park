@@ -1,4 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
+/*import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
@@ -25,18 +25,24 @@ class _SlideListParkingState extends State<SlideListParking> {
   String lngParking;
   int current = 0;
   MapboxMap mapboxMap;
+  MapboxMapController controllerMap;
+  Controller controller = Controller();
 
   @override
   Widget build(BuildContext context) {
     if (latParking == null) {
-      latParking = this.listObjetParking[2].lng.toString();
-      lngParking = this.listObjetParking[2].lat.toString();
+      latParking = this.listObjetParking[current + 1].lng.toString();
+      lngParking = this.listObjetParking[current + 1].lat.toString();
     }
 
-    Controller controller = Controller();
     if (mapboxMap == null) {
+      print("Mapbox Null");
       mapboxMap = controller.creationCarteMapBox(
-          latDepart, lngDepart, latParking, lngParking);
+          latDepart, lngDepart, latParking, lngParking, controllerMap);
+    } else {
+      print("Mapbox Non Null");
+      mapboxMap = controller.creationCarteMapBox(
+          latDepart, lngDepart, latParking, lngParking, controllerMap);
     }
 
     print("parking");
@@ -107,8 +113,6 @@ class _SlideListParkingState extends State<SlideListParking> {
                   current = index;
                   latParking = listObjetParking[current].lng.toString();
                   lngParking = listObjetParking[current].lat.toString();
-                  mapboxMap = controller.creationCarteMapBox(
-                      latDepart, lngDepart, latParking, lngParking);
                   print(current);
                 });
               },
@@ -157,4 +161,4 @@ class _SlideListParkingState extends State<SlideListParking> {
           ),
         ]));
   }
-}
+}*/
