@@ -117,7 +117,7 @@ class _ListeParkingState extends State<ListeParking> {
               minWidth: 20,
               //padding: EdgeInsets.all(10),
               color: Color(0xFFFF008D),
-              child: Icon(Icons.rss_feed, color: Color(0xFFFFFFFF)),
+              child: Icon(FontAwesome.rss, color: Color(0xFFFFFFFF)),
               onPressed: () {},
             ),
           ),

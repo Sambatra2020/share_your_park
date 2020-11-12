@@ -9,6 +9,13 @@ import 'package:share_your_park/views/screens/baseCarteMap.dart';
 import 'package:share_your_park/views/screens/mapbox/listeParking.dart';
 import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
 import 'package:share_your_park/views/screens/register.dart';
+import 'package:share_your_park/views/screens/setting/autosetting.dart';
+import 'package:share_your_park/views/screens/setting/car_setting.dart';
+import 'package:share_your_park/views/screens/setting/confidentialit%C3%A9.dart';
+import 'package:share_your_park/views/screens/setting/infos.dart';
+import 'package:share_your_park/views/screens/setting/notificatio.dart';
+import 'package:share_your_park/views/screens/setting/parain.dart';
+import 'package:share_your_park/views/screens/setting/param%C3%A8tre.dart';
 import 'package:share_your_park/views/screens/signup.dart';
 //import 'package:share_your_park/views/tuto/acceuil.dart';
 import 'models/user.dart' as userModel;
@@ -26,10 +33,10 @@ class MyApp extends StatelessWidget {
     return StreamProvider.value(
       value: AuthService().user,
       child: MaterialApp(
-        home: ScanNFC(),
-        debugShowCheckedModeBanner: false,
-        title: 'SYP Demo',
-        theme: ThemeData(),
+        theme: ThemeData(
+        ),
+        home: Parametre(),
+        debugShowCheckedModeBanner: false
       ),
     );
   }
