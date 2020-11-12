@@ -14,6 +14,7 @@ import 'package:share_your_park/views/screens/setting/car_setting.dart';
 import 'package:share_your_park/views/screens/setting/confidentialit%C3%A9.dart';
 import 'package:share_your_park/views/screens/setting/infos.dart';
 import 'package:share_your_park/views/screens/setting/notificatio.dart';
+import 'package:share_your_park/views/screens/setting/offre.dart';
 import 'package:share_your_park/views/screens/setting/parain.dart';
 import 'package:share_your_park/views/screens/setting/param%C3%A8tre.dart';
 import 'package:share_your_park/views/screens/signup.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
         ),
-        home: Parametre(),
+        home: Offre(),
         debugShowCheckedModeBanner: false
       ),
     );
