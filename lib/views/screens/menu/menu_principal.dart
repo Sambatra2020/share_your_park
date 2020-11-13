@@ -1,13 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-//import 'package:flutter_screenutil/screenutil.dart';
 import 'package:share_your_park/const.dart';
 import 'package:share_your_park/views/screens/FAQ.dart';
-import 'package:share_your_park/views/screens/setting/autosetting.dart';
-//import 'package:share_your_park/views/screens/menu/menu_item.dart';
 import 'package:share_your_park/views/screens/setting/infos.dart';
 import 'package:share_your_park/views/screens/setting/parain.dart';
+import 'package:share_your_park/views/screens/setting/param%C3%A8tre.dart';
 
 class MenuPrincipal extends StatelessWidget {
   @override
@@ -196,7 +194,7 @@ class MenuPrincipal extends StatelessWidget {
                           SizedBox(height: 20),
                           Row(
                             children: [
-                              Icon(FontAwesome.sun_o, color: Colors.white),
+                              Icon(FontAwesome.cog, color: Colors.white),
                               SizedBox(width: 20),
                               RichText(
                                   text: TextSpan(
@@ -212,7 +210,7 @@ class MenuPrincipal extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AutoSetting()));
+                                                      Parametre()));
                                         }))
                             ],
                           ),
