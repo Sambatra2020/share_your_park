@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_nfc_reader/flutter_nfc_reader.dart';
 import 'package:share_your_park/const.dart';
+import 'package:share_your_park/controllers/controller.dart';
+import 'package:share_your_park/models/parking.dart';
+import 'package:share_your_park/views/screens/mapbox/listeParking.dart';
 
 class ScanNFC extends StatefulWidget {
   ScanNFC({Key key}) : super(key: key);
@@ -12,18 +15,12 @@ class ScanNFC extends StatefulWidget {
 }
 
 class _ScanNFCState extends State<ScanNFC> {
+  Controller controller = Controller();
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final heigth = MediaQuery.of(context).size.height;
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-            backgroundColor: Color(0xFFFF008D),
-            child: Icon(Icons.menu),
-            onPressed: () async {
-              await stopNfc();
-              print("ok");
-            }),
         body: Container(
             decoration: BoxDecoration(
               gradient: kPrimaryGradientColor,
@@ -38,9 +35,18 @@ class _ScanNFCState extends State<ScanNFC> {
                           backgroundColor: Color(0xFFFF008D),
                           child: Icon(Icons.menu),
                           onPressed: () async {
-                            await check();
-                            await readNfc();
-                            print("ok");
+                            await controller.getListParkingData(
+                                '2.339432', '48.862056');
+                            List<Parking> listeParking =
+                                controller.listeParking;
+                            print(
+                                "nombre element de la liste est ${listeParking.length}");
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ListeParking(
+                                            listObjetParking: listeParking)));
                           })),
                   Container(
                     margin: EdgeInsets.only(

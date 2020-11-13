@@ -8,10 +8,12 @@ import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/models/trajet.dart';
 
 class Controller {
-  final styleCarte = 'mapbox://styles/sambatra/ckgbwa2x706vs1ap3n6qcaptj';
   MapboxMapController mapController;
-  MapboxMapController mapControllerVide;
+  String styleCarte = 'mapbox://styles/sambatra/ckgbwa2x706vs1ap3n6qcaptj';
+  String accessToken =
+      'pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA';
   List<LatLng> chemin = [];
+  LatLng ancienPosition;
   List<Parking> listObjetParking = [];
   List<List<double>> _coords = [];
   List<Parking> get listeParking => listObjetParking;
@@ -25,8 +27,16 @@ class Controller {
   }
   //requette pour avoir les chemins
 
-  Future getListLatLngAndDrawRoute(String latDepart, String lngDepart,
-      String latArriver, String lngArriver) async {
+  //conversion response en liste de coordonner
+  void conversionResponseEnlistDouble(String latDepart, String lngDepart,
+      String latArriver, String lngArriver) {}
+
+  Future getListLatLngAndDrawRoute(
+    String latDepart,
+    String lngDepart,
+    String latArriver,
+    String lngArriver,
+  ) async {
     http.Response response = await http.get(
         "https://api.mapbox.com/directions/v5/mapbox/driving/" +
             lngDepart +
@@ -36,7 +46,9 @@ class Controller {
             lngArriver +
             "," +
             latArriver +
-            "?geometries=geojson&access_token=pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA");
+            "?geometries=geojson&access_token=" +
+            accessToken +
+            "");
 
     //conversion de la reponse en liste liste de double
 
@@ -123,8 +135,7 @@ class Controller {
     return mapController.addImage(name, list);
   }
 
-  //conversion image to String
-  void _onStyleLoaded() {
+  void _onStyleLoaded() async {
     addImageFromAsset("positionDepart", "assets/images/positionDepart.png");
     addImageFromAsset("positionJaune", "assets/images/positionJaune.png");
     addImageFromAsset("positionRouge", "assets/images/positionRouge.png");
@@ -141,6 +152,7 @@ class Controller {
         geometry: position,
       ),
     );
+    ancienPosition = position;
   }
 
   //creation carte mapbox
@@ -150,40 +162,28 @@ class Controller {
     LatLng center = LatLng(double.parse(latDepart), double.parse(lngDepart));
     LatLng parkingPosition =
         LatLng(double.parse(latArriver), double.parse(lngArriver));
+    print("=================================================");
+    print(latArriver);
+    print(lngArriver);
 
     //fonction qui control la creation de la carte
 
     void _onMapCreated(MapboxMapController controller) async {
-      //construction et ajout de la chemin entre les deux
+      print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
       mapController = controller;
       _onStyleLoaded();
+      //ajout deux symbole de depart et d'arriver
       await _addSymbols(center, 'positionDepart', mapController);
       await _addSymbols(parkingPosition, 'positionVert', mapController);
+      //construction et ajout de la chemin entre les deux
       await getListLatLngAndDrawRoute(
           latDepart, lngDepart, latArriver, lngArriver);
-
-      //ajout deux symbole de depart et d'arriver
     }
 
     return MapboxMap(
         styleString: styleCarte,
         onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(target: center, zoom: 14));
-  }
-
-  MapboxMap mapBoxVide(double latitudeParking, double longitudeParking) {
-    LatLng positionParking = LatLng(latitudeParking, longitudeParking);
-    void _onMapCreatedi(MapboxMapController controllervide) async {
-      //construction et ajout de la chemin entre les deux
-      mapControllerVide = controllervide;
-      //ajout deux symbole de depart et d'arriver
-    }
-
-    return MapboxMap(
-        styleString: styleCarte,
-        onMapCreated: _onMapCreatedi,
-        initialCameraPosition:
-            CameraPosition(target: positionParking, zoom: 14));
+        initialCameraPosition: CameraPosition(target: center, zoom: 18));
   }
 
   //requete vers opendatasoft pour avoir les parking
@@ -204,6 +204,7 @@ class Controller {
       Parking parking = Parking();
       parking.setId(i + 1);
       parking.setNomVoie(instance[i]['properties']['nomvoie']);
+      parking.setNumVoie(instance[i]['properties']['numvoie']);
       parking.setSurface(instance[i]['properties']['surface_calculee']);
       parking.setTarif(instance[i]['properties']['tar']);
       parking.setLng(instance[i]['properties']['geo_point_2d'][0]);
