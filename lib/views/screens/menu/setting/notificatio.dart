@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
-class Confidentialte extends StatefulWidget {
+class Paranotif extends StatefulWidget {
   @override
-  _ConfidentialteState createState() => _ConfidentialteState();
+  _ParanotifState createState() => _ParanotifState();
 }
 
-class _ConfidentialteState extends State<Confidentialte> {
+class _ParanotifState extends State<Paranotif> {
   @override
   Widget build(BuildContext context) {
-    //final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -40,10 +40,10 @@ class _ConfidentialteState extends State<Confidentialte> {
                               color: Colors.white70,
                               fontSize: (100 / screenWidth) * 100,
                             )),
-                        Text('confidentialité',
+                        Text('notification',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: (100 / screenWidth) * 100,
+                              fontSize: (120 / screenWidth) * 100,
                             )),
                       ],
                     ),
@@ -56,45 +56,27 @@ class _ConfidentialteState extends State<Confidentialte> {
                     children: [
                       Container(
                         margin: EdgeInsets.only(
-                            top: screenHeight * 0.05,
+                            top: screenHeight * 0.05, left: screenWidth * 0.01),
+                        child:
+                            Text('Mise à jour du compteet des stationnements',
+                                style: TextStyle(
+                                  fontSize: (90 / screenHeight) * 100,
+                                )),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            top: screenHeight * 0.015,
                             right: screenWidth * 0.33),
-                        child: Text('Paramètre de votre appareil',
+                        child: Text('Notification push ou sms',
                             style: TextStyle(
                               fontSize: (90 / screenHeight) * 100,
                             )),
                       ),
                       Container(
                         margin: EdgeInsets.only(
-                            top: screenHeight * 0.015,
-                            right: screenWidth * 0.4),
-                        child: Text('Localisation : app active',
-                            style: TextStyle(
-                              fontSize: (90 / screenHeight) * 100,
-                            )),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: screenHeight * 0.02, left: screenWidth * 0.05),
+                            top: screenHeight * 0.02, left: screenWidth * 0.03),
                         child: Text(
-                            'Syp utilise les services de localisation de votre \nappareil pour vous proposer un service plus fiable \net pertinent. ( en savoir plus )',
-                            style: TextStyle(
-                              fontSize: (90 / screenHeight) * 100,
-                            )),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: screenHeight * 0.03,
-                            right: screenWidth * 0.41),
-                        child: Text('partage de ma position',
-                            style: TextStyle(
-                              fontSize: (90 / screenHeight) * 100,
-                            )),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: screenHeight * 0.015,
-                            right: screenWidth * 0.21),
-                        child: Text('partager ma position en temps réel',
+                            'Comprend des notifications sur le statut d\'un \nstationnement et des mises à jour concernant \nvotre localisation vis à vis de ce dernier',
                             style: TextStyle(
                               fontSize: (90 / screenHeight) * 100,
                             )),
@@ -106,11 +88,11 @@ class _ConfidentialteState extends State<Confidentialte> {
       floatingActionButton: Container(
         child: FloatingActionButton(
           shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusDirectional.only(
-                    topStart: Radius.circular(50),
-                    topEnd: Radius.circular(50),
-                    bottomStart: Radius.circular(50),
-                    bottomEnd: Radius.zero)),
+              borderRadius: BorderRadiusDirectional.only(
+                  topStart: Radius.circular(50),
+                  topEnd: Radius.circular(50),
+                  bottomStart: Radius.circular(50),
+                  bottomEnd: Radius.zero)),
           backgroundColor: Color(0xFFFF008D),
           onPressed: () {},
           child: Icon(Entypo.menu),

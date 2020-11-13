@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share_your_park/const.dart';
 import 'package:share_your_park/views/screens/FAQ.dart';
-import 'package:share_your_park/views/screens/setting/infos.dart';
-import 'package:share_your_park/views/screens/setting/parain.dart';
-import 'package:share_your_park/views/screens/setting/param%C3%A8tre.dart';
+import 'package:share_your_park/views/screens/menu/setting/infos.dart';
+import 'package:share_your_park/views/screens/menu/setting/parain.dart';
+import 'package:share_your_park/views/screens/menu/setting/param%C3%A8tre.dart';
 
 class MenuPrincipal extends StatelessWidget {
   @override

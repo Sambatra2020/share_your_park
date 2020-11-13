@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:share_your_park/views/screens/setting/confidentialit%C3%A9.dart';
 
 class AutoSetting extends StatefulWidget {
   @override
@@ -167,11 +166,11 @@ class _AutoSettingState extends State<AutoSetting> {
       floatingActionButton: Container(
         child: FloatingActionButton(
           shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusDirectional.only(
-                    topStart: Radius.circular(50),
-                    topEnd: Radius.circular(50),
-                    bottomStart: Radius.circular(50),
-                    bottomEnd: Radius.zero)),
+              borderRadius: BorderRadiusDirectional.only(
+                  topStart: Radius.circular(50),
+                  topEnd: Radius.circular(50),
+                  bottomStart: Radius.circular(50),
+                  bottomEnd: Radius.zero)),
           backgroundColor: Color(0xFFFF008D),
           onPressed: () {},
           child: Icon(Entypo.menu),

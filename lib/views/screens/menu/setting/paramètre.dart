@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share_your_park/views/screens/condition_util.dart';
-import 'package:share_your_park/views/screens/setting/autosetting.dart';
-import 'package:share_your_park/views/screens/setting/confidentialit%C3%A9.dart';
+import 'package:share_your_park/views/screens/menu/setting/autosetting.dart';
+import 'package:share_your_park/views/screens/menu/setting/confidentialit%C3%A9.dart';
 
 class Parametre extends StatefulWidget {
   @override

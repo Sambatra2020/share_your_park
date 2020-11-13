@@ -46,7 +46,9 @@ class _ScanNFCState extends State<ScanNFC> {
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         ListeParking(
-                                            listObjetParking: listeParking)));
+                                          listObjetParking: listeParking,
+                                          current: 0,
+                                        )));
                           })),
                   Container(
                     margin: EdgeInsets.only(

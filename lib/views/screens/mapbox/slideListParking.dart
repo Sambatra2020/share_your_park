@@ -7,6 +7,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:share_your_park/const.dart';
 import 'package:share_your_park/controllers/controller.dart';
 import 'package:share_your_park/models/parking.dart';
+import 'package:share_your_park/views/screens/mapbox/listeParking.dart';
 import 'package:share_your_park/views/screens/menu/menu_principal.dart';
 
 class SlideListParking extends StatefulWidget {
@@ -212,7 +213,18 @@ class _SlideListParkingState extends State<SlideListParking> {
                             color: Color(0xFFFFFFFF),
                             child: Text("Go",
                                 style: TextStyle(color: Color(0xFFFF008D))),
-                            onPressed: () {},
+                            onPressed: () {
+                              print("current : $current");
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          ListeParking(
+                                            listObjetParking:
+                                                this.listObjetParking,
+                                            current: current,
+                                          )));
+                            },
                           ),
                         ],
                       ),

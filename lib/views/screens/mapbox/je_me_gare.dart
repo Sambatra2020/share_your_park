@@ -6,15 +6,22 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:share_your_park/const.dart';
 import 'package:share_your_park/controllers/controller.dart';
 
-class Partir extends StatefulWidget {
+class Garer extends StatefulWidget {
+  final List<String> centreCamera;
+  Garer({this.centreCamera});
   @override
-  _PartirState createState() => _PartirState();
+  _GarerState createState() => _GarerState(centreCamera);
 }
 
-class _PartirState extends State<Partir> {
+class _GarerState extends State<Garer> {
+  List<String> centreCamera;
+  _GarerState(this.centreCamera);
+
   Controller controller = Controller();
   @override
   Widget build(BuildContext context) {
+    double lat = double.parse(centreCamera[0]);
+    double lng = double.parse(centreCamera[1]);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           shape: RoundedRectangleBorder(
@@ -34,10 +41,18 @@ class _PartirState extends State<Partir> {
         children: <Widget>[
           Container(
             child: FlutterMap(
-              options: MapOptions(
-                  center: LatLng(48.862056, 2.339432), zoom: 18, maxZoom: 48),
+              options:
+                  MapOptions(center: LatLng(lat, lng), zoom: 18, maxZoom: 48),
               layers: [
                 tileLayerOptions,
+                MarkerLayerOptions(markers: [
+                  Marker(
+                      width: 40.0,
+                      height: 40.0,
+                      point: LatLng(lat, lng),
+                      builder: (context) => Container(
+                          child: Image.asset("assets/icons/taxirouge.png"))),
+                ]),
               ],
             ),
           ),

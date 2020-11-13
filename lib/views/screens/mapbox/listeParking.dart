@@ -6,19 +6,23 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:share_your_park/const.dart';
 import 'package:share_your_park/controllers/controller.dart';
 import 'package:share_your_park/models/parking.dart';
+import 'package:share_your_park/views/screens/mapbox/je_me_gare.dart';
 import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
 import 'package:share_your_park/views/screens/menu/menu_principal.dart';
 
 class ListeParking extends StatefulWidget {
   final List<Parking> listObjetParking;
-  ListeParking({this.listObjetParking});
+  final int current;
+  ListeParking({this.listObjetParking, this.current});
   @override
-  _ListeParkingState createState() => _ListeParkingState(listObjetParking);
+  _ListeParkingState createState() =>
+      _ListeParkingState(listObjetParking, current);
 }
 
 class _ListeParkingState extends State<ListeParking> {
   List<Parking> listObjetParking;
-  _ListeParkingState(this.listObjetParking);
+  int current;
+  _ListeParkingState(this.listObjetParking, this.current);
 
   Controller controller = Controller();
 
@@ -27,6 +31,7 @@ class _ListeParkingState extends State<ListeParking> {
   String latParking;
   String lngParking;
   bool showdetail = false;
+  List<String> centreCamera = [];
 
   List<LatLng> points = [];
   @override
@@ -34,8 +39,9 @@ class _ListeParkingState extends State<ListeParking> {
     if (latParking == null) {
       print(listObjetParking.length);
       setState(() {
-        latParking = this.listObjetParking[0].lng.toString();
-        lngParking = this.listObjetParking[0].lat.toString();
+        latParking = this.listObjetParking[current].lng.toString();
+        lngParking = this.listObjetParking[current].lat.toString();
+        centreCamera = [latParking, lngParking];
       });
     }
 
@@ -74,11 +80,11 @@ class _ListeParkingState extends State<ListeParking> {
           Container(
             child: FlutterMap(
               options: MapOptions(
-                center: LatLng(48.849519, 2.293370),
+                center:
+                    LatLng(double.parse(latDepart), double.parse(lngDepart)),
                 zoom: 18,
                 minZoom: 16,
                 maxZoom: 600,
-                adaptiveBoundaries: true,
               ),
               layers: [
                 tileLayerOptions,
@@ -178,7 +184,18 @@ class _ListeParkingState extends State<ListeParking> {
               color: Color(0xFFFF008D),
               child:
                   Text("j'y vais", style: TextStyle(color: Color(0xFFFFFFFF))),
-              onPressed: () {},
+              onPressed: () {
+                String a = centreCamera[0];
+                String b = centreCamera[1];
+                print("centre cam $a");
+                print("centre cam $b");
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => Garer(
+                              centreCamera: centreCamera,
+                            )));
+              },
             ),
           ),
         ]));
