@@ -5,6 +5,7 @@ import 'package:latlong/latlong.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:share_your_park/const.dart';
 import 'package:share_your_park/controllers/controller.dart';
+import 'package:share_your_park/views/screens/menu/menu_principal.dart';
 
 class Partir extends StatefulWidget {
   @override
@@ -28,7 +29,10 @@ class _PartirState extends State<Partir> {
             Entypo.menu,
             color: Color(0xFFFFFFFF),
           ),
-          onPressed: () {}),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MenuPrincipal()));
+          }),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: Stack(
         children: [
@@ -56,7 +60,10 @@ class _PartirState extends State<Partir> {
                     radius: 49.0,
                     lineWidth: 5.0,
                     percent: 0.6,
-                    center: Image.asset("assets/images/Ellipse.png"),
+                    center: Image.asset(
+                      "assets/images/Ellipse.png",
+                      width: 40,
+                    ),
                     backgroundColor: Colors.white,
                     progressColor: Color(0xFFFF008D),
                   ),
@@ -98,7 +105,7 @@ class _PartirState extends State<Partir> {
               minWidth: 150,
               color: Color(0xFFFF008D),
               child: Text("Je pars",
-                  style: TextStyle(color: kTextColor, fontSize: 12)),
+                  style: TextStyle(color: kTextColor, fontSize: 16)),
               onPressed: () {},
             ),
           )

@@ -30,7 +30,7 @@ class _ParrainageState extends State<Parrainage> {
                 ),
                 child: Column(children: [
                   Container(
-                    margin: EdgeInsets.only(top: screenHeight * 0.001),
+                    margin: EdgeInsets.only(top: screenHeight * 0.08),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -44,7 +44,11 @@ class _ParrainageState extends State<Parrainage> {
                       ],
                     ),
                   ),
-                  Center(child: Image.asset('assets/icons/parain.png'))
+                  Center(
+                      child: Image.asset(
+                    'assets/icons/parain.png',
+                    width: 230,
+                  ))
                 ]),
               ),
               Container(
@@ -101,6 +105,7 @@ class _ParrainageState extends State<Parrainage> {
           )),
         )),
         floatingActionButton: Container(
+            margin: EdgeInsets.only(top: screenWidth * 0.05),
             height: screenHeight * 0.07,
             width: screenWidth * 0.15,
             child: RawMaterialButton(

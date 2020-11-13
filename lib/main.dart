@@ -2,8 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:share_your_park/services/auth.dart';
 import 'package:provider/provider.dart';
-import 'package:share_your_park/views/nfc/scan_nfc.dart';
+// import 'package:share_your_park/views/nfc/scan_nfc.dart';
 import 'package:share_your_park/views/screens/register.dart';
+import 'package:share_your_park/views/screens/setting/je_me_gare.dart';
 // import 'package:share_your_park/views/screens/setting/autosetting.dart';
 // import 'package:share_your_park/views/screens/setting/car_setting.dart';
 // import 'package:share_your_park/views/screens/setting/confidentialit%C3%A9.dart';
@@ -29,9 +30,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider.value(
       value: AuthService().user,
       child: MaterialApp(
-          theme: ThemeData(),
-          home: ScanNFC(),
-          debugShowCheckedModeBanner: false),
+          theme: ThemeData(), home: Garer(), debugShowCheckedModeBanner: false),
     );
   }
 }

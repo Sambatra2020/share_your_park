@@ -33,12 +33,12 @@ class _ParametreState extends State<Parametre> {
                   children: [
                     Container(
                         margin: EdgeInsets.only(
-                            top: screenHeight * 0.05, left: screenWidth * 0.25),
+                            top: screenHeight * 0.08, left: screenWidth * 0.29),
                         child: Icon(FontAwesome.cog,
                             color: Colors.white70, size: 42)),
                     Container(
                       margin: EdgeInsets.only(
-                          top: screenHeight * 0.05, left: screenWidth * 0.02),
+                          top: screenHeight * 0.08, left: screenWidth * 0.03),
                       child: Text('Paramètre ',
                           style: TextStyle(
                             color: Colors.white70,
@@ -52,13 +52,13 @@ class _ParametreState extends State<Parametre> {
                     Container(
                       margin: EdgeInsets.only(
                         top: screenHeight * 0.15,
-                        left: screenWidth * 0.13,
+                        left: screenWidth * 0.10,
                       ),
                       child: Image.asset('assets/dessins/notification.png'),
                     ),
                     Container(
                       margin: EdgeInsets.only(
-                          top: screenHeight * 0.15, left: screenWidth * 0.02),
+                          top: screenHeight * 0.15, left: screenWidth * 0.08),
                       child: RichText(
                         text: TextSpan(
                             text: 'Paramètre de confidentialité',
@@ -82,13 +82,13 @@ class _ParametreState extends State<Parametre> {
                     Container(
                       margin: EdgeInsets.only(
                         top: screenHeight * 0.03,
-                        left: screenWidth * 0.13,
+                        left: screenWidth * 0.10,
                       ),
                       child: Image.asset('assets/dessins/taxi.png'),
                     ),
                     Container(
                       margin: EdgeInsets.only(
-                          top: screenHeight * 0.03, left: screenWidth * 0.02),
+                          top: screenHeight * 0.03, left: screenWidth * 0.07),
                       child: RichText(
                         text: TextSpan(
                             text: 'Mon véhicule',
@@ -111,13 +111,13 @@ class _ParametreState extends State<Parametre> {
                     Container(
                       margin: EdgeInsets.only(
                         top: screenHeight * 0.03,
-                        left: screenWidth * 0.13,
+                        left: screenWidth * 0.10,
                       ),
                       child: Image.asset('assets/dessins/swap.png'),
                     ),
                     Container(
                         margin: EdgeInsets.only(
-                            top: screenHeight * 0.03, left: screenWidth * 0.02),
+                            top: screenHeight * 0.03, left: screenWidth * 0.08),
                         child: RichText(
                           text: TextSpan(
                               text: 'Conditions d\'utilisations de l\'app',
@@ -140,13 +140,13 @@ class _ParametreState extends State<Parametre> {
                     Container(
                       margin: EdgeInsets.only(
                         top: screenHeight * 0.03,
-                        left: screenWidth * 0.12,
+                        left: screenWidth * 0.10,
                       ),
                       child: Image.asset('assets/dessins/show.png'),
                     ),
                     Container(
                       margin: EdgeInsets.only(
-                          top: screenHeight * 0.03, left: screenWidth * 0.02),
+                          top: screenHeight * 0.03, left: screenWidth * 0.07),
                       child: Text('Règles de confidentialités de l\'app',
                           style: TextStyle(
                               color: Colors.white,
@@ -159,13 +159,13 @@ class _ParametreState extends State<Parametre> {
                     Container(
                       margin: EdgeInsets.only(
                         top: screenHeight * 0.03,
-                        left: screenWidth * 0.12,
+                        left: screenWidth * 0.10,
                       ),
                       child: Image.asset('assets/dessins/danger.png'),
                     ),
                     Container(
                       margin: EdgeInsets.only(
-                          top: screenHeight * 0.03, left: screenWidth * 0.02),
+                          top: screenHeight * 0.03, left: screenWidth * 0.07),
                       child: Text('Signaler un problème',
                           style: TextStyle(
                               color: Colors.white,
@@ -178,13 +178,13 @@ class _ParametreState extends State<Parametre> {
                     Container(
                       margin: EdgeInsets.only(
                         top: screenHeight * 0.03,
-                        left: screenWidth * 0.13,
+                        left: screenWidth * 0.10,
                       ),
                       child: Image.asset('assets/dessins/logout.png'),
                     ),
                     Container(
                       margin: EdgeInsets.only(
-                          top: screenHeight * 0.03, left: screenWidth * 0.02),
+                          top: screenHeight * 0.03, left: screenWidth * 0.09),
                       child: RichText(
                         text: TextSpan(
                             text: 'Déconnexion',
@@ -204,13 +204,13 @@ class _ParametreState extends State<Parametre> {
                     Container(
                       margin: EdgeInsets.only(
                         top: screenHeight * 0.03,
-                        left: screenWidth * 0.13,
+                        left: screenWidth * 0.10,
                       ),
                       child: Image.asset('assets/dessins/fill.png'),
                     ),
                     Container(
                       margin: EdgeInsets.only(
-                          top: screenHeight * 0.03, left: screenWidth * 0.02),
+                          top: screenHeight * 0.03, left: screenWidth * 0.09),
                       child: Text('A propos',
                           style: TextStyle(
                               color: Colors.white,
@@ -223,6 +223,7 @@ class _ParametreState extends State<Parametre> {
           ),
         ),
         floatingActionButton: Container(
+            margin: EdgeInsets.only(top: screenWidth * 0.05),
             height: screenHeight * 0.07,
             width: screenWidth * 0.15,
             child: RawMaterialButton(
