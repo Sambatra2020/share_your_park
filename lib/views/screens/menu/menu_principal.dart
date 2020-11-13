@@ -259,7 +259,7 @@ class MenuPrincipal extends StatelessWidget {
                                   color: Colors.white),
                               SizedBox(width: 20),
                               Text(
-                                "offres",
+                                "Offres",
                                 style: TextStyle(
                                     fontFamily: kfontFamily,
                                     color: kTextColor,

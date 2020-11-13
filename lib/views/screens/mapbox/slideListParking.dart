@@ -1,8 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong/latlong.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:share_your_park/const.dart';
 import 'package:share_your_park/controllers/controller.dart';
 import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/views/screens/menu/menu_principal.dart';
@@ -24,17 +26,22 @@ class _SlideListParkingState extends State<SlideListParking> {
   String latParking;
   String lngParking;
   int current = 0;
+  Controller controller = Controller();
+  List<LatLng> points = [];
 
   @override
   Widget build(BuildContext context) {
     if (latParking == null) {
-      latParking = this.listObjetParking[2].lng.toString();
-      lngParking = this.listObjetParking[2].lat.toString();
+      latParking = this.listObjetParking[current].lng.toString();
+      lngParking = this.listObjetParking[current].lat.toString();
     }
-
-    print("parking");
-    print(latParking);
-    print(lngParking);
+    Future<List<LatLng>> result = controller.getListLatLng(
+                    latDepart, lngDepart, latParking, lngParking);
+                result.then((value) {
+                  setState(() {
+                    points = value;
+                  });
+                });
 
     return Scaffold(
         floatingActionButton: Container(
@@ -60,7 +67,41 @@ class _SlideListParkingState extends State<SlideListParking> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: Stack(children: [
-          Container(),
+          Container(
+            child: FlutterMap(
+              options: MapOptions(
+                  center: LatLng(48.862056, 2.339432), zoom: 18, maxZoom: 48),
+              layers: [
+                tileLayerOptions,
+                MarkerLayerOptions(markers: [
+                  Marker(
+                      width: 35.0,
+                      height: 35.0,
+                      point: LatLng(
+                          double.parse(latDepart), double.parse(lngDepart)),
+                      builder: (context) => Container(
+                          child:
+                              Image.asset("assets/images/positionDepart.png"))),
+                  Marker(
+                      width: 40.0,
+                      height: 40.0,
+                      point: LatLng(
+                          double.parse(latParking), double.parse(lngParking)),
+                      builder: (context) => Container(
+                          child:
+                              Image.asset("assets/images/positionVert.png"))),
+                ]),
+                PolylineLayerOptions(
+                  polylines: [
+                    Polyline(
+                        points: points,
+                        color: Color(0xFFFF008D),
+                        strokeWidth: 6.0)
+                  ],
+                )
+              ],
+            ),
+          ),
           Align(
             alignment: Alignment(-0.9, -0.85),
             child: Container(
@@ -93,12 +134,11 @@ class _SlideListParkingState extends State<SlideListParking> {
             child: CarouselSlider(
               height: 150,
               initialPage: 0,
-              onPageChanged: (index) {
+              onPageChanged: (index) async {
                 setState(() {
                   current = index;
                   latParking = listObjetParking[current].lng.toString();
                   lngParking = listObjetParking[current].lat.toString();
-                  print(current);
                 });
               },
               items: listObjetParking.map((parking) {
@@ -121,11 +161,45 @@ class _SlideListParkingState extends State<SlideListParking> {
                                       ' rue ' +
                                       parking.nomRue
                                   : 'sans nom voie',
-                              style: TextStyle(color: Color(0xFFFFFFFF)),
+                              style: TextStyle(
+                                  color: Color(0xFFFFFFFF), fontSize: 12),
                               textAlign: TextAlign.justify,
                             ),
                           ]),
-                          Row(),
+                          Row(
+                            children: [
+                              Container(
+                                  margin: EdgeInsets.only(left: 10, right: 10),
+                                  child: Image.asset(
+                                      "assets/icons/Time_Circle.png")),
+                              Container(
+                                child: Text(
+                                  'duree',
+                                  style: TextStyle(
+                                      color: Color(0xFFFFFFFF), fontSize: 12),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 10),
+                                child: Text(
+                                  'prix: ' + parking.tarif,
+                                  style: TextStyle(
+                                      color: Color(0xFFFFFFFF), fontSize: 12),
+                                ),
+                              ),
+                              Container(
+                                  margin: EdgeInsets.only(left: 10, right: 10),
+                                  child:
+                                      Image.asset("assets/icons/Filter.png")),
+                              Container(
+                                child: Text(
+                                  'taille M',
+                                  style: TextStyle(
+                                      color: Color(0xFFFFFFFF), fontSize: 12),
+                                ),
+                              )
+                            ],
+                          ),
                           MaterialButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),

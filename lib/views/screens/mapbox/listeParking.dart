@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong/latlong.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:share_your_park/const.dart';
 import 'package:share_your_park/controllers/controller.dart';
 import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
@@ -24,19 +26,26 @@ class _ListeParkingState extends State<ListeParking> {
   String lngDepart = '2.339432';
   String latParking;
   String lngParking;
-  MapboxMap mapboxMap;
+
+  List<LatLng> points = [];
   @override
   Widget build(BuildContext context) {
     if (latParking == null) {
       print(listObjetParking.length);
-      latParking = this.listObjetParking[1].lng.toString();
-      lngParking = this.listObjetParking[1].lat.toString();
+      setState(() {
+        latParking = this.listObjetParking[0].lng.toString();
+        lngParking = this.listObjetParking[0].lat.toString();
+      });
     }
 
-    if (mapboxMap == null) {
-      mapboxMap = controller.creationCarteMapBox(
-          latDepart, lngDepart, latParking, lngParking);
-    }
+    Future<List<LatLng>> result =
+        controller.getListLatLng(latDepart, lngDepart, latParking, lngParking);
+    result.then((value) {
+      setState(() {
+        points = value;
+      });
+    });
+
     return Scaffold(
         floatingActionButton: Container(
           margin: EdgeInsets.only(top: 15),
@@ -62,7 +71,42 @@ class _ListeParkingState extends State<ListeParking> {
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: Stack(children: [
           Container(
-            child: mapboxMap,
+            child: FlutterMap(
+              options: MapOptions(
+                center: LatLng(48.862056, 2.339432),
+                minZoom: 18,
+                maxZoom: 64,
+              ),
+              layers: [
+                tileLayerOptions,
+                MarkerLayerOptions(markers: [
+                  Marker(
+                      width: 40.0,
+                      height: 40.0,
+                      point: LatLng(
+                          double.parse(latDepart), double.parse(lngDepart)),
+                      builder: (context) => Container(
+                          child:
+                              Image.asset("assets/images/positionDepart.png"))),
+                  Marker(
+                      width: 40.0,
+                      height: 40.0,
+                      point: LatLng(
+                          double.parse(latParking), double.parse(lngParking)),
+                      builder: (context) => Container(
+                          child:
+                              Image.asset("assets/images/positionVert.png"))),
+                ]),
+                PolylineLayerOptions(
+                  polylines: [
+                    Polyline(
+                        points: points,
+                        color: Color(0xFFFF008D),
+                        strokeWidth: 6.0)
+                  ],
+                )
+              ],
+            ),
           ),
           Align(
             alignment: Alignment(-0.9, -0.85),
