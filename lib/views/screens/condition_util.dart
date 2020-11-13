@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:share_your_park/const.dart';
 
-class PolitiqueConfid extends StatefulWidget {
+import '../../const.dart';
+
+class ConditionUtil extends StatefulWidget {
   @override
-  _PolitiqueConfidState createState() => _PolitiqueConfidState();
+  _ConditionUtilState createState() => _ConditionUtilState();
 }
 
-class _PolitiqueConfidState extends State<PolitiqueConfid> {
+class _ConditionUtilState extends State<ConditionUtil> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
