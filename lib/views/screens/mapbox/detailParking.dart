@@ -22,11 +22,10 @@ class _ListeParkingState extends State<ListeParking> {
 
   Controller controller = Controller();
 
-  String latDepart = '48.849519';
-  String lngDepart = '2.293370';
+  String latDepart = '48.853846';
+  String lngDepart = '2.311969';
   String latParking;
   String lngParking;
-  bool showdetail = false;
 
   List<LatLng> points = [];
   @override
@@ -74,11 +73,9 @@ class _ListeParkingState extends State<ListeParking> {
           Container(
             child: FlutterMap(
               options: MapOptions(
-                center: LatLng(48.849519, 2.293370),
-                zoom: 18,
-                minZoom: 16,
-                maxZoom: 600,
-                adaptiveBoundaries: true,
+                center: LatLng(48.853846, 2.311969),
+                minZoom: 18,
+                maxZoom: 64,
               ),
               layers: [
                 tileLayerOptions,

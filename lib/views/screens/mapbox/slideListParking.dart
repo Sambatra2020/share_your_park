@@ -20,14 +20,15 @@ class SlideListParking extends StatefulWidget {
 class _SlideListParkingState extends State<SlideListParking> {
   List<Parking> listObjetParking;
   _SlideListParkingState(this.listObjetParking);
-
-  String latDepart = '48.862056';
-  String lngDepart = '2.339432';
+  String latDepart = '48.849519';
+  String lngDepart = '2.293370';
   String latParking;
   String lngParking;
   int current = 0;
   Controller controller = Controller();
   List<LatLng> points = [];
+  String duration = '', distance = '';
+  String taille;
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +36,15 @@ class _SlideListParkingState extends State<SlideListParking> {
       latParking = this.listObjetParking[current].lng.toString();
       lngParking = this.listObjetParking[current].lat.toString();
     }
-    Future<List<LatLng>> result = controller.getListLatLng(
-                    latDepart, lngDepart, latParking, lngParking);
-                result.then((value) {
-                  setState(() {
-                    points = value;
-                  });
-                });
+    Future<List<LatLng>> result =
+        controller.getListLatLng(latDepart, lngDepart, latParking, lngParking);
+    result.then((value) {
+      setState(() {
+        points = value;
+        duration = controller.duration;
+        distance = controller.distance;
+      });
+    });
 
     return Scaffold(
         floatingActionButton: Container(
@@ -70,13 +73,21 @@ class _SlideListParkingState extends State<SlideListParking> {
           Container(
             child: FlutterMap(
               options: MapOptions(
-                  center: LatLng(48.862056, 2.339432), zoom: 18, maxZoom: 48),
+                  center: LatLng(48.849519, 2.293370), zoom: 18, maxZoom: 600),
               layers: [
                 tileLayerOptions,
+                PolylineLayerOptions(
+                  polylines: [
+                    Polyline(
+                        points: points,
+                        color: Color(0xFFFF008D),
+                        strokeWidth: 6.0)
+                  ],
+                ),
                 MarkerLayerOptions(markers: [
                   Marker(
                       width: 35.0,
-                      height: 35.0,
+                      height: 50.0,
                       point: LatLng(
                           double.parse(latDepart), double.parse(lngDepart)),
                       builder: (context) => Container(
@@ -91,14 +102,6 @@ class _SlideListParkingState extends State<SlideListParking> {
                           child:
                               Image.asset("assets/images/positionVert.png"))),
                 ]),
-                PolylineLayerOptions(
-                  polylines: [
-                    Polyline(
-                        points: points,
-                        color: Color(0xFFFF008D),
-                        strokeWidth: 6.0)
-                  ],
-                )
               ],
             ),
           ),
@@ -139,6 +142,7 @@ class _SlideListParkingState extends State<SlideListParking> {
                   current = index;
                   latParking = listObjetParking[current].lng.toString();
                   lngParking = listObjetParking[current].lat.toString();
+                  points = [];
                 });
               },
               items: listObjetParking.map((parking) {
@@ -156,11 +160,7 @@ class _SlideListParkingState extends State<SlideListParking> {
                           Row(children: [
                             Image.asset("assets/icons/position_path.png"),
                             Text(
-                              parking.nomRue != null
-                                  ? parking.numRue.toString() +
-                                      ' rue ' +
-                                      parking.nomRue
-                                  : 'sans nom voie',
+                              checkNomEtNumRue(parking.nomRue, parking.numRue),
                               style: TextStyle(
                                   color: Color(0xFFFFFFFF), fontSize: 12),
                               textAlign: TextAlign.justify,
@@ -169,12 +169,12 @@ class _SlideListParkingState extends State<SlideListParking> {
                           Row(
                             children: [
                               Container(
-                                  margin: EdgeInsets.only(left: 10, right: 10),
+                                  margin: EdgeInsets.only(left: 10, right: 5),
                                   child: Image.asset(
                                       "assets/icons/Time_Circle.png")),
                               Container(
                                 child: Text(
-                                  'duree',
+                                  duration + " min",
                                   style: TextStyle(
                                       color: Color(0xFFFFFFFF), fontSize: 12),
                                 ),
@@ -182,7 +182,7 @@ class _SlideListParkingState extends State<SlideListParking> {
                               Container(
                                 margin: EdgeInsets.only(left: 10),
                                 child: Text(
-                                  'prix: ' + parking.tarif,
+                                  'Prix: ' + parking.tarif,
                                   style: TextStyle(
                                       color: Color(0xFFFFFFFF), fontSize: 12),
                                 ),
@@ -193,12 +193,16 @@ class _SlideListParkingState extends State<SlideListParking> {
                                       Image.asset("assets/icons/Filter.png")),
                               Container(
                                 child: Text(
-                                  'taille M',
+                                  "Taille " +
+                                      checkTailleParking(parking.surface),
                                   style: TextStyle(
                                       color: Color(0xFFFFFFFF), fontSize: 12),
                                 ),
                               )
                             ],
+                          ),
+                          SizedBox(
+                            height: 10,
                           ),
                           MaterialButton(
                             shape: RoundedRectangleBorder(
@@ -219,5 +223,25 @@ class _SlideListParkingState extends State<SlideListParking> {
             ),
           ),
         ]));
+  }
+
+  String checkTailleParking(double surface) {
+    if (surface <= 6) {
+      return 'S';
+    } else if (surface > 6 && surface < 10) {
+      return 'M';
+    } else {
+      return 'L';
+    }
+  }
+
+  String checkNomEtNumRue(String nomRue, int numRue) {
+    if (nomRue != null && numRue != null) {
+      return numRue.toString() + ' Rue ' + nomRue;
+    } else if (nomRue != null && numRue == null) {
+      return ' Rue ' + nomRue;
+    } else {
+      return 'Rue Sans Nom';
+    }
   }
 }

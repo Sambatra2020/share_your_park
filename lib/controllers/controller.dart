@@ -25,6 +25,9 @@ class Controller {
   LatLng ancienPosition;
   List<Parking> listObjetParking = [];
   List<List<double>> _coords = [];
+  String duree, dist;
+  String get duration => duree;
+  String get distance => dist;
   List<Parking> get listeParking => listObjetParking;
   ////
   //////
@@ -68,6 +71,8 @@ class Controller {
     routes = data['routes'];
     geometry = routes[0]['geometry'];
     coordinates = geometry['coordinates'];
+    duree = (1 + (routes[0]['duration'] / 60)).toStringAsFixed(0);
+    dist = (routes[0]['distance']).toStringAsFixed(0);
     //
     ///
     for (int i = 0; i < coordinates.length; i++) {
