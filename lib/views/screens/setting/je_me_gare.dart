@@ -28,9 +28,9 @@ class _PartirState extends State<Partir> {
           onPressed: () {}),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: Stack(
-        children: [
+        children: <Widget>[
           Container(
-            child: controller.mapBoxVide(2.331332, 48.862056),
+            child: controller.mapBoxVide(48.862056, 2.331332),
           ),
           Align(
             alignment: Alignment(-0.9, 0.5),

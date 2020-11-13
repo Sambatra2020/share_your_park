@@ -7,11 +7,11 @@ import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/models/trajet.dart';
 
-final styleCarte = 'mapbox://styles/sambatra/ckgbwa2x706vs1ap3n6qcaptj';
-MapboxMapController mapController;
-List<LatLng> chemin = [];
-
 class Controller {
+  final styleCarte = 'mapbox://styles/sambatra/ckgbwa2x706vs1ap3n6qcaptj';
+  MapboxMapController mapController;
+  MapboxMapController mapControllerVide;
+  List<LatLng> chemin = [];
   List<Parking> listObjetParking = [];
   List<List<double>> _coords = [];
   List<Parking> get listeParking => listObjetParking;
@@ -173,15 +173,15 @@ class Controller {
 
   MapboxMap mapBoxVide(double latitudeParking, double longitudeParking) {
     LatLng positionParking = LatLng(latitudeParking, longitudeParking);
-    void _onMapCreated(MapboxMapController controller) async {
+    void _onMapCreatedi(MapboxMapController controllervide) async {
       //construction et ajout de la chemin entre les deux
-      mapController = controller;
+      mapControllerVide = controllervide;
       //ajout deux symbole de depart et d'arriver
     }
 
     return MapboxMap(
         styleString: styleCarte,
-        onMapCreated: _onMapCreated,
+        onMapCreated: _onMapCreatedi,
         initialCameraPosition:
             CameraPosition(target: positionParking, zoom: 14));
   }
