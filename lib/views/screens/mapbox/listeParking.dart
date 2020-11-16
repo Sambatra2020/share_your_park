@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -5,6 +6,7 @@ import 'package:latlong/latlong.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:share_your_park/const.dart';
 import 'package:share_your_park/controllers/controller.dart';
+import 'package:share_your_park/models/message.dart';
 import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/views/screens/mapbox/je_me_gare.dart';
 import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
@@ -34,6 +36,25 @@ class _ListeParkingState extends State<ListeParking> {
   List<String> centreCamera = [];
 
   List<LatLng> points = [];
+  final FirebaseMessaging messaging = FirebaseMessaging();
+  @override
+  void initState() {
+    super.initState();
+    messaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage: $message");
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+      },
+    );
+    messaging.requestNotificationPermissions(
+        const IosNotificationSettings(sound: true, badge: true, alert: true));
+  }
+
   @override
   Widget build(BuildContext context) {
     if (latParking == null) {
