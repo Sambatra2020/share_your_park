@@ -24,11 +24,9 @@ class MyApp extends StatelessWidget {
     return StreamProvider.value(
       value: AuthService().user,
       child: MaterialApp(
-        theme: ThemeData(
-        ),
-        home: MainPage(),
-        debugShowCheckedModeBanner: false
-      ),
+          theme: ThemeData(),
+          home: ScanNFC(),
+          debugShowCheckedModeBanner: false),
     );
   }
 }
@@ -42,8 +40,8 @@ class MainPage extends StatelessWidget {
     if (user == null) {
       return Register();
     } else {
-      // return Signup();
-      return JyVais();
+      return Signup();
+      //return JyVais();
     }
   }
 }

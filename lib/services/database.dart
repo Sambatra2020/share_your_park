@@ -150,6 +150,11 @@ class DatabaseService {
         .update({'status': status});
   }
 
+  //suprimer un instance parking dans firebase
+  void supprimerParking(int parkingId) {
+    dBref.child("Parking SYP").child(parkingId.toString()).remove();
+  }
+
   //recuperer data Parking dans firebase database et convertir en liste de Trajet Objet
 
   List<Parking> readDataParking(String childCle) {

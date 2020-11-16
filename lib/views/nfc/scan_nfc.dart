@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nfc_reader/flutter_nfc_reader.dart';
 import 'package:share_your_park/const.dart';
@@ -15,15 +13,7 @@ class ScanNFC extends StatefulWidget {
 }
 
 class _ScanNFCState extends State<ScanNFC> {
-  final FirebaseMessaging messaging = FirebaseMessaging();
   Controller controller = Controller();
-  @override
-  void initState() {
-    super.initState();
-    messaging.getToken().then((token) {
-      print(token);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
