@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:share_your_park/views/nfc/scan_nfc.dart';
 import 'package:share_your_park/views/nfc/testNfc.dart';
 import 'package:share_your_park/views/screens/baseCarteMap.dart';
+import 'package:share_your_park/views/screens/mapbox/j_y_vais.dart';
 import 'package:share_your_park/views/screens/mapbox/listeParking.dart';
 import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
 import 'package:share_your_park/views/screens/register.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
         ),
-        home: Parametre(),
+        home: MainPage(),
         debugShowCheckedModeBanner: false
       ),
     );
@@ -51,7 +52,8 @@ class MainPage extends StatelessWidget {
     if (user == null) {
       return Register();
     } else {
-      return Signup();
+      // return Signup();
+      return JyVais();
     }
   }
 }
