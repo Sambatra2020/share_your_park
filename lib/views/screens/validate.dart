@@ -6,6 +6,7 @@ import 'package:share_your_park/models/user.dart' as userModel;
 import 'package:share_your_park/views/screens/end.dart';
 import 'package:share_your_park/services/database.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:share_your_park/views/screens/mapbox/j_y_vais.dart';
 import 'package:share_your_park/views/screens/politique_confid.dart';
 
 class Validate extends StatefulWidget {
@@ -228,7 +229,7 @@ class _ValidateState extends State<Validate> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Ending()));
+                                  builder: (context) => JyVais()));
                         }
                       },
                       child: Text(

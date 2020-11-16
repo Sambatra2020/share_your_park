@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:share_your_park/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:share_your_park/views/nfc/scan_nfc.dart';
+import 'package:share_your_park/views/nfc/testNfc.dart';
+import 'package:share_your_park/views/screens/baseCarteMap.dart';
+import 'package:share_your_park/views/screens/mapbox/j_y_vais.dart';
+import 'package:share_your_park/views/screens/mapbox/listeParking.dart';
+import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
 import 'package:share_your_park/views/screens/register.dart';
 import 'package:share_your_park/views/screens/signup.dart';
 import 'models/user.dart' as userModel;
@@ -19,9 +24,11 @@ class MyApp extends StatelessWidget {
     return StreamProvider.value(
       value: AuthService().user,
       child: MaterialApp(
-          theme: ThemeData(),
-          home: ScanNFC(),
-          debugShowCheckedModeBanner: false),
+        theme: ThemeData(
+        ),
+        home: MainPage(),
+        debugShowCheckedModeBanner: false
+      ),
     );
   }
 }
@@ -35,7 +42,8 @@ class MainPage extends StatelessWidget {
     if (user == null) {
       return Register();
     } else {
-      return Signup();
+      // return Signup();
+      return JyVais();
     }
   }
 }
