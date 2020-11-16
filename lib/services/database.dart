@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/models/user.dart' as userModel;
 
 import '../models/trajet.dart';
@@ -131,5 +132,40 @@ class DatabaseService {
       }
     });
     return listeTrajetUtilisateur;
+  }
+
+  //ecriture data Parking  dans firebase database
+  void addDataParking(Parking parking) {
+    dBref
+        .child("Parking SYP")
+        .child(parking.pId.toString())
+        .set(parking.toMap());
+  }
+
+  //update a status parking
+  void updateStatusParking(int parkingId, int status) {
+    dBref
+        .child("Parking SYP")
+        .child(parkingId.toString())
+        .update({'status': status});
+  }
+
+  //recuperer data Parking dans firebase database et convertir en liste de Trajet Objet
+
+  List<Parking> readDataParking(String childCle) {
+    List<Parking> listeParkingSyp = [];
+
+    //recuperation data dans realtime database
+    dBref.child(childCle).once().then((DataSnapshot dataSnapshot) {
+      var key = dataSnapshot.value.length;
+      var data = dataSnapshot.value;
+      //iteration des donnes Trajet de l'utilisateur
+      for (int i = 1; i < key; i++) {
+        if (data[i]['status'] == 0) {
+          listeParkingSyp.add(Parking.fromMapObject(data[i]));
+        }
+      }
+    });
+    return listeParkingSyp;
   }
 }
