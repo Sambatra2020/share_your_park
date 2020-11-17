@@ -5,6 +5,8 @@ import 'package:latlong/latlong.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:share_your_park/const.dart';
 import 'package:share_your_park/controllers/controller.dart';
+import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
+import 'package:share_your_park/views/screens/menu/menu_principal.dart';
 
 class Garer extends StatefulWidget {
   final List<String> centreCamera;
@@ -35,7 +37,12 @@ class _GarerState extends State<Garer> {
             Entypo.menu,
             color: Color(0xFFFFFFFF),
           ),
-          onPressed: () {}),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => MenuPrincipal()));
+          }),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: Stack(
         children: <Widget>[
@@ -91,7 +98,12 @@ class _GarerState extends State<Garer> {
               minWidth: 20,
               color: Color(0xFFFF008D),
               child: Icon(Icons.search, color: Color(0xFFFFFFFF)),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => SlideListParking()));
+              },
             ),
           ),
           Align(

@@ -79,7 +79,8 @@ class DatabaseService {
   //ecriture data trajet  dans firebase database
   void addDataTrajet(Trajet trajet) {
     dBref
-        .child(trajet.uId)
+        .child("BDD Trajet")
+        .child(uid)
         .child(trajet.idTrajet.toString())
         .set(trajet.toMap());
   }

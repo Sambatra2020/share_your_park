@@ -8,6 +8,8 @@ import 'package:share_your_park/const.dart';
 import 'package:share_your_park/controllers/controller.dart';
 import 'package:share_your_park/models/message.dart';
 import 'package:share_your_park/models/parking.dart';
+import 'package:share_your_park/models/trajet.dart';
+import 'package:share_your_park/services/database.dart';
 import 'package:share_your_park/views/screens/mapbox/je_me_gare.dart';
 import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
 import 'package:share_your_park/views/screens/menu/menu_principal.dart';
@@ -34,12 +36,18 @@ class _ListeParkingState extends State<ListeParking> {
   String lngParking;
   bool showdetail = false;
   List<String> centreCamera = [];
+  List<Parking> listeParking = [];
+  String duration = '', distance = '';
+  List<double> positionDepart = [], positionArriver = [];
 
   List<LatLng> points = [];
   final FirebaseMessaging messaging = FirebaseMessaging();
+  DatabaseService databaseService = DatabaseService(uid: "onja");
   @override
   void initState() {
     super.initState();
+    controller.getListParkingData(lngDepart, latDepart);
+    listeParking = controller.listeParking;
     messaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage: $message");
@@ -57,22 +65,29 @@ class _ListeParkingState extends State<ListeParking> {
 
   @override
   Widget build(BuildContext context) {
+    positionDepart = [double.parse(latDepart), double.parse(lngDepart)];
+    if (listObjetParking == null) {
+      listObjetParking = listeParking;
+      current = 0;
+    }
     if (latParking == null) {
       print(listObjetParking.length);
       setState(() {
         latParking = this.listObjetParking[current].lng.toString();
         lngParking = this.listObjetParking[current].lat.toString();
+        positionArriver = [double.parse(latParking), double.parse(lngParking)];
         centreCamera = [latParking, lngParking];
+        Future<List<LatLng>> result = controller.getListLatLng(
+            latDepart, lngDepart, latParking, lngParking);
+        result.then((value) {
+          setState(() {
+            points = value;
+            duration = controller.duration;
+            distance = controller.distance;
+          });
+        });
       });
     }
-
-    Future<List<LatLng>> result =
-        controller.getListLatLng(latDepart, lngDepart, latParking, lngParking);
-    result.then((value) {
-      setState(() {
-        points = value;
-      });
-    });
 
     return Scaffold(
         floatingActionButton: Container(
@@ -101,12 +116,12 @@ class _ListeParkingState extends State<ListeParking> {
           Container(
             child: FlutterMap(
               options: MapOptions(
-                center:
-                    LatLng(double.parse(latDepart), double.parse(lngDepart)),
-                zoom: 18,
-                minZoom: 16,
-                maxZoom: 600,
-              ),
+                  center:
+                      LatLng(double.parse(latDepart), double.parse(lngDepart)),
+                  zoom: 18,
+                  minZoom: 16,
+                  maxZoom: 1600,
+                  debug: true),
               layers: [
                 tileLayerOptions,
                 PolylineLayerOptions(
@@ -206,10 +221,18 @@ class _ListeParkingState extends State<ListeParking> {
               child:
                   Text("j'y vais", style: TextStyle(color: Color(0xFFFFFFFF))),
               onPressed: () {
-                String a = centreCamera[0];
-                String b = centreCamera[1];
-                print("centre cam $a");
-                print("centre cam $b");
+                //creation trajet d'un utilisateur
+                Trajet trajet = Trajet();
+                trajet.setidTrajetId(1);
+                trajet.setdureeTrajet(double.parse(duration));
+                trajet.setdistanceTrajet(double.parse(distance));
+                trajet.settrajetCoords(
+                    controller.convertionLatLngToListdouble(points));
+                trajet.setpositionDepart(positionDepart);
+                trajet.setpositionArriver(positionArriver);
+
+                //insertion du trajet dans firebase
+                databaseService.addDataTrajet(trajet);
                 Navigator.push(
                     context,
                     MaterialPageRoute(

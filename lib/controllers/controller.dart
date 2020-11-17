@@ -138,33 +138,29 @@ class Controller {
     return chemin;
   }
 
+  //conversion liste latln en list list double
+  List<List<double>> convertionLatLngToListdouble(List<LatLng> points) {
+    List<List<double>> coords = [];
+    print(points);
+    for (int i = 0; i < points.length; i++) {
+      print(points[i].latitude);
+      List<double> a = [points[i].latitude, points[i].longitude];
+      coords.add(a);
+    }
+    return coords;
+  }
+
   //construction trajet d'un utilisateur
   Future<Trajet> constructionTrajetUtilisateur(
       List<List<double>> coords,
       String idUtilisateur,
       int idTrajet,
       List<double> positionDepart,
-      List<double> positionArriver) async {
-    http.Response response = await http.get(
-        "https://api.mapbox.com/directions/v5/mapbox/driving/" +
-            positionDepart[1].toString() +
-            "," +
-            positionDepart[0].toString() +
-            ";" +
-            positionArriver[1].toString() +
-            "," +
-            positionArriver[0].toString() +
-            "?geometries=geojson&access_token=pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA");
-
+      List<double> positionArriver,
+      double distance,
+      double duration) async {
     //construction objet parking a partir de ka requette
     Trajet trajet = Trajet();
-    double duration;
-    double distance;
-
-    Map data = json.decode(response.body);
-    var routes = data['routes'];
-    duration = routes[0]['duration'];
-    distance = routes[0]['distance'];
 
     trajet.setidTrajetId(idTrajet);
     trajet.setidUser(idUtilisateur);

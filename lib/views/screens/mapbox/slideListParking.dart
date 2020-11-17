@@ -30,9 +30,16 @@ class _SlideListParkingState extends State<SlideListParking> {
   List<LatLng> points = [];
   String duration = '', distance = '';
   String taille;
+  List<Parking> listeParking = [];
 
   @override
   Widget build(BuildContext context) {
+    if (listObjetParking == null) {
+      controller.getListParkingData(lngDepart, latDepart);
+      listeParking = controller.listeParking;
+      listObjetParking = listeParking;
+      current = 0;
+    }
     if (latParking == null) {
       latParking = this.listObjetParking[current].lng.toString();
       lngParking = this.listObjetParking[current].lat.toString();
