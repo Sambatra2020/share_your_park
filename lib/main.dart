@@ -7,7 +7,6 @@ import 'package:share_your_park/views/nfc/testNfc.dart';
 import 'package:share_your_park/views/screens/baseCarteMap.dart';
 import 'package:share_your_park/views/screens/mapbox/j_y_vais.dart';
 import 'package:share_your_park/views/screens/mapbox/listeParking.dart';
-import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
 import 'package:share_your_park/views/screens/register.dart';
 import 'package:share_your_park/views/screens/signup.dart';
 import 'models/user.dart' as userModel;
@@ -43,7 +42,8 @@ class MainPage extends StatelessWidget {
       return Register();
     } else {
       // return Signup();
-      return JyVais();
+      // return JyVais();
+      return ScanNFC();
     }
   }
 }

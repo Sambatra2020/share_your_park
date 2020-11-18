@@ -28,7 +28,7 @@ class LocationServices{
     _locationData = await location.getLocation();
     var latitude = _locationData.latitude;
     var longitude = _locationData.longitude;
-    List<double> coordActuel = [latitude, longitude];
+    List<double> coordActuel = [longitude, latitude];
 
     return coordActuel;
   }

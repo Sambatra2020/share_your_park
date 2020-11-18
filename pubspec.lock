@@ -253,6 +253,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.1"
+  firebase_messaging:
+    dependency: "direct main"
+    description:
+      name: firebase_messaging
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "7.0.3"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -418,7 +425,7 @@ packages:
     source: hosted
     version: "3.0.1"
   latlong:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: latlong
       url: "https://pub.dartlang.org"
@@ -459,34 +466,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.11.4"
-  mapbox_gl:
-    dependency: "direct main"
-    description:
-      name: mapbox_gl
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.8.0"
-  mapbox_gl_dart:
-    dependency: transitive
-    description:
-      name: mapbox_gl_dart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.5"
-  mapbox_gl_platform_interface:
-    dependency: transitive
-    description:
-      name: mapbox_gl_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.8.0"
-  mapbox_gl_web:
-    dependency: transitive
-    description:
-      name: mapbox_gl_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.8.0"
   matcher:
     dependency: transitive
     description:
