@@ -87,11 +87,15 @@ class DatabaseService {
 
   //recuperer data trajet dans firebase database et convertir en liste de Trajet Objet
 
-  List<Trajet> readDatatrajet(String userId) {
+  List<Trajet> readDatatrajet() {
     List<Trajet> listeTrajetUtilisateur = [];
 
     //recuperation data dans realtime database
-    dBref.child(userId).once().then((DataSnapshot dataSnapshot) {
+    dBref
+        .child("BDD Trajet")
+        .child(uid)
+        .once()
+        .then((DataSnapshot dataSnapshot) {
       var key = dataSnapshot.value.length;
       var data = dataSnapshot.value;
       //iteration des donnes Trajet de l'utilisateur
@@ -124,7 +128,7 @@ class DatabaseService {
         //instanciation liste de trajet d'un utilisateur
         listeTrajetUtilisateur.add(new Trajet(
             tId: i,
-            uId: userId,
+            uId: uid,
             pDepart: positionDepart,
             pArriver: positionArriver,
             coords: coo,
