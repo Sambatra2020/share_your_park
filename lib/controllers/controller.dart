@@ -36,37 +36,28 @@ class Controller {
 
   //draw routes
 
-  //requette pour avoir les chemins
-  //
-  ///
+  //fonction  pour avoir les chemins
   List<List<double>> convertResponse(http.Response response, String latDepart,
       String lngDepart, String latArriver, String lngArriver) {
     //
     ///declaration des variables locaux
-    ///
     Map data;
     var routes, geometry, coordinates, coords;
     double lng, lat;
     List<double> coo;
     List<List<double>> _coordsLocal = [];
-
-    ///
     //
     double latInitiale = double.parse(latDepart);
     double lngInitiale = double.parse(lngDepart);
     List<double> initiale = [latInitiale, lngInitiale];
     //
-    ///
     double latFinale = double.parse(latArriver);
     double lngFinale = double.parse(lngArriver);
     List<double> finale = [latFinale, lngFinale];
     //
-    ///
     _coordsLocal.add(initiale);
 
     //export et ajout du coordonne dans la liste
-    ///
-
     data = json.decode(response.body);
     routes = data['routes'];
     geometry = routes[0]['geometry'];
@@ -141,9 +132,7 @@ class Controller {
   //conversion liste latln en list list double
   List<List<double>> convertionLatLngToListdouble(List<LatLng> points) {
     List<List<double>> coords = [];
-    print(points);
     for (int i = 0; i < points.length; i++) {
-      print(points[i].latitude);
       List<double> a = [points[i].latitude, points[i].longitude];
       coords.add(a);
     }

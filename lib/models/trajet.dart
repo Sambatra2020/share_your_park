@@ -6,6 +6,7 @@ class Trajet {
   List<List<double>> coords;
   double duration;
   double distance;
+  String date;
 
   Trajet(
       {this.tId,
@@ -14,7 +15,8 @@ class Trajet {
       this.pArriver,
       this.coords,
       this.distance,
-      this.duration});
+      this.duration,
+      this.date});
   //getter
   int get idTrajet => tId;
   String get idUser => uId;
@@ -23,8 +25,13 @@ class Trajet {
   List<List<double>> get trajetCoords => coords;
   double get dureeTrajet => duration;
   double get distanceTrajet => distance;
+  String get time => date;
 
   //setter
+  setDate(String newTime) {
+    this.date = newTime;
+  }
+
   setidTrajetId(int newTrajetId) {
     this.tId = newTrajetId;
   }
@@ -61,6 +68,7 @@ class Trajet {
     map['coords'] = coords;
     map['duration'] = duration;
     map['distance'] = distance;
+    map['date'] = date;
 
     return map;
   }
@@ -74,5 +82,6 @@ class Trajet {
     this.coords = map['coords'];
     this.duration = map['duration'];
     this.distance = map['distance'];
+    this.date = map['date'];
   }
 }

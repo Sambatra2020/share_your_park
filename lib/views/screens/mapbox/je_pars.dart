@@ -35,7 +35,7 @@ class _PartirState extends State<Partir> {
           Container(
             child: FlutterMap(
               options: MapOptions(
-                  center: LatLng(48.862056, 2.339432), zoom: 18, maxZoom: 48),
+                  center: LatLng(48.862056, 2.339432), minZoom: 18.0),
               layers: [
                 tileLayerOptions,
               ],

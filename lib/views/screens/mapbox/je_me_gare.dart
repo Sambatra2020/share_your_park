@@ -48,8 +48,7 @@ class _GarerState extends State<Garer> {
         children: <Widget>[
           Container(
             child: FlutterMap(
-              options:
-                  MapOptions(center: LatLng(lat, lng), zoom: 18, maxZoom: 48),
+              options: MapOptions(center: LatLng(lat, lng), minZoom: 18.0),
               layers: [
                 tileLayerOptions,
                 MarkerLayerOptions(markers: [

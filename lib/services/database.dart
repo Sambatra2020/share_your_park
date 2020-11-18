@@ -86,20 +86,33 @@ class DatabaseService {
   }
 
   //recuperer data trajet dans firebase database et convertir en liste de Trajet Objet
-
-  List<Trajet> readDatatrajet() {
-    List<Trajet> listeTrajetUtilisateur = [];
-
-    //recuperation data dans realtime database
-    dBref
+  Future<int> idTrajet() async {
+    int id = 0;
+    await dBref
         .child("BDD Trajet")
         .child(uid)
         .once()
         .then((DataSnapshot dataSnapshot) {
+      if (dataSnapshot.value != null) {
+        id = dataSnapshot.value.length;
+      }
+    });
+    return id;
+  }
+
+  Future<List<Trajet>> readDatatrajet() async {
+    List<Trajet> listeTrajet = [];
+    //recuperation data dans realtime database
+    await dBref
+        .child("BDD Trajet")
+        .child(uid)
+        .once()
+        .then((DataSnapshot dataSnapshot) {
+      List<Trajet> listeTrajetUtilisateur = [];
       var key = dataSnapshot.value.length;
       var data = dataSnapshot.value;
       //iteration des donnes Trajet de l'utilisateur
-      for (int i = 1; i < key; i++) {
+      for (int i = 0; i < key; i++) {
         List<List<double>> coo = [];
 
         //recuperation des coordonnes et conversion en liste de liste de double
@@ -125,6 +138,9 @@ class DatabaseService {
         double duration = data[i]['duration'].toDouble();
         double distance = data[i]['distance'].toDouble();
 
+        //recuperation date du trajet
+        String date = data[i]['date'];
+
         //instanciation liste de trajet d'un utilisateur
         listeTrajetUtilisateur.add(new Trajet(
             tId: i,
@@ -133,10 +149,13 @@ class DatabaseService {
             pArriver: positionArriver,
             coords: coo,
             duration: duration,
-            distance: distance));
+            distance: distance,
+            date: date));
       }
+      listeTrajet = listeTrajetUtilisateur;
     });
-    return listeTrajetUtilisateur;
+    print(listeTrajet.length);
+    return listeTrajet;
   }
 
   //ecriture data Parking  dans firebase database

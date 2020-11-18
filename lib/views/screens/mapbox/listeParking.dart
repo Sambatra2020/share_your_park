@@ -6,7 +6,6 @@ import 'package:latlong/latlong.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:share_your_park/const.dart';
 import 'package:share_your_park/controllers/controller.dart';
-import 'package:share_your_park/models/message.dart';
 import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/models/trajet.dart';
 import 'package:share_your_park/services/database.dart';
@@ -42,7 +41,7 @@ class _ListeParkingState extends State<ListeParking> {
 
   List<LatLng> points = [];
   final FirebaseMessaging messaging = FirebaseMessaging();
-  DatabaseService databaseService = DatabaseService(uid: "patrick_romeo");
+  DatabaseService databaseService = DatabaseService(uid: "romeo_patrick");
   @override
   void initState() {
     super.initState();
@@ -116,12 +115,10 @@ class _ListeParkingState extends State<ListeParking> {
           Container(
             child: FlutterMap(
               options: MapOptions(
-                  center:
-                      LatLng(double.parse(latDepart), double.parse(lngDepart)),
-                  zoom: 18,
-                  minZoom: 16,
-                  maxZoom: 1600,
-                  debug: true),
+                center:
+                    LatLng(double.parse(latDepart), double.parse(lngDepart)),
+                minZoom: 18.0,
+              ),
               layers: [
                 tileLayerOptions,
                 PolylineLayerOptions(
@@ -207,7 +204,18 @@ class _ListeParkingState extends State<ListeParking> {
               //padding: EdgeInsets.all(10),
               color: Color(0xFFFF008D),
               child: Icon(FontAwesome.rss, color: Color(0xFFFFFFFF)),
-              onPressed: () {},
+              onPressed: () {
+                print("======================");
+
+                Future<List<Trajet>> listeTrajet =
+                    databaseService.readDatatrajet();
+                listeTrajet.then((value) {
+                  print(value.length);
+                  for (int i = 0; i < value.length; i++) {
+                    print(value[i].time);
+                  }
+                });
+              },
             ),
           ),
           Align(
@@ -220,16 +228,23 @@ class _ListeParkingState extends State<ListeParking> {
               color: Color(0xFFFF008D),
               child:
                   Text("j'y vais", style: TextStyle(color: Color(0xFFFFFFFF))),
-              onPressed: () {
+              onPressed: () async {
                 //creation trajet d'un utilisateur
+                int idTrajet;
+                await databaseService.idTrajet().then((value) {
+                  setState(() {
+                    idTrajet = value;
+                  });
+                });
                 Trajet trajet = Trajet();
-                trajet.setidTrajetId(1);
+                trajet.setidTrajetId(idTrajet);
                 trajet.setdureeTrajet(double.parse(duration));
                 trajet.setdistanceTrajet(double.parse(distance));
                 trajet.settrajetCoords(
                     controller.convertionLatLngToListdouble(points));
                 trajet.setpositionDepart(positionDepart);
                 trajet.setpositionArriver(positionArriver);
+                trajet.setDate(DateTime.now().toString());
 
                 //insertion du trajet dans firebase
                 databaseService.addDataTrajet(trajet);

@@ -4,6 +4,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share_your_park/const.dart';
 import 'package:share_your_park/views/screens/FAQ.dart';
 import 'package:share_your_park/views/screens/menu/setting/infos.dart';
+import 'package:share_your_park/views/screens/menu/setting/mes_trajets.dart';
 import 'package:share_your_park/views/screens/menu/setting/parain.dart';
 import 'package:share_your_park/views/screens/menu/setting/param%C3%A8tre.dart';
 
@@ -219,12 +220,22 @@ class MenuPrincipal extends StatelessWidget {
                             children: [
                               Icon(FontAwesome.map_marker, color: Colors.white),
                               SizedBox(width: 20),
-                              Text("Mes trajets",
-                                  style: TextStyle(
-                                      fontFamily: kfontFamily,
-                                      color: kTextColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.normal)),
+                              RichText(
+                                  text: TextSpan(
+                                      text: "Mes trajets",
+                                      style: TextStyle(
+                                          fontFamily: kfontFamily,
+                                          color: kTextColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.normal),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      MesTrajets()));
+                                        }))
                             ],
                           ),
                           SizedBox(height: 20),

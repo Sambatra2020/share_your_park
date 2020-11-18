@@ -81,7 +81,7 @@ class _SlideListParkingState extends State<SlideListParking> {
           Container(
             child: FlutterMap(
               options: MapOptions(
-                  center: LatLng(48.849519, 2.293370), zoom: 18, maxZoom: 600),
+                  center: LatLng(48.849519, 2.293370), minZoom: 18.0),
               layers: [
                 tileLayerOptions,
                 PolylineLayerOptions(
