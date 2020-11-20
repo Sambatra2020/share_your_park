@@ -254,6 +254,7 @@ class _SignupState extends State<Signup> {
                             newUser.setEmail(currentEmail);
                             newUser.setCodePostal(currentCodePostal);
                             newUser.setAdress(currentAdress);
+                            newUser.setFirstSign(true);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
