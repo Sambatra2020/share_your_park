@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:share_your_park/services/auth.dart';
 import 'package:provider/provider.dart';
@@ -15,18 +16,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(MyApp(),);
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider.value(
-      value: AuthService().user,
+    return StreamProvider.value( 
+       value: AuthService().user,
       child: MaterialApp(
-          theme: ThemeData(),
-          home: MainPage(),
-          debugShowCheckedModeBanner: false),
+        theme: ThemeData(),
+        home: Signup(),
+        debugShowCheckedModeBanner: false
+      ),
     );
   }
 }

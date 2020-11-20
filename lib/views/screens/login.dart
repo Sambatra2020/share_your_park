@@ -1,5 +1,9 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_bubble/bubble_type.dart';
+import 'package:flutter_chat_bubble/chat_bubble.dart';
+import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_3.dart';
+import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_3.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share_your_park/main.dart';
 import 'package:share_your_park/services/auth.dart';
@@ -55,14 +59,31 @@ class _LoginState extends State<Login> {
                           fontFamily: 'Quicksand')),
                 ),
                 Container(
-                    margin: EdgeInsets.only(
-                        left: screenWidth * 0.51, top: screenHeight * 0.12),
-                    child: Image.asset(
-                      'assets/images/revoir.png',
-                      height: screenHeight * 0.25,
-                      width: screenWidth * 0.5,
-                      alignment: Alignment.bottomRight,
-                    ))
+                    child:  Column(
+                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ChatBubble(
+                          margin: EdgeInsets.only(top: screenHeight * 0.1),
+                              alignment: Alignment.center,clipper: ChatBubbleClipper3(type: BubbleType.sendBubble),
+                              backGroundColor: Colors.white,
+                                    child: Container(
+                                      constraints: BoxConstraints(
+                                        maxWidth: screenWidth * 0.45,
+                                      ),
+                                      child: Text(
+                                        'Content de te revoir🙂',
+                                        style: TextStyle(color: Color(0xFFFF008D)),
+                                        )),
+                          ),
+                          SizedBox(height: screenHeight * 0.01,),
+                          Image.asset('assets/images/seepy3.png',
+                          width: screenWidth * 0.5,
+                          height: screenHeight * 0.2
+                          ),
+
+                      ],
+                      ),
+                  ),
               ]),
             ),
 
