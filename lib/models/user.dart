@@ -15,6 +15,7 @@ class UserInformation {
   DateTime userDateInscription;
   String userTypeVehicule;
   String userTailleVehicule;
+  bool userFirstSign;
 
   UserInformation(
       {this.userId,
@@ -27,6 +28,7 @@ class UserInformation {
       this.userDateDeNaissance,
       this.userTypeVehicule,
       this.userTailleVehicule,
+      this.userFirstSign,
       this.userDateInscription});
 
   //getter
@@ -41,6 +43,7 @@ class UserInformation {
   String get typeDeVehicule => userTypeVehicule;
   String get tailleDeVehicule => userTailleVehicule;
   DateTime get dateInscription => userDateInscription;
+  bool get firstSign => userFirstSign;
 
   //setter
   setId(String newId) {
@@ -101,6 +104,11 @@ class UserInformation {
     this.userDateInscription = newdateInscription;
   }
 
+ setFirstSign(bool newFirstSign) {
+    this.userFirstSign = newFirstSign;
+  }
+
+
   //convert a Dev object to a Map object
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
@@ -118,6 +126,7 @@ class UserInformation {
     map['typeDeVehicule'] = userTypeVehicule;
     map['tailleDeVehicule'] = userTailleVehicule;
     map['dateInscription'] = userDateInscription;
+    map['firstSign'] = userFirstSign;
 
     return map;
   }
@@ -135,5 +144,6 @@ class UserInformation {
     this.userTypeVehicule = map['typeDeVehicule'];
     this.userTailleVehicule = map['tailleDeVehicule'];
     this.userDateInscription = map['dateInscription'];
+    this.userFirstSign = map['firstSign'];
   }
 }

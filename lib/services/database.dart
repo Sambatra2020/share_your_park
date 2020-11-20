@@ -33,7 +33,13 @@ class DatabaseService {
       'dateDeNaissance': userInformation.dateDeNaissance,
       'typeVehicule': userInformation.typeDeVehicule,
       'tailleVehicule': userInformation.tailleDeVehicule,
+      'firstSign':userInformation.firstSign,
       'dateInscription': DateTime.now()
+    });
+  }
+    Future updateFirstUserSign(var first) async {
+    return await userCollection.doc(uid).set({
+      'firstSign': first,
     });
   }
 
@@ -50,6 +56,7 @@ class DatabaseService {
           userDateDeNaissance: doc.get('dateDeNaissance') ?? DateTime.now(),
           userTypeVehicule: doc.get('typeVehicule') ?? '',
           userTailleVehicule: doc.get('tailleVehicule') ?? '',
+          userFirstSign: doc.get('firstSign') ?? '',
           userDateInscription: doc.get('dateInscription') ?? DateTime.now());
     }).toList();
   }
@@ -65,6 +72,7 @@ class DatabaseService {
         userDateDeNaissance: snapshot.get('dateDeNaissance'),
         userTypeVehicule: snapshot.get('typeVehicule'),
         userTailleVehicule: snapshot.get('tailleVehicule'),
+        userFirstSign: snapshot.get('firstSign'),
         userDateInscription: snapshot.get('dateInscription'));
   }
 
@@ -76,6 +84,10 @@ class DatabaseService {
   //get user doc stream
   Stream<userModel.UserInformation> get userData {
     return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
+  }
+
+  Future getUserData() async {
+    return userCollection.doc(uid).get();
   }
 
   //parking dans firebase database

@@ -223,6 +223,7 @@ class _ValidateState extends State<Validate> {
                           print(newUser.codePostal);
                           print(newUser.tailleDeVehicule);
                           print(newUser.typeDeVehicule);
+                          print(newUser.firstSign);
                           databaseService.updateUserData(newUser);
                           //SystemNavigator.pop();
                           Navigator.push(
