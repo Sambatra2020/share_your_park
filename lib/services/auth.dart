@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
-import 'package:share_your_park/services/database.dart';
 import '../models/user.dart' as userModel;
 
 class AuthService {
@@ -38,11 +37,6 @@ class AuthService {
       dynamic result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
-      print("§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§");
-      print(result.additionalUserInfo.isNewUser);
-      if ( result.additionalUserInfo.isNewUser) {
-        await DatabaseService(uid: user.uid).updateFirstUserSign(false);
-      }
       return _userFromFireBaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -64,11 +58,6 @@ class AuthService {
             FacebookAuthProvider.credential(token);
         var result = await _auth.signInWithCredential(credential);
         var user = result.user;
-      print("§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§");
-      print(result.additionalUserInfo.isNewUser);
-        if ( result.additionalUserInfo.isNewUser) {
-          await DatabaseService(uid: user.uid).updateFirstUserSign(false);
-        }
         return _userFromFireBaseUser(user);
       } else {}
     } catch (e) {
@@ -93,11 +82,6 @@ class AuthService {
       // Once signed in, return the UserCredential
       var result = await FirebaseAuth.instance.signInWithCredential(credential);
       var user = result.user;
-      print("§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§");
-      print(result.additionalUserInfo.isNewUser);
-      if ( result.additionalUserInfo.isNewUser) {
-        await DatabaseService(uid: user.uid).updateFirstUserSign(false);
-      }
       return _userFromFireBaseUser(user);
     } catch (e) {
       print(e.toString());
