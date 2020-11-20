@@ -46,7 +46,7 @@ class _CarState extends State<Car> {
                         Color(0xFFFF6EBE),
                       ])),
                   child: Center(
-                    Container(
+                    child:Container(
                     child:  Column(
                       //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -74,7 +74,7 @@ class _CarState extends State<Car> {
                   ),
                     ),
                   ),
-                ),
+                
                 Container(
                   height: screenHeight * 0.02,
                   color: Color(0xFFA3005A),
