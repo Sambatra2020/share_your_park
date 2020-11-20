@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_bubble/bubble_type.dart';
+import 'package:flutter_chat_bubble/chat_bubble.dart';
+import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_3.dart';
 import 'package:share_your_park/const.dart';
 import 'package:share_your_park/models/user.dart' as userModel;
 import 'package:share_your_park/views/screens/validate.dart';
@@ -43,17 +46,33 @@ class _CarState extends State<Car> {
                         Color(0xFFFF6EBE),
                       ])),
                   child: Center(
-                    child: Column(children: [
-                      Container(
-                        child: Align(
-                            child: Image.asset(
-                          'assets/images/car.png',
-                          height: screenHeight * 0.5,
-                          width: screenWidth * 0.75,
-                          alignment: Alignment(0, 1),
-                        )),
+                    Container(
+                    child:  Column(
+                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ChatBubble(
+                          margin: EdgeInsets.only(top: screenHeight * 0.1),
+                              alignment: Alignment.center,clipper: ChatBubbleClipper3(type: BubbleType.sendBubble),
+                              backGroundColor: Colors.white,
+                                    child: Container(
+                                      constraints: BoxConstraints(
+                                        maxWidth: screenWidth * 0.45,
+                                      ),
+                                      child: Text(
+                                        'Chouette ! Un nouveau copain💖',
+                                        style: TextStyle(color: Color(0xFFFF008D)),
+                                        )),
+                          ),
+                          SizedBox(height: screenHeight * 0.01,),
+                          Image.asset('assets/images/seepy.png',
+                          width: screenWidth * 0.5,
+                          height: screenHeight * 0.2
+                          ),
+
+                      ],
                       ),
-                    ]),
+                  ),
+                    ),
                   ),
                 ),
                 Container(

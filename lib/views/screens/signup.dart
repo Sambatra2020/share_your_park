@@ -1,5 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_bubble/bubble_type.dart';
+import 'package:flutter_chat_bubble/chat_bubble.dart';
+import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_3.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share_your_park/models/user.dart' as userModel;
 import 'package:share_your_park/views/screens/car.dart';
@@ -52,13 +55,37 @@ class _SignupState extends State<Signup> {
                               left: screenWidth * 0.13,
                               top: screenHeight * 0.01),
                           child: Align(
-                              child: Image.asset(
-                            'assets/images/bien.png',
-                            height: screenHeight * 0.4,
-                            width: screenWidth * 0.7,
                             alignment: Alignment(0, 1),
-                          )),
+                              child: Container(
+                    child:  Column(
+                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ChatBubble(
+                          margin: EdgeInsets.only(top: screenHeight * 0.1),
+                              alignment: Alignment.center,clipper: ChatBubbleClipper3(type: BubbleType.sendBubble),
+                              backGroundColor: Colors.white,
+                                    child: Container(
+                                      constraints: BoxConstraints(
+                                        maxWidth: screenWidth * 0.45,
+                                      ),
+                                      child: Text(
+                                        'Allez, viens! On est bien 😎',
+                                        style: TextStyle(color: Color(0xFFFF008D)),
+                                        )),
+                          ),
+                          SizedBox(height: screenHeight * 0.01,),
+                          Image.asset('assets/images/seepy.png',
+                          width: screenWidth * 0.5,
+                          height: screenHeight * 0.2
+                          
+                          ),
+
+                      ],
+                      ),
+                  ),
+                          ),
                         ),
+                        //
                         Center(
                             child: Text("Enregistre-toi !",
                                 style: TextStyle(

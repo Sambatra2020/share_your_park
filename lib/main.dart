@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:share_your_park/controllers/controller.dart';
 import 'package:share_your_park/services/auth.dart';
@@ -17,26 +18,27 @@ import 'package:share_your_park/views/screens/setting/notificatio.dart';
 import 'package:share_your_park/views/screens/setting/offre.dart';
 import 'package:share_your_park/views/screens/setting/parain.dart';
 import 'package:share_your_park/views/screens/setting/param%C3%A8tre.dart';
+import 'package:share_your_park/views/screens/setting/stat.dart';
 import 'package:share_your_park/views/screens/signup.dart';
-//import 'package:share_your_park/views/tuto/acceuil.dart';
+
+import 'package:share_your_park/views/tuto/acceuil.dart';
 import 'models/user.dart' as userModel;
 //import 'package:share_your_park/views/screens/notification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(MyApp(),);
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider.value(
-      value: AuthService().user,
+    return StreamProvider.value( 
+       value: AuthService().user,
       child: MaterialApp(
-        theme: ThemeData(
-        ),
-        home: Offre(),
+        theme: ThemeData(),
+        home: Signup(),
         debugShowCheckedModeBanner: false
       ),
     );
