@@ -5,6 +5,7 @@ import 'package:latlong/latlong.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:share_your_park/const.dart';
 import 'package:share_your_park/controllers/controller.dart';
+import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
 import 'package:share_your_park/views/screens/menu/menu_principal.dart';
 
@@ -97,11 +98,15 @@ class _GarerState extends State<Garer> {
               minWidth: 20,
               color: Color(0xFFFF008D),
               child: Icon(Icons.search, color: Color(0xFFFFFFFF)),
-              onPressed: () {
+              onPressed: () async {
+                await controller.getListParkingData('2.293370', '48.849519');
+                List<Parking> listeParking = controller.listeParking;
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => SlideListParking()));
+                        builder: (BuildContext context) => SlideListParking(
+                              listObjetParking: listeParking,
+                            )));
               },
             ),
           ),
