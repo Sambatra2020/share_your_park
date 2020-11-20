@@ -23,14 +23,17 @@ class _SlideListParkingState extends State<SlideListParking> {
   _SlideListParkingState(this.listObjetParking);
   String latDepart = '48.849519';
   String lngDepart = '2.293370';
-  String latParking;
-  String lngParking;
-  int current = 0;
+  String latParking, lngParking;
+  String latParking1, lngParking1;
+  int current = 0, current1 = 0;
   Controller controller = Controller();
+  MapController _mapCtrl = MapController();
   List<LatLng> points = [];
   String duration = '', distance = '';
   String taille;
   List<Parking> listeParking = [];
+  Map<String, dynamic> mapS = {};
+  bool checkControl = false;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +47,7 @@ class _SlideListParkingState extends State<SlideListParking> {
       latParking = this.listObjetParking[current].lng.toString();
       lngParking = this.listObjetParking[current].lat.toString();
     }
+
     Future<List<LatLng>> result =
         controller.getListLatLng(latDepart, lngDepart, latParking, lngParking);
     result.then((value) {
@@ -53,8 +57,18 @@ class _SlideListParkingState extends State<SlideListParking> {
         distance = controller.distance;
       });
     });
+    mapS = controller.calculCentreEtDistance2LatLng(
+        double.parse(latDepart),
+        double.parse(lngDepart),
+        double.parse(latParking),
+        double.parse(lngParking));
+
+    if (checkControl == true) {
+      controller.moveCamAndZoomAuto(mapS, distance, _mapCtrl);
+    }
 
     return Scaffold(
+        extendBody: true,
         floatingActionButton: Container(
           margin: EdgeInsets.only(top: 15),
           child: FloatingActionButton(
@@ -80,8 +94,12 @@ class _SlideListParkingState extends State<SlideListParking> {
         body: Stack(children: [
           Container(
             child: FlutterMap(
+              mapController: _mapCtrl,
               options: MapOptions(
-                  center: LatLng(48.849519, 2.293370), minZoom: 18.0),
+                center: mapS['centre'],
+                zoom: 20,
+                maxZoom: 32,
+              ),
               layers: [
                 tileLayerOptions,
                 PolylineLayerOptions(
@@ -150,7 +168,7 @@ class _SlideListParkingState extends State<SlideListParking> {
                   current = index;
                   latParking = listObjetParking[current].lng.toString();
                   lngParking = listObjetParking[current].lat.toString();
-                  points = [];
+                  checkControl = true;
                 });
               },
               items: listObjetParking.map((parking) {

@@ -15,13 +15,11 @@ const kinputdeco =
 final tileLayerOptions = TileLayerOptions(
     urlTemplate:
         'https://api.mapbox.com/styles/v1/sambatra/ckgbwa2x706vs1ap3n6qcaptj/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA',
-    subdomains: [
-      'a',
-      'b',
-      'c'
-    ],
+    subdomains: ['a', 'b', 'c'],
     additionalOptions: {
       'accessToken':
           'pk.eyJ1Ijoic2FtYmF0cmEiLCJhIjoiY2tmeHhicGs0MXMzOTJyczh4eGp5aGltcSJ9.Tf6Svlf_iXkHzOF9-9rARA',
-      'id': 'mapbox.mapbox-streets-v7'
-    });
+      'id': 'mapbox.streets'
+    },
+    maxNativeZoom: 32,
+    maxZoom: 32);

@@ -1,5 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
@@ -12,6 +16,7 @@ import 'package:share_your_park/services/database.dart';
 import 'package:share_your_park/views/screens/mapbox/je_me_gare.dart';
 import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
 import 'package:share_your_park/views/screens/menu/menu_principal.dart';
+import 'dart:ui' as ui;
 
 class ListeParking extends StatefulWidget {
   final List<Parking> listObjetParking;
@@ -24,6 +29,7 @@ class ListeParking extends StatefulWidget {
 
 class _ListeParkingState extends State<ListeParking> {
   List<Parking> listObjetParking;
+  Uint8List capture;
   int current;
   _ListeParkingState(this.listObjetParking, this.current);
 
@@ -38,10 +44,12 @@ class _ListeParkingState extends State<ListeParking> {
   List<Parking> listeParking = [];
   String duration = '', distance = '';
   List<double> positionDepart = [], positionArriver = [];
-
+  MapController _mapCtrl = MapController();
+  GlobalKey _key = GlobalKey();
   List<LatLng> points = [];
+  Map<String, dynamic> mapS = {};
   final FirebaseMessaging messaging = FirebaseMessaging();
-  DatabaseService databaseService = DatabaseService(uid: "romeo_patrick");
+  DatabaseService databaseService = DatabaseService(uid: "onja");
   @override
   void initState() {
     super.initState();
@@ -70,12 +78,12 @@ class _ListeParkingState extends State<ListeParking> {
       current = 0;
     }
     if (latParking == null) {
-      print(listObjetParking.length);
       setState(() {
         latParking = this.listObjetParking[current].lng.toString();
         lngParking = this.listObjetParking[current].lat.toString();
         positionArriver = [double.parse(latParking), double.parse(lngParking)];
         centreCamera = [latParking, lngParking];
+
         Future<List<LatLng>> result = controller.getListLatLng(
             latDepart, lngDepart, latParking, lngParking);
         result.then((value) {
@@ -86,6 +94,14 @@ class _ListeParkingState extends State<ListeParking> {
           });
         });
       });
+    } else {
+      mapS = controller.calculCentreEtDistance2LatLng(
+          double.parse(latDepart),
+          double.parse(lngDepart),
+          double.parse(latParking),
+          double.parse(lngParking));
+
+      controller.moveCamAndZoomAuto(mapS, distance, _mapCtrl);
     }
 
     return Scaffold(
@@ -112,42 +128,46 @@ class _ListeParkingState extends State<ListeParking> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: Stack(children: [
-          Container(
-            child: FlutterMap(
-              options: MapOptions(
-                center:
-                    LatLng(double.parse(latDepart), double.parse(lngDepart)),
-                minZoom: 18.0,
-              ),
-              layers: [
-                tileLayerOptions,
-                PolylineLayerOptions(
-                  polylines: [
-                    Polyline(
-                        points: points,
-                        color: Color(0xFFFF008D),
-                        strokeWidth: 6.0)
-                  ],
+          RepaintBoundary(
+            key: _key,
+            child: Container(
+              child: FlutterMap(
+                mapController: _mapCtrl,
+                options: MapOptions(
+                  center: mapS['centre'],
+                  // LatLng(double.parse(latDepart), double.parse(lngDepart)),
+                  zoom: 20.0,
                 ),
-                MarkerLayerOptions(markers: [
-                  Marker(
-                      width: 40.0,
-                      height: 40.0,
-                      point: LatLng(
-                          double.parse(latDepart), double.parse(lngDepart)),
-                      builder: (context) => Container(
-                          child:
-                              Image.asset("assets/images/positionDepart.png"))),
-                  Marker(
-                      width: 40.0,
-                      height: 40.0,
-                      point: LatLng(
-                          double.parse(latParking), double.parse(lngParking)),
-                      builder: (context) => Container(
-                          child:
-                              Image.asset("assets/images/positionVert.png"))),
-                ]),
-              ],
+                layers: [
+                  tileLayerOptions,
+                  PolylineLayerOptions(
+                    polylines: [
+                      Polyline(
+                          points: points,
+                          color: Color(0xFFFF008D),
+                          strokeWidth: 6.0)
+                    ],
+                  ),
+                  MarkerLayerOptions(markers: [
+                    Marker(
+                        width: 40.0,
+                        height: 40.0,
+                        point: LatLng(
+                            double.parse(latDepart), double.parse(lngDepart)),
+                        builder: (context) => Container(
+                            child: Image.asset(
+                                "assets/images/positionDepart.png"))),
+                    Marker(
+                        width: 40.0,
+                        height: 40.0,
+                        point: LatLng(
+                            double.parse(latParking), double.parse(lngParking)),
+                        builder: (context) => Container(
+                            child:
+                                Image.asset("assets/images/positionVert.png"))),
+                  ]),
+                ],
+              ),
             ),
           ),
           Align(
@@ -236,6 +256,16 @@ class _ListeParkingState extends State<ListeParking> {
                     idTrajet = value;
                   });
                 });
+
+                Future<Uint8List> result = convertWidgetToImage();
+                result.then((value) {
+                  setState(() {
+                    capture = value;
+                    print(capture);
+                    databaseService.addScreenShootTrajet(capture);
+                  });
+                });
+
                 Trajet trajet = Trajet();
                 trajet.setidTrajetId(idTrajet);
                 trajet.setdureeTrajet(double.parse(duration));
@@ -247,6 +277,7 @@ class _ListeParkingState extends State<ListeParking> {
                 trajet.setDate(DateTime.now().toString());
 
                 //insertion du trajet dans firebase
+
                 databaseService.addDataTrajet(trajet);
                 Navigator.push(
                     context,
@@ -258,5 +289,15 @@ class _ListeParkingState extends State<ListeParking> {
             ),
           ),
         ]));
+  }
+
+  Future<Uint8List> convertWidgetToImage() async {
+    RenderRepaintBoundary renderRepaintBoundary =
+        _key.currentContext.findRenderObject();
+    ui.Image boxImage = await renderRepaintBoundary.toImage(pixelRatio: 1);
+    ByteData byteData =
+        await boxImage.toByteData(format: ui.ImageByteFormat.png);
+    Uint8List uint8list = byteData.buffer.asUint8List();
+    return uint8list;
   }
 }

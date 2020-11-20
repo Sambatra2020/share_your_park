@@ -1,5 +1,8 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:share_your_park/models/parking.dart';
 import 'package:share_your_park/models/user.dart' as userModel;
 
@@ -11,7 +14,8 @@ class DatabaseService {
 
   //instance database reference
   final dBref = FirebaseDatabase.instance.reference();
-
+  final firebase_storage.Reference storageReference =
+      firebase_storage.FirebaseStorage.instance.ref();
   //utilisateur et formation dans firestore
 
   //collection reference
@@ -85,6 +89,16 @@ class DatabaseService {
         .set(trajet.toMap());
   }
 
+  //store an image to firebase
+  void addScreenShootTrajet(Uint8List uint8list) async {
+    await storageReference
+        .child(uid)
+        .child("IMG_${DateTime.now().millisecondsSinceEpoch}.png")
+        .putData(uint8list);
+  }
+
+  //import an image from firebase
+
   //recuperer data trajet dans firebase database et convertir en liste de Trajet Objet
   Future<int> idTrajet() async {
     int id = 0;
@@ -154,7 +168,6 @@ class DatabaseService {
       }
       listeTrajet = listeTrajetUtilisateur;
     });
-    print(listeTrajet.length);
     return listeTrajet;
   }
 

@@ -28,6 +28,7 @@ class Trajet {
   String get time => date;
 
   //setter
+
   setDate(String newTime) {
     this.date = newTime;
   }

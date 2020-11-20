@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:math';
 
+import 'package:flutter_map/flutter_map.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong/latlong.dart';
 //import 'package:mapbox_gl/mapbox_gl.dart';
@@ -187,15 +189,54 @@ class Controller {
       parking.setLat(instance[i]['properties']['geo_point_2d'][1]);
       listObjetParking.add(parking);
     }
+  }
 
-    //visualisation liste parking sur le terminale
-    for (int i = 0; i < instance.length; i++) {
-      print("parking numero ${i + 1}");
-      print(instance[i]['properties']['nomvoie']);
-      print(instance[i]['properties']['surface_calculee']);
-      print(instance[i]['properties']['tar']);
-      print(instance[i]['properties']['geo_point_2d'][0]);
-      print(instance[i]['properties']['geo_point_2d'][1]);
+  void moveCamAndZoomAuto(
+      Map<String, dynamic> map, String distance, MapController mapC) {
+    LatLng centreCam = map['centre'];
+    double zoom = 18;
+    if (double.parse(distance) > 100) {
+      zoom = 16;
+    } else if (double.parse(distance) < 10) {
+      zoom = 20;
+    } else if (double.parse(distance) > 1000) {
+      zoom = 15;
     }
+    if (mapC != null) {
+      mapC.move(centreCam, zoom);
+    }
+  }
+
+  Map<String, dynamic> calculCentreEtDistance2LatLng(
+      double _lat1, double _lng1, double _lat2, double _lng2) {
+    LatLng centre;
+    Map<String, dynamic> mapE = {};
+    //conversion latlng en coordonner cartesienne
+    var x1 = cos(_lat1 * pi / 180) * cos(_lng1 * pi / 180);
+    var y1 = cos(_lat1 * pi / 180) * sin(_lng1 * pi / 180);
+    var z1 = sin(_lat1 * pi / 180);
+    var x2 = cos(_lat2 * pi / 180) * cos(_lng2 * pi / 180);
+    var y2 = cos(_lat2 * pi / 180) * sin(_lng2 * pi / 180);
+    var z2 = sin(_lat2 * pi / 180);
+
+    //calcul coordonner centre en cartesienne
+    var x = (x1 + x2) / 2;
+    var y = (y1 + y2) / 2;
+    var z = (z1 + z2) / 2;
+
+    //calcul distance entre ces 2 points
+    var dist = sqrt(pow((x2 - x1), 2) + pow((y2 - y1), 2) + pow((z2 - z1), 2));
+
+    //conversion de ce coordonner cartesienne en latlng
+    var lng = atan2(y, x);
+    var hyp = sqrt(pow(x, 2) + pow(y, 2));
+    var lat = atan2(z, hyp);
+    centre = LatLng(lat * 180 / pi, lng * 180 / pi);
+
+    //ajout centre et distance dans map
+    mapE['centre'] = centre;
+    mapE['distance'] = dist * 10000000;
+
+    return mapE;
   }
 }
