@@ -224,18 +224,7 @@ class _ListeParkingState extends State<ListeParking> {
               //padding: EdgeInsets.all(10),
               color: Color(0xFFFF008D),
               child: Icon(FontAwesome.rss, color: Color(0xFFFFFFFF)),
-              onPressed: () {
-                print("======================");
-
-                Future<List<Trajet>> listeTrajet =
-                    databaseService.readDatatrajet();
-                listeTrajet.then((value) {
-                  print(value.length);
-                  for (int i = 0; i < value.length; i++) {
-                    print(value[i].time);
-                  }
-                });
-              },
+              onPressed: () {},
             ),
           ),
           Align(

@@ -4,7 +4,7 @@ import 'package:flutter_nfc_reader/flutter_nfc_reader.dart';
 import 'package:share_your_park/const.dart';
 import 'package:share_your_park/controllers/controller.dart';
 import 'package:share_your_park/models/parking.dart';
-import 'package:share_your_park/views/screens/mapbox/listeParking.dart';
+import 'package:share_your_park/views/screens/mapbox/slideListParking.dart';
 
 class ScanNFC extends StatefulWidget {
   ScanNFC({Key key}) : super(key: key);
@@ -44,9 +44,8 @@ class _ScanNFCState extends State<ScanNFC> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        ListeParking(
+                                        SlideListParking(
                                           listObjetParking: listeParking,
-                                          current: 0,
                                         )));
                           })),
                   Container(
